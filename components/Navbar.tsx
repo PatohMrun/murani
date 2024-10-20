@@ -55,7 +55,7 @@ const Navbar: React.FC = () => {
                     src={currentLogo}
                     alt='Logo'
                 /> */}
-                <h1 className='font-bold text-lg text-primary dark:text-blue-300'>Hi, I&apos;m <span className=''>Patrick Murani</span></h1>
+                <h1 className='font-bold text-sm sm:text-md md:text-lg text-primary dark:text-blue-300'>Hi, I&apos;m <span className=''>Patrick Murani</span></h1>
             </div>
 
             {/* Theme switch and large screen nav links */}
@@ -64,7 +64,7 @@ const Navbar: React.FC = () => {
                 <div className='hidden sm:flex gap-4 text-primary dark:text-white'>
                     <Link href='/' className={`navlinks ${pathname === "/" ? "active" : ""}`}>Home</Link>
                     <Link href='/skills' className={`navlinks ${pathname === "/skills" ? "active" : ""}`}>Skills</Link>
-                    <Link href='/creations' className={`navlinks ${pathname === "/creations" ? "active" : ""}`}>Creations</Link>
+                    <Link href='/creations' className={`navlinks ${pathname.includes("/creations") ? "active" : ""}`}>Creations</Link>
                     <Link href='/contact' className={`navlinks ${pathname === "/contact" ? "active" : ""}`}>Contact</Link>
                 </div>
 
@@ -116,7 +116,7 @@ const Navbar: React.FC = () => {
                                 setIsOpen(false);
                             }}
                             href="/creations"
-                            className={`navlinks ${pathname === "/creations" ? "active" : ""}`}
+                            className={`navlinks ${pathname.includes("/creations") ? "active" : ""}`}
                         >
                             Creations
                         </Link>
