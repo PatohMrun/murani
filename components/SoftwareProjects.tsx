@@ -11,7 +11,7 @@ const SoftwareProjects: React.FC = () => {
         <SoftwareCard source="/software/Innovation.webp" title="UEAB Innovation" description="A portal for UEAB Students to submit their innovation proposals" link="https://ueabinnovation.vercel.app/" />
         <SoftwareCard source="/software/Research.webp" title="UEAB Research Grants & Innovation" description="A platform for the Directorate of Research Grants & Innovation" link="https://ueab-research.vercel.app/" />
         <SoftwareCard source="/software/Hotel.webp" title="10-Star Hotel Management System" description="A hotel management system for an hypothetical 10-Star hotel" link="https://young-professor-github-io.vercel.app/" />
-        <SoftwareCard source="/software/Patrick.webp" title="Patrick Murani" description="My initial portfolio site" link="https://patrickmurani.vercel.app/" />
+        <SoftwareCard source="/software/Patrick.webp" title="Patrick Murani" description="My initial portfolio site" link="https://patrickmurani1.vercel.app/" />
       </div>
     </section>
   );
