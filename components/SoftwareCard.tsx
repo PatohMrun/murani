@@ -22,7 +22,7 @@ const SoftwareCard: React.FC<SoftwareCardProps> = ({ source, title, description,
         <h3 className="font-bold uppercase mt-1">{title}</h3>
         <p className="text-sm italic">{description}</p>
         <div className="flex justify-end">
-            <a href={link} target="_blank" rel="noopener noreferrer" className="flex gap-2 text-nowrap text-white text-sm rounded-lg items-center w-32 my-2 mx-4 p-2 bg-primary dark:bg-blue-800">View Project <FaArrowRight /></a>
+            <a href={link} target="_blank" rel="noopener noreferrer" className="flex gap-2 text-nowrap text-white text-sm rounded-lg items-center w-32 my-2 mx-4 p-2 bg-primary hover:bg-gray-900 dark:bg-blue-800 dark:hover:bg-blue-600">View Project <FaArrowRight /></a>
         </div>
       </div>
     </section>

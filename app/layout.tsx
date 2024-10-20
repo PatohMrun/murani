@@ -4,6 +4,7 @@ import "./globals.css";
 import { Providers } from "./Providers";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import WhatsApp from "@/components/WhatsApp";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,6 +29,7 @@ export default function RootLayout({
           <Navbar />
           <section className="pt-10">
             {children}
+            <WhatsApp />
           </section>
           <Footer />
         </Providers>
