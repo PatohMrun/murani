@@ -57,7 +57,7 @@ export default function Home() {
               <h2 className="text-2xl lg:text-3xl font-bold font-poppins mb-4">Software Engineer | Aspiring Machine Learning Engineer | Graphic Designer | Photographer </h2>
               <p className="text-lg leading-relaxed max-w-3xl font-poppins">
                 I&apos;m <span className="font-semibold text-blue-900 dark:text-blue-500">Patrick Murani</span>, a Bachelor&apos;s degree holder in <span className="font-semibold text-blue-900 dark:text-blue-500">Software Engineering</span> from the University of Eastern Africa, Baraton. <br /> 
-                I am accredited by the <span className="font-semibold text-blue-900 dark:text-blue-500">Media Council of Kenya</span> as a <span className="font-semibold text-blue-900 dark:text-blue-500">Graphic Designer</span>. <br /> 
+                I am accredited by the <a href="https://mediacouncil.or.ke" target="_blank" rel="noopener noreferrer" className="font-semibold text-blue-900 dark:text-blue-500">Media Council of Kenya</a> as a <span className="font-semibold text-blue-900 dark:text-blue-500">Graphic Designer</span>. <br /> 
                 I&apos;m also an experienced and skilled <span className="font-semibold text-blue-900 dark:text-blue-500">Photographer</span>.
               </p>
 
