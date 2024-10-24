@@ -57,11 +57,11 @@ export default function Home() {
               <h2 className="text-2xl lg:text-3xl font-bold font-poppins mb-4">Software Engineer | Aspiring Machine Learning Engineer | Graphic Designer | Photographer </h2>
               <p className="text-lg leading-relaxed max-w-3xl font-poppins">
                 I&apos;m <span className="font-semibold text-blue-900 dark:text-blue-500">Patrick Murani</span>, a Bachelor&apos;s degree holder in <span className="font-semibold text-blue-900 dark:text-blue-500">Software Engineering</span> from the University of Eastern Africa, Baraton. <br /> 
-                I am accredited by the <a href="https://mediacouncil.or.ke" target="_blank" rel="noopener noreferrer" className="font-semibold text-blue-900 dark:text-blue-500">Media Council of Kenya</a> as a <span className="font-semibold text-blue-900 dark:text-blue-500">Graphic Designer</span>. <br /> 
+                I am accredited by the <a href="https://mediacouncil.or.ke" target="_blank" rel="noopener noreferrer" className="font-semibold text-blue-900 dark:text-blue-500 underline">Media Council of Kenya</a> as a <span className="font-semibold text-blue-900 dark:text-blue-500">Graphic Designer</span>. <br /> 
                 I&apos;m also an experienced and skilled <span className="font-semibold text-blue-900 dark:text-blue-500">Photographer</span>.
               </p>
 
-              <Link href={"Resume.pdf"} target="_blank" rel="noopener noreferrer" className="inline-block mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded" >Download Résumé</Link>
+              <Link href={"Resume.pdf"} target="_blank" rel="noopener noreferrer" className="inline-block mt-4 bg-blue-500 hover:bg-blue-600  text-white font-bold py-2 px-4 rounded" >Download Résumé</Link>
 
             </div>
           </div>
