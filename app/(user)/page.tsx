@@ -47,7 +47,7 @@ export default function Home() {
           <div className="flex flex-col lg:flex-row items-center lg:items-start">
             <Image
               src="/Murani.jpg"
-              alt="Michael Wanje"
+              alt="Patrick Murani"
               width={250}
               height={250}
               className="rounded-full mx-4 my-2 lg:mr-8"
