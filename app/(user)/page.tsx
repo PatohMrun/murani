@@ -74,8 +74,7 @@ export default function Home() {
                 variants={fadeInUp}
               >
                 I&apos;m <span className="font-semibold text-blue-900 dark:text-blue-500">Patrick Murani</span>, 
-                a Bachelor&apos;s degree holder in <span className="font-semibold text-blue-900 dark:text-blue-500">Software Engineering</span> 
-                from the University of Eastern Africa, Baraton. <br /> 
+                a Bachelor of Science degree holder in <span className="font-semibold text-blue-900 dark:text-blue-500">Software Engineering</span> from the University of Eastern Africa, Baraton. <br /> 
                 I am accredited by the <a href="https://mediacouncil.or.ke" target="_blank" rel="noopener noreferrer" 
                 className="font-semibold text-blue-900 dark:text-blue-500 underline">Media Council of Kenya</a> as 
                 a <span className="font-semibold text-blue-900 dark:text-blue-500">Graphic Designer</span>. <br /> 
