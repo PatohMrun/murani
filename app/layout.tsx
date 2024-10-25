@@ -9,7 +9,7 @@ import WhatsApp from "@/components/WhatsApp";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Patick Murani",
+  title: "Patrick Murani",
   description: "Software Engineer | Graphic Designer | Photographer",
 };
 
