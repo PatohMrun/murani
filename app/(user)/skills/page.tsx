@@ -89,11 +89,11 @@ const Skills: React.FC = () => {
             color: "bg-yellow-500"
         },
         {
-            icon: <IoMdCamera className="text-orange-500 dark:text-orange-400" size={40} />,
+            icon: <IoMdCamera className="text-black dark:text-black" size={40} />,
             title: "Photography, Videography & Animation",
             skills: "Adobe Photoshop, Adobe Lightroom, Adobe Premiere Pro, Adobe After Effects, Adobe Audition, Blender",
             progress: "80%",
-            color: "bg-orange-500"
+            color: "bg-black"
         }
     ];
 
