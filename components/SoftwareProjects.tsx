@@ -12,10 +12,34 @@ const SoftwareProjects: React.FC = () => {
 
   const projects = [
     {
+      source: "/software/HealJunction.webp",
+      title: "HealJunction Website",
+      description: "A website for HealJunction Health Services",
+      link: "https://healjunction.co.ke/"
+    },
+    {
+      source: "/software/KaziPos.webp",
+      title: "KaziPOS System Website",
+      description: "A Point of Sale system by Hillgan Innovations",
+      link: "https://kazi-pos.vercel.app/"
+    },
+    {
+      source: "/software/KaziAfya.webp",
+      title: "KaziAfya System Website",
+      description: "A Health management system by Hillgan Innovations",
+      link: "https://kaziafya.vercel.app/"
+    },
+        {
       source: "/software/Kazi.webp",
       title: "Kazi Desk HR System",
       description: "A General purpose HR management system by Hillgan Innovations",
       link: "https://kazi-desk.vercel.app/"
+    },
+    {
+      source: "/software/Kazi2.webp",
+      title: "Kazi Desk HR System v2",
+      description: "A General purpose HR management system by Hillgan Innovations",
+      link: "https://kazisystem.vercel.app/"
     },
     {
       source: "/software/Sms.webp",
