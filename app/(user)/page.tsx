@@ -121,45 +121,54 @@ export default function Home() {
             <motion.div variants={fadeInUp}>
               <Experience 
                 company="Hillgan Innovations" 
-                position="Front-end Developer" 
-                year="May 2024 - July 2024" 
-                description="Handled the front-end for Kazi Desk HR Management System and also for the Hillgan Bulk SMS system" 
+                position="Software Engineer" 
+                year="March 2025 – June 2025" 
+                description="Built and refined front-end interfaces for KaziDesk, KaziPOS, KaziAfya, and HealJunction using modern UI/UX principles to ensure responsive and engaging experiences." 
               />
             </motion.div>
-            
+
             <motion.div variants={fadeInUp}>
               <Experience 
-                company="Centri Closet" 
-                position="UI Designer" 
-                year="January 2022 - April 2024" 
-                description="Designed some of the UI concepts for the Centri closet e-commerce platform" 
+                company="AWS Student Community Day Kenya" 
+                position="Graphic Designer" 
+                year="May 2024 – September 2024" 
+                description="Designed visual assets and event materials for AWS Students Community Day Kenya, ensuring consistent branding and high-quality presentation." 
               />
             </motion.div>
-            
+
             <motion.div variants={fadeInUp}>
               <Experience 
-                company="University of Eastern Africa, Baraton - Yearbook Department" 
+                company="Google Developer Groups – UEAB" 
+                position="UI/UX Lead" 
+                year="September 2023 – August 2024" 
+                description="Established the GDG UEAB chapter and served as its first UI/UX Lead, organizing workshops and mentoring students in design and creative coding." 
+              />
+            </motion.div>
+
+            <motion.div variants={fadeInUp}>
+              <Experience 
+                company="University of Eastern Africa, Baraton" 
+                position="Full Stack Developer" 
+                year="2023 – 2024" 
+                description="Developed the UEAB Research Grants and UEAB Innovation websites, streamlining project visibility and showcasing institutional innovations." 
+              />
+            </motion.div>
+
+            <motion.div variants={fadeInUp}>
+              <Experience 
+                company="UEAB Crested Crane (Yearbook Office)" 
                 position="Graphic Designer & Photographer" 
-                year="September 2022 - April 2024" 
-                description="A Graphic Designer for the 2022/2023 Yearbook and a Photographer/Graphic Designer for the 2023/2024 Yearbook" 
+                year="September 2022 – April 2024" 
+                description="Captured and curated campus stories through photography, co-designed the university’s yearbook, and created cohesive visual narratives." 
               />
             </motion.div>
-            
+
             <motion.div variants={fadeInUp}>
               <Experience 
-                company="University of Eastern Africa, Baraton - Journalism Department" 
+                company="UEAB Journalism Club" 
                 position="Graphic Designer" 
-                year="November 2023 - February 2024" 
-                description="The Designer for the First and Second releases of The Baratonian Newsletter" 
-              />
-            </motion.div>
-            
-            <motion.div variants={fadeInUp}>
-              <Experience 
-                company="Elimu Publishers" 
-                position="Graphic Designer" 
-                year="September 2023 - October 2023" 
-                description="The Designer for book covers and Illustrations" 
+                year="January 2024 – February 2024" 
+                description="Designed the first and second editions of The Baratonian Newsletter, shaping its visual identity through engaging layouts and creative direction." 
               />
             </motion.div>
           </motion.div>
