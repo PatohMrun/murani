@@ -93,7 +93,7 @@ const Skills: React.FC = () => {
 
     return (
         <motion.section
-            className="min-h-screen py-20 px-4 sm:px-8 font-poppins relative overflow-hidden"
+            className="min-h-screen py-20 pb-40 px-4 sm:px-8 font-poppins relative overflow-x-hidden"
             id="skills"
             initial="hidden"
             whileInView="visible"
@@ -102,7 +102,7 @@ const Skills: React.FC = () => {
         >
             {/* Background elements */}
             <div className="absolute -top-32 -right-20 w-96 h-96 bg-gray-500/10 dark:bg-white/5 rounded-full blur-[100px] pointer-events-none" />
-            <div className="absolute -bottom-32 -left-20 w-96 h-96 bg-gray-500/10 dark:bg-white/5 rounded-full blur-[100px] pointer-events-none" />
+            <div className="absolute -bottom-10 -left-20 w-96 h-96 bg-gray-500/10 dark:bg-white/5 rounded-full blur-[100px] pointer-events-none" />
 
             <div className="max-w-7xl mx-auto relative z-10">
                 <motion.div variants={cardVariants} className="text-center mb-16">

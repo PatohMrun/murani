@@ -25,7 +25,7 @@ const Footer: React.FC = () => {
     ];
 
     return (
-        <footer className="bg-white dark:bg-primary border-t border-gray-200 dark:border-gray-800 font-poppins mt-20 transition-colors duration-500">
+        <footer className="relative z-10 font-poppins mt-20 transition-colors duration-500">
             <div className="container mx-auto px-4 py-12">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
                     {/* Brand Section */}
