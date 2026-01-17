@@ -1,7 +1,6 @@
 'use client'
 import Image from "next/image";
 import Link from "next/link";
-import CosmosBackground from "@/components/CosmosBackground";
 import Experience from "@/components/Experience";
 import { motion } from "framer-motion";
 import { FaArrowRight, FaLinkedin, FaGithub, FaEnvelope } from "react-icons/fa6";
@@ -27,12 +26,10 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-primary transition-colors duration-500 font-poppins text-gray-900 dark:text-gray-100 overflow-x-hidden">
+    <div className="min-h-screen transition-colors duration-500 font-poppins text-gray-900 dark:text-gray-100 overflow-x-hidden">
 
       {/* Hero Section */}
       <section className="relative min-h-[90vh] flex flex-col lg:flex-row items-center justify-center px-4 pt-20 pb-16 lg:pb-0">
-        {/* Cosmos Background */}
-        <CosmosBackground />
 
         <div className="container mx-auto grid lg:grid-cols-2 gap-12 items-center relative z-10 w-full max-w-6xl">
           {/* Text Content */}
@@ -46,12 +43,12 @@ export default function Home() {
               👋 Hello, I'm Patrick Murani
             </motion.div>
 
-            <motion.h1 variants={fadeInUp} className="text-5xl lg:text-7xl font-bold font-oswald mb-6 leading-tight">
+            <motion.h1 variants={fadeInUp} className="text-4xl sm:text-5xl lg:text-7xl font-bold font-oswald mb-6 leading-tight">
               Building <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Digital</span> <br />
               Experiences
             </motion.h1>
 
-            <motion.p variants={fadeInUp} className="text-gray-600 dark:text-gray-400 text-lg lg:text-xl mb-8 leading-relaxed max-w-xl mx-auto lg:mx-0">
+            <motion.p variants={fadeInUp} className="text-gray-600 dark:text-gray-400 text-base sm:text-lg lg:text-xl mb-8 leading-relaxed max-w-xl mx-auto lg:mx-0">
               A <span className="text-blue-600 dark:text-blue-400 font-semibold">Senior Software Engineer</span> with a passion for blending code, design, and usability. I turn complex problems into elegant, user-centric solutions.
             </motion.p>
 
@@ -120,8 +117,8 @@ export default function Home() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-sm font-bold text-blue-500 tracking-widest uppercase mb-2">My Journey</h2>
-            <h3 className="text-3xl lg:text-4xl font-bold font-oswald">Professional Experience</h3>
+            <h2 className="text-xs sm:text-sm font-bold text-blue-500 tracking-widest uppercase mb-2">My Journey</h2>
+            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold font-oswald">Professional Experience</h3>
           </motion.div>
 
           <div className="relative space-y-8 md:space-y-0 relative">

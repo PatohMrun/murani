@@ -29,7 +29,7 @@ const GraphicDesign: React.FC = () => {
     "/graphic/Image31.webp",
     "/graphic/Image32.webp",
     "/graphic/Image33.webp",
-    "/graphic/Image34.webp",  
+    "/graphic/Image34.webp",
     "/graphic/Image35.webp",
     "/graphic/Image36.webp",
     "/graphic/Image37.webp",
@@ -93,12 +93,12 @@ const GraphicDesign: React.FC = () => {
       const windowWidth = getWindowWidth();
       const numColumns = getNumColumns(windowWidth);
       const newColumns: number[][] = Array.from({ length: numColumns }, () => []);
-      
+
       images.forEach((_, index) => {
         const columnIndex = index % numColumns;
         newColumns[columnIndex].push(index);
       });
-      
+
       setColumns(newColumns);
     };
 
@@ -159,7 +159,7 @@ const GraphicDesign: React.FC = () => {
                 key={imageIndex}
                 variants={itemVariants}
                 className="mb-4"
-                whileHover={{ 
+                whileHover={{
                   scale: 1.02,
                   transition: { duration: 0.2 }
                 }}
@@ -181,44 +181,7 @@ const GraphicDesign: React.FC = () => {
         ))}
       </motion.div>
 
-      {/* Floating Action Buttons */}
-      <div className="fixed bottom-10 left-4 space-y-2 z-10">
-        {[
-          {
-            Icon: FaInstagram,
-            href: "https://www.instagram.com/mrunphotography",
-            className: "bg-gradient-to-r from-purple-500 via-pink-500 to-yellow-500 dark:from-purple-400 dark:via-pink-400 dark:to-yellow-400"
-          },
-          {
-            Icon: FaPinterest,
-            href: "https://www.pinterest.com/mrunphotography/_tpd_social/",
-            className: "bg-red-600 dark:bg-red-500"
-          },
-          {
-            Icon: FaWhatsapp,
-            href: "https://wa.me/c/254111983606",
-            className: "bg-green-600 dark:bg-green-500"
-          }
-        ].map(({ Icon, href, className }, index) => (
-          <motion.a
-            key={href}
-            href={href}
-            custom={index}
-            variants={socialButtonVariants}
-            initial="hidden"
-            animate="visible"
-            whileHover={{ scale: 1.1, x: 10 }}
-            className={`flex items-center justify-start p-4 rounded-full hover:scale-110 transition shadow-md shadow-primary ${className}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Icon className="text-white text-xl" />
-            <span className="ml-2 text-white text-sm opacity-90 group-hover:opacity-100 transition-opacity">
-              View More
-            </span>
-          </motion.a>
-        ))}
-      </div>
+
     </div>
   );
 };

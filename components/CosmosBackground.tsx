@@ -19,22 +19,22 @@ const CosmosBackground = () => {
     }, []);
 
     return (
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            {/* Deep Space Gradients */}
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-100/50 via-gray-50 to-gray-50 dark:from-blue-900/20 dark:via-primary dark:to-primary opacity-90 dark:opacity-80"></div>
+        <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10 bg-gray-50 dark:bg-[#0a1014] transition-colors duration-500">
+            {/* Deep Space Gradients - Theme Aware */}
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-100/40 via-transparent to-transparent dark:from-slate-900/50 dark:via-[#0a1014] dark:to-[#0a1014]"></div>
 
-            {/* Nebula Layers */}
+            {/* Subtle Nebula Layers - Theme Aware */}
             <motion.div
                 animate={{
                     rotate: [0, 360],
                     scale: [1, 1.1, 1],
                 }}
                 transition={{
-                    duration: 50,
+                    duration: 60,
                     repeat: Infinity,
                     ease: "linear"
                 }}
-                className="absolute top-[-20%] left-[-10%] w-[70%] h-[70%] bg-purple-400/20 dark:bg-purple-600/10 rounded-full blur-[100px] mix-blend-multiply dark:mix-blend-screen"
+                className="absolute top-[-20%] left-[-10%] w-[70%] h-[70%] bg-blue-300/20 dark:bg-blue-900/10 rounded-full blur-[120px] mix-blend-multiply dark:mix-blend-screen opacity-60 dark:opacity-40"
             />
             <motion.div
                 animate={{
@@ -42,18 +42,18 @@ const CosmosBackground = () => {
                     scale: [1, 1.2, 1],
                 }}
                 transition={{
-                    duration: 45,
+                    duration: 55,
                     repeat: Infinity,
                     ease: "linear"
                 }}
-                className="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] bg-blue-400/20 dark:bg-blue-600/10 rounded-full blur-[120px] mix-blend-multiply dark:mix-blend-screen"
+                className="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] bg-indigo-300/20 dark:bg-indigo-900/10 rounded-full blur-[120px] mix-blend-multiply dark:mix-blend-screen opacity-60 dark:opacity-40"
             />
 
-            {/* Twinkling Stars */}
+            {/* Twinkling Stars - Dark in Light Mode, White in Dark Mode */}
             {stars.map((star, i) => (
                 <motion.div
                     key={i}
-                    className="absolute bg-blue-900/20 dark:bg-white rounded-full"
+                    className="absolute bg-blue-900/30 dark:bg-white rounded-full opacity-70"
                     style={{
                         top: star.top,
                         left: star.left,
@@ -61,8 +61,8 @@ const CosmosBackground = () => {
                         height: star.size,
                     }}
                     animate={{
-                        opacity: [0.2, 1, 0.2],
-                        scale: [1, 1.5, 1],
+                        opacity: [0.2, 0.8, 0.2],
+                        scale: [1, 1.2, 1],
                     }}
                     transition={{
                         duration: star.duration,
@@ -87,7 +87,7 @@ const CosmosBackground = () => {
                     repeatDelay: 5,
                     ease: "easeIn"
                 }}
-                className="absolute w-1 h-1 bg-blue-400 dark:bg-white shadow-[0_0_20px_2px_rgba(59,130,246,0.5)] dark:shadow-[0_0_20px_2px_rgba(255,255,255,0.8)] rounded-full blur-[0.5px]"
+                className="absolute w-1 h-1 bg-blue-500 dark:bg-white shadow-[0_0_20px_2px_rgba(59,130,246,0.5)] dark:shadow-[0_0_20px_2px_rgba(255,255,255,0.8)] rounded-full blur-[0.5px]"
             />
         </div>
     );

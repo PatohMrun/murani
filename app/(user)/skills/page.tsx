@@ -101,13 +101,13 @@ const Skills: React.FC = () => {
             variants={containerVariants}
         >
             {/* Background elements */}
-            <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-500/5 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -top-32 -right-20 w-96 h-96 bg-blue-500/10 rounded-full blur-[100px] pointer-events-none" />
+            <div className="absolute -bottom-32 -left-20 w-96 h-96 bg-purple-500/10 rounded-full blur-[100px] pointer-events-none" />
 
             <div className="max-w-7xl mx-auto relative z-10">
                 <motion.div variants={cardVariants} className="text-center mb-16">
-                    <h2 className="text-sm font-bold text-blue-500 tracking-widest uppercase mb-2">My Expertise</h2>
-                    <h3 className="text-3xl lg:text-5xl font-bold font-oswald text-gray-900 dark:text-gray-100">
+                    <h2 className="text-xs sm:text-sm font-bold text-blue-500 tracking-widest uppercase mb-2">My Expertise</h2>
+                    <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-oswald text-gray-900 dark:text-gray-100">
                         Technical <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">Skills</span>
                     </h3>
                 </motion.div>

@@ -5,6 +5,7 @@ import { Providers } from "./Providers";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsApp from "@/components/WhatsApp";
+import CosmosBackground from "@/components/CosmosBackground";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,14 +27,15 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <Providers>
+          <CosmosBackground />
           <Navbar />
-          <section className="pt-10">
+          <section className="">
             {children}
             <WhatsApp />
           </section>
           <Footer />
         </Providers>
-        </body>
+      </body>
     </html>
   );
 }

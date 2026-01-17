@@ -5,7 +5,6 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { FaPaperPlane, FaEnvelope, FaPhone, FaLocationDot, FaWhatsapp, FaLinkedin, FaInstagram, FaGithub } from "react-icons/fa6";
-import CosmosBackground from "@/components/CosmosBackground";
 
 const Contact: React.FC = () => {
     const [formData, setFormData] = useState({
@@ -57,11 +56,6 @@ const Contact: React.FC = () => {
 
     return (
         <div className="min-h-screen relative font-poppins pt-24 pb-12 overflow-x-hidden">
-            {/* Background */}
-            <div className="absolute inset-0 z-0">
-                <CosmosBackground />
-            </div>
-
             <div className="container mx-auto px-4 relative z-10 max-w-6xl">
                 {/* Header */}
                 <motion.div
@@ -69,8 +63,8 @@ const Contact: React.FC = () => {
                     animate={{ opacity: 1, y: 0 }}
                     className="text-center mb-16"
                 >
-                    <h2 className="text-sm font-bold text-blue-500 tracking-widest uppercase mb-2">Get in Touch</h2>
-                    <h1 className="text-4xl lg:text-6xl font-bold font-oswald text-gray-900 dark:text-white">
+                    <h2 className="text-xs sm:text-sm font-bold text-blue-500 tracking-widest uppercase mb-2">Get in Touch</h2>
+                    <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold font-oswald text-gray-900 dark:text-white">
                         Let's <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">Connect</span>
                     </h1>
                 </motion.div>
@@ -91,8 +85,8 @@ const Contact: React.FC = () => {
                                         <FaEnvelope size={20} />
                                     </div>
                                     <div className="min-w-0">
-                                        <p className="text-sm text-gray-500 dark:text-gray-400 font-semibold uppercase tracking-wide">Email</p>
-                                        <a href="mailto:patrickmurani@gmail.com" className="text-lg font-medium text-gray-900 dark:text-gray-200 hover:text-blue-500 transition-colors break-all">patrickmurani@gmail.com</a>
+                                        <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 font-semibold uppercase tracking-wide">Email</p>
+                                        <a href="mailto:patrickmurani@gmail.com" className="text-sm sm:text-lg font-medium text-gray-900 dark:text-gray-200 hover:text-blue-500 transition-colors whitespace-nowrap">patrickmurani@gmail.com</a>
                                     </div>
                                 </div>
 
@@ -101,8 +95,8 @@ const Contact: React.FC = () => {
                                         <FaPhone size={20} />
                                     </div>
                                     <div>
-                                        <p className="text-sm text-gray-500 dark:text-gray-400 font-semibold uppercase tracking-wide">Phone</p>
-                                        <a href="tel:+254795556007" className="text-lg font-medium text-gray-900 dark:text-gray-200 hover:text-blue-500 transition-colors text-nowrap">+254 795 556 007</a>
+                                        <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 font-semibold uppercase tracking-wide">Phone</p>
+                                        <a href="tel:+254795556007" className="text-sm sm:text-lg font-medium text-gray-900 dark:text-gray-200 hover:text-blue-500 transition-colors whitespace-nowrap">+254 795 556 007</a>
                                     </div>
                                 </div>
 
@@ -111,8 +105,8 @@ const Contact: React.FC = () => {
                                         <FaLocationDot size={20} />
                                     </div>
                                     <div>
-                                        <p className="text-sm text-gray-500 dark:text-gray-400 font-semibold uppercase tracking-wide">Location</p>
-                                        <p className="text-lg font-medium text-gray-900 dark:text-gray-200">Nairobi, Kenya</p>
+                                        <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 font-semibold uppercase tracking-wide">Location</p>
+                                        <p className="text-sm sm:text-lg font-medium text-gray-900 dark:text-gray-200">Nairobi, Kenya</p>
                                     </div>
                                 </div>
                             </div>

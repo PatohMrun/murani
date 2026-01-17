@@ -35,13 +35,13 @@ const Experience: React.FC<ExperienceProps> = ({ company, year, position, descri
                 <div className="md:hidden absolute left-[-26px] top-6 w-4 h-4 rounded-full bg-blue-500 border-2 border-white dark:border-primary z-10 shadow-md" />
 
                 <div className={`flex flex-col gap-2 ${isEven ? 'md:items-end' : 'md:items-start'}`}>
-                    <span className="text-sm font-semibold text-blue-500 bg-blue-50 dark:bg-blue-900/20 px-3 py-1 rounded-full w-fit">
+                    <span className="text-xs sm:text-sm font-semibold text-blue-500 bg-blue-50 dark:bg-blue-900/20 px-3 py-1 rounded-full w-fit">
                         {year}
                     </span>
-                    <h4 className="text-xl font-bold text-gray-900 dark:text-white group-hover:text-blue-500 transition-colors">
+                    <h4 className="text-lg md:text-xl font-bold text-gray-900 dark:text-white group-hover:text-blue-500 transition-colors">
                         {company}
                     </h4>
-                    <h5 className="text-lg font-medium text-gray-700 dark:text-gray-300">
+                    <h5 className="text-base md:text-lg font-medium text-gray-700 dark:text-gray-300">
                         {position}
                     </h5>
                     <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
