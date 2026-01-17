@@ -9,95 +9,54 @@ interface ExperienceProps {
 }
 
 const Experience: React.FC<ExperienceProps> = ({ company, year, position, description }) => {
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                when: "beforeChildren",
-                staggerChildren: 0.2
-            }
-        }
-    };
-
-    const itemVariants = {
-        hidden: { 
-            x: -20,
-            opacity: 0 
-        },
-        visible: {
-            x: 0,
-            opacity: 1,
-            transition: {
-                duration: 0.5,
-                ease: "easeOut"
-            }
-        }
-    };
-
-    const borderVariants = {
-        hidden: { 
-            height: 0,
-            opacity: 0 
-        },
-        visible: {
-            height: "100%",
-            opacity: 1,
-            transition: {
-                duration: 0.5,
-                ease: "easeOut"
-            }
-        }
-    };
-
     return (
-        <motion.section 
-            className="mb-16 font-poppins relative" 
-            id="experience"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: false, margin: "-100px" }}
-            variants={containerVariants}
-        >
-            <div className="space-y-8">
-                <div className="relative pl-6 py-2">
-                    {/* Animated border */}
-                    <motion.div
-                        className="absolute left-0 top-0 w-1 bg-blue-500"
-                        variants={borderVariants}
-                        style={{ originY: 0 }}
-                    />
+        <div className="relative pl-8 md:pl-0 font-poppins group">
+            {/* Timeline Line (Desktop Center) */}
+            <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-gray-200 dark:bg-gray-800 -translate-x-1/2 group-last:bottom-auto group-last:h-full" />
+
+            {/* Timeline Line (Mobile Left) */}
+            <div className="md:hidden absolute left-[11px] top-0 bottom-0 w-0.5 bg-gray-200 dark:bg-gray-800 group-last:bottom-auto group-last:h-full" />
+
+            {/* Timeline Dot (Desktop Center) */}
+            <div className="hidden md:block absolute left-1/2 top-0 w-4 h-4 rounded-full bg-blue-500 border-4 border-white dark:border-primary -translate-x-1/2 z-10 shadow-md group-hover:scale-125 transition-transform duration-300" />
+
+            {/* Timeline Dot (Mobile Left) */}
+            <div className="md:hidden absolute left-0 top-0 w-6 h-6 rounded-full bg-blue-500 border-4 border-white dark:border-primary z-10 shadow-md" />
+
+            {/* Content Container */}
+            <div className={`md:flex justify-between items-center w-full md:w-auto`}>
+                {/* Date Side (Alternating) - For simplicity in this component, we render card content directly. 
+                    The alternating layout logic will be simpler if handled by valid CSS grid or flex order, 
+                    but to keep the component simple, we'll design a full-width card for now that sits to the right/left 
+                    OR a central layout. 
                     
-                    {/* Content with animations */}
-                    <motion.div
-                        variants={itemVariants}
-                        className="relative"
-                        whileHover={{ x: 4 }}
-                        transition={{ duration: 0.2 }}
-                    >
-                        <motion.h4 
-                            className="text-xl font-bold text-gray-900 dark:text-gray-200 mb-1"
-                            variants={itemVariants}
-                        >
+                    Actually, for a robust timeline, let's use a standard block approach that works well responsive.
+                */}
+
+                <motion.div
+                    whileHover={{ y: -5 }}
+                    className="bg-white dark:bg-gray-900 p-6 rounded-xl shadow-lg border border-gray-100 dark:border-gray-800 hover:border-blue-500/30 dark:hover:border-blue-500/30 transition-all duration-300 relative z-0"
+                >
+                    <div className="flex flex-col md:flex-row md:items-center justify-between mb-2">
+                        <h4 className="text-xl font-bold text-gray-900 dark:text-white group-hover:text-blue-500 transition-colors">
                             {company}
-                        </motion.h4>
-                        <motion.p 
-                            className="text-gray-700 dark:text-gray-400 mb-2"
-                            variants={itemVariants}
-                        >
-                            {position} • {year}
-                        </motion.p>
-                        <motion.p 
-                            className="text-gray-700 dark:text-gray-400"
-                            variants={itemVariants}
-                        >
-                            {description}
-                        </motion.p>
-                    </motion.div>
-                </div>
+                        </h4>
+                        <span className="text-sm font-semibold text-blue-500 bg-blue-50 dark:bg-blue-900/20 px-3 py-1 rounded-full mt-2 md:mt-0 w-fit">
+                            {year}
+                        </span>
+                    </div>
+
+                    <h5 className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-3">
+                        {position}
+                    </h5>
+
+                    <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                        {description}
+                    </p>
+                </motion.div>
             </div>
-        </motion.section>
+        </div>
     );
 }
- 
+
 export default Experience;
