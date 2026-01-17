@@ -12,6 +12,24 @@ const SoftwareProjects: React.FC = () => {
 
   const projects = [
     {
+      source: "/software/asg.png",
+      title: "AlphaShield Global",
+      description: "Professional security solutions across Kenya and internationally",
+      link: "https://alphashield.vercel.app/"
+    },
+    {
+      source: "/software/b360.png",
+      title: "B360 Inc.",
+      description: "A global provider of professional services enabling government and private sector success",
+      link: "https://b360inc.com/"
+    },
+    {
+      source: "/software/bcpa.png",
+      title: "B360 CPA",
+      description: "Provides CPA Services globally",
+      link: "https://b360-cpa.vercel.app/"
+    },
+    {
       source: "/software/HealJunction.webp",
       title: "HealJunction Website",
       description: "A website for HealJunction Health Services",
@@ -29,7 +47,7 @@ const SoftwareProjects: React.FC = () => {
       description: "A Health management system by Hillgan Innovations",
       link: "https://kaziafya.vercel.app/"
     },
-        {
+    {
       source: "/software/Kazi.webp",
       title: "Kazi Desk HR System",
       description: "A General purpose HR management system by Hillgan Innovations",
@@ -121,7 +139,7 @@ const SoftwareProjects: React.FC = () => {
             key={index}
             variants={cardVariants}
             className="relative"
-            whileHover={{ 
+            whileHover={{
               scale: 1.02,
               transition: { duration: 0.2 }
             }}
