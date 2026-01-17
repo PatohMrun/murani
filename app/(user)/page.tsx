@@ -1,6 +1,7 @@
 'use client'
 import Image from "next/image";
 import Link from "next/link";
+import CosmosBackground from "@/components/CosmosBackground";
 import Experience from "@/components/Experience";
 import { motion } from "framer-motion";
 import { FaArrowRight, FaLinkedin, FaGithub, FaEnvelope } from "react-icons/fa6";
@@ -30,9 +31,8 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className="relative min-h-[90vh] flex flex-col lg:flex-row items-center justify-center px-4 pt-20 pb-16 lg:pb-0">
-        {/* Background Gradients/Blobs */}
-        <div className="absolute top-[-20%] left-[-10%] w-[50vw] h-[50vw] bg-blue-600/10 rounded-full blur-[120px] animate-pulse" />
-        <div className="absolute bottom-0 right-[-10%] w-[40vw] h-[40vw] bg-purple-600/10 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '1s' }} />
+        {/* Cosmos Background */}
+        <CosmosBackground />
 
         <div className="container mx-auto grid lg:grid-cols-2 gap-12 items-center relative z-10 w-full max-w-6xl">
           {/* Text Content */}
@@ -113,7 +113,7 @@ export default function Home() {
 
       {/* Experience Section */}
       <section className="py-20 relative" id="experience">
-        <div className="container mx-auto px-4 max-w-4xl">
+        <div className="container mx-auto px-4 max-w-7xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -124,12 +124,13 @@ export default function Home() {
             <h3 className="text-3xl lg:text-4xl font-bold font-oswald">Professional Experience</h3>
           </motion.div>
 
-          <div className="relative space-y-8 md:space-y-16">
+          <div className="relative space-y-8 md:space-y-0 relative">
             <Experience
               company="BizSolutions 360, Inc."
               position="Software Developer, Business Developer & Social Media Manager"
               year="Nov 2025 - Present"
               description="Driving digital transformation through full-stack development, strategic business growth, and brand management."
+              index={0}
             />
 
             <Experience
@@ -137,6 +138,7 @@ export default function Home() {
               position="Software Engineer"
               year="Mar 2025 – Jun 2025"
               description="Led frontend architecture for key products (KaziDesk, KaziPOS), focusing on performance optimization and intuitive UX design."
+              index={1}
             />
 
             <Experience
@@ -144,6 +146,7 @@ export default function Home() {
               position="Graphic Designer"
               year="May 2024 – Sep 2024"
               description="Crafted the visual identity for a major tech conference, designing marketing assets that drove engagement and brand consistency."
+              index={2}
             />
 
             <Experience
@@ -151,6 +154,7 @@ export default function Home() {
               position="UI/UX Lead"
               year="Sep 2023 – Aug 2024"
               description="Pioneered the design chapter, mentoring students in UI/UX principles and leading workshops on creative coding and prototyping."
+              index={3}
             />
 
             <Experience
@@ -158,6 +162,7 @@ export default function Home() {
               position="Full Stack Developer"
               year="2023 – 2024"
               description="Developed institutional platforms for research and innovation, streamlining grant applications and project showcases."
+              index={4}
             />
 
             <Experience
@@ -165,6 +170,7 @@ export default function Home() {
               position="Graphic Designer & Photographer"
               year="Sep 2022 – Apr 2024"
               description="Visual storyteller for the university, capturing campus life and designing the annual yearbook publication."
+              index={5}
             />
 
             <div className="flex justify-center pt-8">

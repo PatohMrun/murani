@@ -132,15 +132,15 @@ const SoftwareProjects: React.FC = () => {
         variants={containerVariants}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
-        className="flex gap-4 justify-center items-center flex-wrap"
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto"
       >
         {projects.map((project, index) => (
           <motion.div
             key={index}
             variants={cardVariants}
-            className="relative"
+            className="flex"
             whileHover={{
-              scale: 1.02,
+              y: -5,
               transition: { duration: 0.2 }
             }}
           >

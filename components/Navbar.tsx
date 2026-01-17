@@ -45,9 +45,9 @@ const Navbar: React.FC = () => {
         };
     }, [isOpen]);
 
-   
+
     return (
-        <nav className='fixed w-full z-10 bg-white shadow-sm shadow-gray-400 dark:shadow-gray-900  dark:bg-primary flex justify-between items-center px-6 py-5 font-poppins text-primary dark:text-white h-12 '>
+        <nav className='fixed w-full z-50 bg-white shadow-sm shadow-gray-400 dark:shadow-gray-900  dark:bg-primary flex justify-between items-center px-6 py-5 font-poppins text-primary dark:text-white h-12 '>
             <div>
                 {/* <Image 
                     width={45}
@@ -85,9 +85,8 @@ const Navbar: React.FC = () => {
 
                 {/* Navlinks mobile */}
                 <div
-                    className={`${
-                        isOpen ? "flex" : "hidden"
-                    } absolute top-12 left-0 w-full flex-col sm:hidden bg-white dark:bg-primary shadow-sm shadow-primary mt-0 pt-4 pb-2 items-center `}
+                    className={`${isOpen ? "flex" : "hidden"
+                        } absolute top-12 left-0 w-full flex-col sm:hidden bg-white dark:bg-primary shadow-sm shadow-primary mt-0 pt-4 pb-2 items-center `}
                 >
                     <div
                         ref={menuRef}
