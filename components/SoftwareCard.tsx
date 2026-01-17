@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { FaArrowRight, FaExternalLinkAlt } from "react-icons/fa";
+import { FaArrowRight } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 

@@ -35,7 +35,7 @@ const Footer: React.FC = () => {
                         </h2>
                         <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
                             Crafting digital experiences through code, design, and photography.
-                            Let's build something amazing together.
+                            Let&apos;s build something amazing together.
                         </p>
                     </div>
 

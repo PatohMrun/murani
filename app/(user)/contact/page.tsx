@@ -65,7 +65,7 @@ const Contact: React.FC = () => {
                 >
                     <h2 className="text-xs sm:text-sm font-bold text-blue-500 tracking-widest uppercase mb-2">Get in Touch</h2>
                     <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold font-oswald text-gray-900 dark:text-white">
-                        Let's <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">Connect</span>
+                        Let&apos;s <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">Connect</span>
                     </h1>
                 </motion.div>
 

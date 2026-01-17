@@ -40,7 +40,7 @@ export default function Home() {
             className="text-center lg:text-left order-2 lg:order-1"
           >
             <motion.div variants={fadeInUp} className="inline-block px-4 py-2 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 font-semibold text-sm mb-6 border border-blue-200 dark:border-blue-800">
-              👋 Hello, I'm Patrick Murani
+              👋 Hello, I&apos;m Patrick Murani
             </motion.div>
 
             <motion.h1 variants={fadeInUp} className="text-4xl sm:text-5xl lg:text-7xl font-bold font-oswald mb-6 leading-tight">
