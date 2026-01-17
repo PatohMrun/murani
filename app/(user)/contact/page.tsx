@@ -140,7 +140,7 @@ const Contact: React.FC = () => {
                         transition={{ delay: 0.4 }}
                         className="bg-white dark:bg-gray-800 rounded-3xl p-6 md:p-8 lg:p-10 shadow-2xl relative overflow-hidden"
                     >
-                        <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-bl-full pointer-events-none" />
+                        <div className="absolute top-0 right-0 w-32 h-32 bg-gray-500/10 dark:bg-white/5 rounded-bl-full pointer-events-none" />
 
                         <h3 className="text-2xl font-bold font-oswald mb-8 text-gray-900 dark:text-white">Send a Message</h3>
 

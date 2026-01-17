@@ -101,8 +101,8 @@ const Skills: React.FC = () => {
             variants={containerVariants}
         >
             {/* Background elements */}
-            <div className="absolute -top-32 -right-20 w-96 h-96 bg-blue-500/10 rounded-full blur-[100px] pointer-events-none" />
-            <div className="absolute -bottom-32 -left-20 w-96 h-96 bg-purple-500/10 rounded-full blur-[100px] pointer-events-none" />
+            <div className="absolute -top-32 -right-20 w-96 h-96 bg-gray-500/10 dark:bg-white/5 rounded-full blur-[100px] pointer-events-none" />
+            <div className="absolute -bottom-32 -left-20 w-96 h-96 bg-gray-500/10 dark:bg-white/5 rounded-full blur-[100px] pointer-events-none" />
 
             <div className="max-w-7xl mx-auto relative z-10">
                 <motion.div variants={cardVariants} className="text-center mb-16">
