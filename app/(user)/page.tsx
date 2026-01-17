@@ -174,9 +174,9 @@ export default function Home() {
               <Link
                 href="patrickmurani.pdf"
                 target="_blank"
-                className="px-6 py-3 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg text-sm font-semibold transition-colors flex items-center gap-2"
+                className="px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full font-bold shadow-lg hover:shadow-blue-500/25 hover:scale-105 active:scale-95 transition-all duration-300 flex items-center gap-2"
               >
-                Download Full Résumé <FaArrowRight className="text-xs" />
+                Download Full Résumé <FaArrowRight className="text-sm animate-pulse" />
               </Link>
             </div>
           </div>

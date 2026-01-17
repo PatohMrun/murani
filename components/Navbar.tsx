@@ -115,13 +115,13 @@ const Navbar: React.FC = () => {
                         transition={{ duration: 0.3, ease: "easeInOut" }}
                         className="md:hidden bg-white/95 dark:bg-primary/95 backdrop-blur-xl border-b border-gray-200 dark:border-gray-800 overflow-hidden"
                     >
-                        <div ref={menuRef} className="container mx-auto px-6 py-6 flex flex-col gap-4">
+                        <div ref={menuRef} className="container mx-auto px-6 py-4 flex flex-col gap-2">
                             {navLinks.map((link) => (
                                 <Link
                                     key={link.name}
                                     href={link.href}
                                     onClick={() => setIsOpen(false)}
-                                    className={`p-4 rounded-xl text-lg font-medium transition-colors flex items-center justify-between
+                                    className={`p-3 rounded-lg text-sm font-medium transition-colors flex items-center justify-between
                                         ${isActive(link.href)
                                             ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400'
                                             : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800'
@@ -132,7 +132,7 @@ const Navbar: React.FC = () => {
                                         <motion.div
                                             initial={{ scale: 0 }}
                                             animate={{ scale: 1 }}
-                                            className="w-2 h-2 rounded-full bg-blue-500"
+                                            className="w-1.5 h-1.5 rounded-full bg-blue-500"
                                         />
                                     )}
                                 </Link>

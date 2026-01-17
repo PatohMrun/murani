@@ -6,7 +6,7 @@ import { useTheme } from "next-themes"
 
 export default function ThemeSwitch() {
     const [mounted, setMounted] = useState(false)
-    const { theme, setTheme } = useTheme()
+    const { theme, setTheme, resolvedTheme } = useTheme()
 
     useEffect(() => setMounted(true), [])
 
@@ -15,11 +15,12 @@ export default function ThemeSwitch() {
     return (
         <div className="flex justify-center items-center">
             <button type="button"
-                className="text-white dark:text-black text-2xl"
-                onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+                className="text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 text-xl transition-colors"
+                onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
+                aria-label="Toggle Theme"
             >
-                {theme === 'dark' ? <FiSun className="text-white" /> : <FiMoon className="text-black" />}
+                {resolvedTheme === 'dark' ? <FiSun /> : <FiMoon />}
             </button>
-        </div>
+        </div >
     )
 }
