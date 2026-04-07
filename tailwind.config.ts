@@ -6,6 +6,7 @@ const config: Config = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  darkMode: "class",
   theme: {
     extend: {
       backgroundImage: {
@@ -14,17 +15,17 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       colors: {
-        "primary": '#0a1014'
+        primary: "#0a1014",
       },
       fontFamily: {
-        'oswald': 'Oswald',
-        'poppins': 'Poppins',
-        'berkshire': 'Berkshire Swash',
-        'barlow': 'Barlow Condensed'
+        oswald: ["Oswald", "sans-serif"],
+        poppins: ["Poppins", "sans-serif"],
+        berkshire: ["Berkshire Swash", "cursive"],
+        barlow: ["Barlow Condensed", "sans-serif"],
       },
     },
   },
   plugins: [],
-  darkMode: "class",
 };
+
 export default config;
