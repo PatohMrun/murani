@@ -4,9 +4,7 @@ export async function generateStaticParams() {
   return []
 }
 
-export async function generateMetadata(): Promise<Metadata> {
-  return {}
-}
+
 
 export default async function BlogPostPage() {
   notFound()

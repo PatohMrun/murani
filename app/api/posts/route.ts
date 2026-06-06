@@ -3,8 +3,8 @@ import { cookies } from 'next/headers'
 import { revalidatePath } from 'next/cache'
 import { prisma } from '@/lib/prisma'
 
-function isAdmin() {
-  const cookieStore = cookies()
+async function isAdmin() {
+  const cookieStore = await cookies()
   return cookieStore.get('admin_token')?.value === process.env.ADMIN_SECRET
 }
 
@@ -18,7 +18,7 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
-  if (!isAdmin()) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  if (!(await isAdmin())) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
   const { title, slug, excerpt, content, tags, status } = await req.json()
   const post = await prisma.post.create({
