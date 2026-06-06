@@ -1,10 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from "./Providers";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import WhatsApp from "@/components/WhatsApp";
-import CosmosBackground from "@/components/CosmosBackground";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://murani.signiqe.com"),
@@ -77,13 +73,7 @@ export default function RootLayout({
       </head>
       <body>
         <Providers>
-          <CosmosBackground />
-          <Navbar />
-          <section>
-            {children}
-            <WhatsApp />
-          </section>
-          <Footer />
+          {children}
         </Providers>
       </body>
     </html>
