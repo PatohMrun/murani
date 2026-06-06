@@ -4,8 +4,9 @@ import PostForm from '@/components/admin/PostForm'
 
 export const metadata = { title: 'Edit Post | Admin Studio' }
 
-export default async function EditPostPage({ params }: { params: { id: string } }) {
-  const post = await prisma.post.findUnique({ where: { id: params.id } })
+export default async function EditPostPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const post = await prisma.post.findUnique({ where: { id } })
   if (!post) notFound()
 
   return (
