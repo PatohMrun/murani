@@ -1,14 +1,20 @@
 import Link from 'next/link'
+import { prisma } from '@/lib/prisma'
 import { Metadata } from 'next'
+
+export const revalidate = 3600
 
 export const metadata: Metadata = {
   title: 'Blog',
   description: 'Thoughts on software engineering, design, and building digital products.',
 }
 
-const posts: { id: string; title: string; slug: string; excerpt: string; tags: string[]; createdAt: Date }[] = []
-
 export default async function BlogPage() {
+  const posts = await prisma.post.findMany({
+    where: { status: 'published' },
+    orderBy: { createdAt: 'desc' },
+    select: { id: true, title: true, slug: true, excerpt: true, tags: true, createdAt: true },
+  })
 
   return (
     <div className="min-h-screen pt-24 pb-16 px-4 font-poppins">
