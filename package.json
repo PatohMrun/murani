@@ -4,7 +4,9 @@
   "private": true,
   "pnpm": {
     "onlyBuiltDependencies": [
-      "sharp"
+      "sharp",
+      "@prisma/client",
+      "prisma"
     ]
   },
   "scripts": {
