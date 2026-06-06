@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaAndroid, FaChevronDown, FaHistory } from 'react-icons/fa';
 import { MdDownload, MdInfoOutline } from 'react-icons/md';
-import Link from 'next/link';
 import Image from 'next/image';
 
 // App releases data structure supporting versioning
@@ -54,7 +53,7 @@ export default function APKsPage() {
             .then(res => res.json())
             .then(data => {
                 const newStats: Record<string, number> = {};
-                data.forEach((stat: any) => {
+                data.forEach((stat: { appId: string; downloads: number }) => {
                     newStats[stat.appId] = (newStats[stat.appId] || 0) + stat.downloads;
                 });
                 setStats(newStats);
@@ -77,7 +76,7 @@ export default function APKsPage() {
                             Android <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Releases</span>
                         </h1>
                         <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                            Direct APK downloads. Enable "Install from Unknown Sources" on your device to install.
+                            Direct APK downloads. Enable &quot;Install from Unknown Sources&quot; on your device to install.
                         </p>
                     </div>
                 </div>
@@ -155,7 +154,7 @@ export default function APKsPage() {
                                                 <div className="flex-1">
                                                     <h4 className="text-sm font-semibold mb-2 flex items-center gap-2 text-gray-900 dark:text-white">
                                                         <MdInfoOutline className="text-purple-500" />
-                                                        What's new in v{app.latestRelease.version}
+                                                        What&apos;s new in v{app.latestRelease.version}
                                                     </h4>
                                                     <div className="text-sm text-gray-600 dark:text-gray-400 space-y-1.5">
                                                         <div className="flex items-center gap-3 mb-2 text-xs font-mono bg-gray-100 dark:bg-gray-800 inline-block px-2 py-1 rounded">
