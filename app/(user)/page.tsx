@@ -44,7 +44,7 @@ export default function Home() {
             </motion.div>
 
             <motion.h1 variants={fadeInUp} className="text-4xl sm:text-5xl lg:text-7xl font-bold font-oswald mb-6 leading-tight">
-              Building <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Digital</span> <br />
+              Building <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-600 to-purple-600">Digital</span> <br />
               Experiences
             </motion.h1>
 
@@ -83,13 +83,13 @@ export default function Home() {
             className="order-1 lg:order-2 flex justify-center relative"
           >
             <div className="relative w-72 h-72 lg:w-96 lg:h-96">
-              <div className="absolute inset-0 bg-gradient-to-tr from-blue-600 to-purple-600 rounded-[2rem] rotate-6 opacity-20 blur-2xl animate-pulse"></div>
-              <div className="absolute inset-0 bg-gray-200 dark:bg-gray-800 rounded-[2rem] rotate-3 shadow-2xl"></div>
+              <div className="absolute inset-0 bg-linear-to-tr from-blue-600 to-purple-600 rounded-4xl rotate-6 opacity-20 blur-2xl animate-pulse"></div>
+              <div className="absolute inset-0 bg-gray-200 dark:bg-gray-800 rounded-4xl rotate-3 shadow-2xl"></div>
               <Image
                 src="/Murani.jpg"
                 alt="Patrick Murani"
                 fill
-                className="object-cover object-top rounded-[2rem] shadow-inner relative z-10"
+                className="object-cover object-top rounded-4xl shadow-inner relative z-10"
                 priority
               />
             </div>
@@ -104,7 +104,7 @@ export default function Home() {
           className="absolute bottom-8 left-1/2 -translate-x-1/2 text-gray-400 text-sm hidden lg:flex flex-col items-center gap-2"
         >
           <span>Scroll to Explore</span>
-          <div className="w-0.5 h-12 bg-gradient-to-b from-blue-500 to-transparent"></div>
+          <div className="w-0.5 h-12 bg-linear-to-b from-blue-500 to-transparent"></div>
         </motion.div>
       </section>
 
@@ -174,7 +174,7 @@ export default function Home() {
               <Link
                 href="patrickmurani.pdf"
                 target="_blank"
-                className="px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full font-bold shadow-lg hover:shadow-blue-500/25 hover:scale-105 active:scale-95 transition-all duration-300 flex items-center gap-2"
+                className="px-8 py-3 bg-linear-to-r from-blue-600 to-purple-600 text-white rounded-full font-bold shadow-lg hover:shadow-blue-500/25 hover:scale-105 active:scale-95 transition-all duration-300 flex items-center gap-2"
               >
                 Download Full Résumé <FaArrowRight className="text-sm animate-pulse" />
               </Link>

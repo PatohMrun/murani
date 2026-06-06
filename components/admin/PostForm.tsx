@@ -92,7 +92,7 @@ export default function PostForm({ initialData }: PostFormProps) {
           onChange={e => handleTitleChange(e.target.value)}
           required
           placeholder="Post title"
-          className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all"
+          className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-hidden transition-all"
         />
       </div>
 
@@ -105,7 +105,7 @@ export default function PostForm({ initialData }: PostFormProps) {
           onChange={e => setForm(f => ({ ...f, slug: e.target.value }))}
           required
           placeholder="post-url-slug"
-          className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all font-mono text-sm"
+          className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-hidden transition-all font-mono text-sm"
         />
       </div>
 
@@ -117,7 +117,7 @@ export default function PostForm({ initialData }: PostFormProps) {
           onChange={e => setForm(f => ({ ...f, excerpt: e.target.value }))}
           rows={2}
           placeholder="Short description shown in the post list"
-          className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all resize-none"
+          className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-hidden transition-all resize-none"
         />
       </div>
 
@@ -135,7 +135,7 @@ export default function PostForm({ initialData }: PostFormProps) {
           value={tagInput}
           onChange={e => setTagInput(e.target.value)}
           placeholder="nextjs, react, web"
-          className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all"
+          className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-hidden transition-all"
         />
       </div>
 
@@ -168,7 +168,7 @@ export default function PostForm({ initialData }: PostFormProps) {
           <button
             type="submit"
             disabled={saving}
-            className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold hover:opacity-90 transition-opacity disabled:opacity-60 text-sm"
+            className="px-6 py-2.5 rounded-xl bg-linear-to-r from-blue-600 to-purple-600 text-white font-semibold hover:opacity-90 transition-opacity disabled:opacity-60 text-sm"
           >
             {saving ? 'Saving...' : isEditing ? 'Update Post' : 'Create Post'}
           </button>

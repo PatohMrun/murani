@@ -67,7 +67,7 @@ export default function Editor({ content, onChange }: EditorProps) {
     onUpdate: ({ editor }) => onChange(editor.getHTML()),
     editorProps: {
       attributes: {
-        class: 'prose prose-gray dark:prose-invert max-w-none min-h-[400px] p-4 focus:outline-none',
+        class: 'prose prose-gray dark:prose-invert max-w-none min-h-[400px] p-4 focus:outline-hidden',
       },
     },
   })

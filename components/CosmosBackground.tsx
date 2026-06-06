@@ -21,7 +21,7 @@ const CosmosBackground = () => {
     return (
         <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10 bg-gray-50 dark:bg-black transition-colors duration-500">
             {/* Deep Space Gradients - Theme Aware */}
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-gray-200/40 via-transparent to-transparent dark:from-zinc-900/80 dark:via-black dark:to-black"></div>
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,var(--tw-gradient-stops))] from-gray-200/40 via-transparent to-transparent dark:from-zinc-900/80 dark:via-black dark:to-black"></div>
 
             {/* Subtle Nebula Layers - Theme Aware */}
             <motion.div

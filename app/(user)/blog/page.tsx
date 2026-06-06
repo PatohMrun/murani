@@ -1,20 +1,14 @@
 import Link from 'next/link'
-import { prisma } from '@/lib/prisma'
 import { Metadata } from 'next'
-
-export const revalidate = 3600
 
 export const metadata: Metadata = {
   title: 'Blog',
   description: 'Thoughts on software engineering, design, and building digital products.',
 }
 
+const posts: { id: string; title: string; slug: string; excerpt: string; tags: string[]; createdAt: Date }[] = []
+
 export default async function BlogPage() {
-  const posts = await prisma.post.findMany({
-    where: { status: 'published' },
-    orderBy: { createdAt: 'desc' },
-    select: { id: true, title: true, slug: true, excerpt: true, tags: true, createdAt: true },
-  })
 
   return (
     <div className="min-h-screen pt-24 pb-16 px-4 font-poppins">
@@ -22,7 +16,7 @@ export default async function BlogPage() {
         <div className="mb-12">
           <h2 className="text-xs font-bold text-blue-500 tracking-widest uppercase mb-2">Writing</h2>
           <h1 className="text-4xl lg:text-6xl font-bold font-oswald text-gray-900 dark:text-white">
-            The <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">Blog</span>
+            The <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-500 to-purple-500">Blog</span>
           </h1>
           <p className="text-gray-500 dark:text-gray-400 mt-4 text-lg">
             Thoughts on software engineering, design, and building digital products.

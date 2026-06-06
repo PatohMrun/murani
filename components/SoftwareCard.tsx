@@ -43,12 +43,12 @@ const SoftwareCard: React.FC<SoftwareCardProps> = ({ source, title, description,
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </div>
 
-            <div className="p-6 flex flex-col flex-grow">
+            <div className="p-6 flex flex-col grow">
                 <h3 className="text-xl font-bold font-oswald text-gray-900 dark:text-white mb-2 line-clamp-1">{title}</h3>
-                <p className="text-gray-600 dark:text-gray-300 text-sm mb-6 line-clamp-3 flex-grow">{description}</p>
+                <p className="text-gray-600 dark:text-gray-300 text-sm mb-6 line-clamp-3 grow">{description}</p>
 
                 <motion.a
                     href={link}

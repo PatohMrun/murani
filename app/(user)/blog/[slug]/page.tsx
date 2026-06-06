@@ -1,31 +1,18 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { prisma } from '@/lib/prisma'
 import { Metadata } from 'next'
 import { FaArrowLeft } from 'react-icons/fa6'
 
-export const revalidate = 3600
-
 export async function generateStaticParams() {
-  const posts = await prisma.post.findMany({
-    where: { status: 'published' },
-    select: { slug: true },
-  })
-  return posts.map(p => ({ slug: p.slug }))
+  return []
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const post = await prisma.post.findUnique({ where: { slug: params.slug } })
-  if (!post) return {}
-  return {
-    title: post.title,
-    description: post.excerpt ?? undefined,
-  }
+export async function generateMetadata(): Promise<Metadata> {
+  return {}
 }
 
-export default async function BlogPostPage({ params }: { params: { slug: string } }) {
-  const post = await prisma.post.findUnique({ where: { slug: params.slug, status: 'published' } })
-  if (!post) notFound()
+export default async function BlogPostPage() {
+  notFound()
 
   return (
     <div className="min-h-screen pt-24 pb-16 px-4 font-poppins">

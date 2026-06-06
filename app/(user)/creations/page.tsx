@@ -31,7 +31,7 @@ const Creations: React.FC = () => {
           {/* ... existing header content ... */}
           <h2 className="text-xs sm:text-sm font-bold text-blue-500 tracking-widest uppercase mb-2">Portfolio</h2>
           <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold font-oswald text-gray-900 dark:text-gray-100 mb-6">
-            My <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">Creations</span>
+            My <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-500 to-purple-500">Creations</span>
           </h1>
           <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-lg">
             Explore a collection of my digital work, ranging from complex software solutions to creative graphic designs.
@@ -94,7 +94,7 @@ const Creations: React.FC = () => {
               {
                 Icon: FaInstagram,
                 href: "https://www.instagram.com/mrunphotography",
-                className: "bg-gradient-to-r from-purple-500 via-pink-500 to-yellow-500 dark:from-purple-400 dark:via-pink-400 dark:to-yellow-400"
+                className: "bg-linear-to-r from-purple-500 via-pink-500 to-yellow-500 dark:from-purple-400 dark:via-pink-400 dark:to-yellow-400"
               },
               {
                 Icon: FaPinterest,

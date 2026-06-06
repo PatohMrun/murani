@@ -65,7 +65,7 @@ const Contact: React.FC = () => {
                 >
                     <h2 className="text-xs sm:text-sm font-bold text-blue-500 tracking-widest uppercase mb-2">Get in Touch</h2>
                     <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold font-oswald text-gray-900 dark:text-white">
-                        Let&apos;s <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">Connect</span>
+                        Let&apos;s <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-500 to-purple-500">Connect</span>
                     </h1>
                 </motion.div>
 
@@ -81,7 +81,7 @@ const Contact: React.FC = () => {
                             <h3 className="text-2xl font-bold font-oswald mb-6 text-gray-900 dark:text-white">Contact Information</h3>
                             <div className="space-y-6">
                                 <div className="flex items-start gap-4">
-                                    <div className="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-full text-blue-600 dark:text-blue-400 flex-shrink-0">
+                                    <div className="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-full text-blue-600 dark:text-blue-400 shrink-0">
                                         <FaEnvelope size={20} />
                                     </div>
                                     <div className="min-w-0">
@@ -91,7 +91,7 @@ const Contact: React.FC = () => {
                                 </div>
 
                                 <div className="flex items-start gap-4">
-                                    <div className="p-3 bg-green-100 dark:bg-green-900/30 rounded-full text-green-600 dark:text-green-400 flex-shrink-0">
+                                    <div className="p-3 bg-green-100 dark:bg-green-900/30 rounded-full text-green-600 dark:text-green-400 shrink-0">
                                         <FaPhone size={20} />
                                     </div>
                                     <div>
@@ -101,7 +101,7 @@ const Contact: React.FC = () => {
                                 </div>
 
                                 <div className="flex items-start gap-4">
-                                    <div className="p-3 bg-purple-100 dark:bg-purple-900/30 rounded-full text-purple-600 dark:text-purple-400 flex-shrink-0">
+                                    <div className="p-3 bg-purple-100 dark:bg-purple-900/30 rounded-full text-purple-600 dark:text-purple-400 shrink-0">
                                         <FaLocationDot size={20} />
                                     </div>
                                     <div>
@@ -153,7 +153,7 @@ const Contact: React.FC = () => {
                                         name="from_name"
                                         value={formData.from_name}
                                         onChange={handleChange}
-                                        className="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-900/50 border border-gray-200 dark:border-gray-700 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all dark:text-white"
+                                        className="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-900/50 border border-gray-200 dark:border-gray-700 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-hidden transition-all dark:text-white"
                                         placeholder="e.g. Kamau Juma"
                                         required
                                     />
@@ -165,7 +165,7 @@ const Contact: React.FC = () => {
                                         name="reply_to"
                                         value={formData.reply_to}
                                         onChange={handleChange}
-                                        className="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-900/50 border border-gray-200 dark:border-gray-700 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all dark:text-white"
+                                        className="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-900/50 border border-gray-200 dark:border-gray-700 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-hidden transition-all dark:text-white"
                                         placeholder="kamau@example.com"
                                         required
                                     />
@@ -179,7 +179,7 @@ const Contact: React.FC = () => {
                                     name="subject"
                                     value={formData.subject}
                                     onChange={handleChange}
-                                    className="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-900/50 border border-gray-200 dark:border-gray-700 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all dark:text-white"
+                                    className="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-900/50 border border-gray-200 dark:border-gray-700 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-hidden transition-all dark:text-white"
                                     placeholder="Project Inquiry"
                                     required
                                 />
@@ -192,7 +192,7 @@ const Contact: React.FC = () => {
                                     rows={4}
                                     value={formData.message}
                                     onChange={handleChange}
-                                    className="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-900/50 border border-gray-200 dark:border-gray-700 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all resize-none dark:text-white"
+                                    className="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-900/50 border border-gray-200 dark:border-gray-700 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-hidden transition-all resize-none dark:text-white"
                                     placeholder="Tell me about your project..."
                                     required
                                 />
@@ -201,7 +201,7 @@ const Contact: React.FC = () => {
                             <button
                                 type="submit"
                                 disabled={isSubmitting}
-                                className="w-full py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold rounded-xl shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+                                className="w-full py-4 bg-linear-to-r from-blue-600 to-purple-600 text-white font-bold rounded-xl shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
                             >
                                 {isSubmitting ? (
                                     <>

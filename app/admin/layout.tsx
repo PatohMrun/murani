@@ -10,7 +10,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           <div className="max-w-6xl mx-auto flex items-center justify-between">
             <div className="flex items-center gap-8">
               <Link href="/admin" className="font-bold text-xl font-oswald text-gray-900 dark:text-white">
-                Admin <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Studio</span>
+                Admin <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-600 to-purple-600">Studio</span>
               </Link>
               <nav className="flex gap-6">
                 <Link href="/admin" className="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 transition-colors">

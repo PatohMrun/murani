@@ -1,14 +1,10 @@
 import Link from 'next/link'
-import { prisma } from '@/lib/prisma'
 import PostActions from '@/components/admin/PostActions'
 
 export const revalidate = 0
 
 export default async function AdminPage() {
-  const posts = await prisma.post.findMany({
-    orderBy: { createdAt: 'desc' },
-    select: { id: true, title: true, slug: true, status: true, tags: true, createdAt: true },
-  })
+  const posts: { id: string; title: string; slug: string; status: string; tags: string[]; createdAt: Date }[] = []
 
   return (
     <div>
@@ -19,7 +15,7 @@ export default async function AdminPage() {
         </div>
         <Link
           href="/admin/new"
-          className="px-5 py-2.5 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm font-semibold rounded-xl hover:opacity-90 transition-opacity"
+          className="px-5 py-2.5 bg-linear-to-r from-blue-600 to-purple-600 text-white text-sm font-semibold rounded-xl hover:opacity-90 transition-opacity"
         >
           + New Post
         </Link>

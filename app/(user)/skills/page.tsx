@@ -108,7 +108,7 @@ const Skills: React.FC = () => {
                 <motion.div variants={cardVariants} className="text-center mb-16">
                     <h2 className="text-xs sm:text-sm font-bold text-blue-500 tracking-widest uppercase mb-2">My Expertise</h2>
                     <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-oswald text-gray-900 dark:text-gray-100">
-                        Technical <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">Skills</span>
+                        Technical <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-500 to-purple-500">Skills</span>
                     </h3>
                 </motion.div>
 
@@ -116,7 +116,7 @@ const Skills: React.FC = () => {
                     {skillsData.map((skill, index) => (
                         <motion.div
                             key={index}
-                            className="bg-white dark:bg-gray-800/50 backdrop-blur-sm border border-gray-100 dark:border-gray-700 p-6 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 group"
+                            className="bg-white dark:bg-gray-800/50 backdrop-blur-xs border border-gray-100 dark:border-gray-700 p-6 rounded-2xl shadow-xs hover:shadow-xl transition-all duration-300 group"
                             variants={cardVariants}
                             whileHover={{ y: -5 }}
                         >

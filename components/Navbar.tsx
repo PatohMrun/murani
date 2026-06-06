@@ -39,7 +39,7 @@ const Navbar: React.FC = () => {
         { name: "Home", href: "/" },
         { name: "Skills", href: "/skills" },
         { name: "Creations", href: "/creations" },
-        { name: "Blog", href: "/blog" },
+        { name: "APKs", href: "/apks" },
         { name: "Contact", href: "/contact" },
     ];
 
@@ -60,7 +60,7 @@ const Navbar: React.FC = () => {
                 {/* Brand */}
                 <Link href="/" className="group">
                     <h1 className='font-bold text-xl sm:text-2xl font-oswald tracking-wide text-gray-900 dark:text-white'>
-                        Patrick <span className='text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 group-hover:from-purple-600 group-hover:to-blue-600 transition-all duration-500'>Murani</span>
+                        Patrick <span className='text-transparent bg-clip-text bg-linear-to-r from-blue-600 to-purple-600 group-hover:from-purple-600 group-hover:to-blue-600 transition-all duration-500'>Murani</span>
                     </h1>
                 </Link>
 

@@ -51,7 +51,7 @@ export default function NotFound() {
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, type: "spring", delay: 0.2 }}
-                    className="text-8xl md:text-9xl font-bold leading-none font-oswald text-transparent bg-clip-text bg-gradient-to-r from-gray-200 to-gray-500 mb-2"
+                    className="text-8xl md:text-9xl font-bold leading-none font-oswald text-transparent bg-clip-text bg-linear-to-r from-gray-200 to-gray-500 mb-2"
                 >
                     404
                 </motion.h1>
@@ -83,7 +83,7 @@ export default function NotFound() {
                 >
                     <Link
                         href="/"
-                        className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 shadow-lg hover:shadow-blue-500/25"
+                        className="inline-flex items-center gap-2 bg-linear-to-r from-blue-600 to-purple-600 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 shadow-lg hover:shadow-blue-500/25"
                     >
                         Return Home
                     </Link>
