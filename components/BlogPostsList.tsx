@@ -77,7 +77,7 @@ export default function BlogPostsList({ posts }: { posts: Post[] }) {
               <motion.div key={post.id} custom={i} variants={card}>
                 <Link
                   href={`/blog/${post.slug}`}
-                  className="flex items-start gap-5 group bg-white/80 dark:bg-gray-800/50 backdrop-blur-md border border-gray-100 dark:border-gray-700 rounded-2xl p-5 sm:p-6 hover:border-blue-300/60 dark:hover:border-blue-700/60 hover:shadow-lg hover:shadow-blue-500/5 hover:-translate-y-0.5 transition-all duration-300"
+                  className="flex items-start gap-5 group bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-5 sm:p-6 hover:border-blue-200 dark:hover:border-gray-700 hover:shadow-md dark:hover:shadow-none hover:-translate-y-0.5 transition-all duration-300"
                 >
                   {/* Date stamp */}
                   <div className="hidden sm:flex flex-col items-center shrink-0 w-11 pt-0.5 text-center">
