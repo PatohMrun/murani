@@ -26,7 +26,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen transition-colors duration-500 font-poppins text-gray-900 dark:text-gray-100 overflow-x-hidden">
+    <div className="min-h-screen transition-colors duration-500 font-inter text-gray-900 dark:text-gray-100 overflow-x-hidden">
 
       {/* Hero Section */}
       <section className="relative min-h-[90vh] flex flex-col lg:flex-row items-center justify-center px-4 pt-20 pb-16 lg:pb-0">

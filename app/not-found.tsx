@@ -6,7 +6,7 @@ import { TbCameraOff } from "react-icons/tb";
 
 export default function NotFound() {
     return (
-        <div className="min-h-screen flex items-center justify-center font-poppins relative overflow-hidden">
+        <div className="min-h-screen flex items-center justify-center font-inter relative overflow-hidden">
             {/* Neutral Background blobs to match Cosmos theme */}
             <motion.div
                 animate={{

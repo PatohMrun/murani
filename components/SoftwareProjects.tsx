@@ -126,7 +126,7 @@ const SoftwareProjects: React.FC = () => {
   };
 
   return (
-    <section className="font-poppins">
+    <section className="font-inter">
       <motion.div
         ref={containerRef}
         variants={containerVariants}

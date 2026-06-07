@@ -55,7 +55,7 @@ const Contact: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen relative font-poppins pt-24 pb-12 overflow-x-hidden">
+        <div className="min-h-screen relative font-inter pt-24 pb-12 overflow-x-hidden">
             <div className="container mx-auto px-4 relative z-10 max-w-6xl">
                 {/* Header */}
                 <motion.div

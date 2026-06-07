@@ -93,7 +93,7 @@ const Skills: React.FC = () => {
 
     return (
         <motion.section
-            className="min-h-screen py-20 pb-40 px-4 sm:px-8 font-poppins relative overflow-x-hidden"
+            className="min-h-screen py-20 pb-40 px-4 sm:px-8 font-inter relative overflow-x-hidden"
             id="skills"
             initial="hidden"
             whileInView="visible"

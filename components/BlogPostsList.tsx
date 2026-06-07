@@ -1,7 +1,10 @@
 'use client'
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
+import { FaChevronDown } from 'react-icons/fa6'
+
+const MAX_VISIBLE = 5
 
 type Post = {
   id: string
@@ -23,47 +26,111 @@ const card = {
 
 export default function BlogPostsList({ posts }: { posts: Post[] }) {
   const [activeTag, setActiveTag] = useState<string | null>(null)
+  const [dropdownOpen, setDropdownOpen] = useState(false)
+  const dropdownRef = useRef<HTMLDivElement>(null)
 
   const allTags = Array.from(new Set(posts.flatMap(p => p.tags))).sort()
+  const visibleTags = allTags.slice(0, MAX_VISIBLE)
+  const hiddenTags = allTags.slice(MAX_VISIBLE)
+  const hasHidden = hiddenTags.length > 0
+  const activeIsHidden = activeTag !== null && hiddenTags.includes(activeTag)
+
   const filtered = activeTag ? posts.filter(p => p.tags.includes(activeTag)) : posts
+
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setDropdownOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handler)
+    return () => document.removeEventListener('mousedown', handler)
+  }, [])
+
+  const selectTag = (tag: string | null) => {
+    setActiveTag(prev => (prev === tag ? null : tag))
+    setDropdownOpen(false)
+  }
+
+  const pillClass = (active: boolean) =>
+    `shrink-0 px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200 whitespace-nowrap ${
+      active
+        ? 'bg-blue-600 text-white shadow-sm shadow-blue-500/30'
+        : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700'
+    }`
 
   return (
     <div>
       {allTags.length > 0 && (
-        <div className="flex flex-wrap gap-2 mb-10">
-          <button
-            onClick={() => setActiveTag(null)}
-            className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200 ${
-              !activeTag
-                ? 'bg-blue-600 text-white shadow-sm shadow-blue-500/30'
-                : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700'
-            }`}
-          >
-            All
-          </button>
-          {allTags.map(tag => (
-            <button
-              key={tag}
-              onClick={() => setActiveTag(activeTag === tag ? null : tag)}
-              className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200 ${
-                activeTag === tag
-                  ? 'bg-blue-600 text-white shadow-sm shadow-blue-500/30'
-                  : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700'
-              }`}
-            >
-              {tag}
-            </button>
-          ))}
+        <div className="flex items-center gap-2 mb-10">
+          {/* Scrollable pill strip */}
+          <div className="relative flex-1 min-w-0">
+            <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-0.5">
+              <button className={pillClass(!activeTag)} onClick={() => selectTag(null)}>
+                All
+              </button>
+              {visibleTags.map(tag => (
+                <button key={tag} className={pillClass(activeTag === tag)} onClick={() => selectTag(tag)}>
+                  {tag}
+                </button>
+              ))}
+            </div>
+            {/* Right fade hint */}
+            {hasHidden && (
+              <div className="absolute right-0 top-0 bottom-0 w-10 bg-linear-to-l from-gray-50 dark:from-black to-transparent pointer-events-none" />
+            )}
+          </div>
+
+          {/* More dropdown */}
+          {hasHidden && (
+            <div className="relative shrink-0" ref={dropdownRef}>
+              <button
+                onClick={() => setDropdownOpen(o => !o)}
+                className={`flex items-center gap-1.5 px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200 ${
+                  activeIsHidden || dropdownOpen
+                    ? 'bg-blue-600 text-white shadow-sm shadow-blue-500/30'
+                    : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700'
+                }`}
+              >
+                More
+                <FaChevronDown
+                  size={10}
+                  className={`transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`}
+                />
+              </button>
+
+              <AnimatePresence>
+                {dropdownOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -6, scale: 0.96 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -6, scale: 0.96 }}
+                    transition={{ duration: 0.15 }}
+                    className="absolute right-0 top-full mt-2 bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-xl shadow-lg shadow-black/5 dark:shadow-black/40 p-1.5 min-w-[140px] z-20"
+                  >
+                    {hiddenTags.map(tag => (
+                      <button
+                        key={tag}
+                        onClick={() => selectTag(tag)}
+                        className={`w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                          activeTag === tag
+                            ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400'
+                            : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800'
+                        }`}
+                      >
+                        {tag}
+                      </button>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          )}
         </div>
       )}
 
       <AnimatePresence mode="wait">
-        <motion.div
-          key={activeTag ?? 'all'}
-          initial="hidden"
-          animate="visible"
-          className="space-y-4"
-        >
+        <motion.div key={activeTag ?? 'all'} initial="hidden" animate="visible" className="space-y-4">
           {filtered.length === 0 ? (
             <motion.p
               initial={{ opacity: 0 }}
@@ -112,7 +179,11 @@ export default function BlogPostsList({ posts }: { posts: Post[] }) {
                       </p>
                     )}
                     <p className="text-xs text-gray-400 dark:text-gray-600 mt-3 sm:hidden">
-                      {new Date(post.createdAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                      {new Date(post.createdAt).toLocaleDateString('en-US', {
+                        month: 'long',
+                        day: 'numeric',
+                        year: 'numeric',
+                      })}
                     </p>
                   </div>
 

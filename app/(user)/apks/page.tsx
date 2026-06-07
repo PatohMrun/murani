@@ -66,7 +66,7 @@ export default function APKsPage() {
     };
 
     return (
-        <main className="min-h-screen bg-gray-50 dark:bg-[#0a1014] pt-24 pb-12 font-poppins text-gray-900 dark:text-gray-100">
+        <main className="min-h-screen bg-gray-50 dark:bg-[#0a1014] pt-24 pb-12 font-inter text-gray-900 dark:text-gray-100">
             <div className="container mx-auto px-4 max-w-4xl">
                 
                 {/* Header Section */}

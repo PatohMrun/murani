@@ -24,7 +24,7 @@ const Creations: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen transition-colors duration-500 font-poppins relative overflow-x-hidden pt-24 pb-12">
+    <div className="min-h-screen transition-colors duration-500 font-inter relative overflow-x-hidden pt-24 pb-12">
       <div className="relative z-10 container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-12">
