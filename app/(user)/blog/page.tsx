@@ -56,13 +56,13 @@ function PostsError() {
 }
 
 async function PostsFeed() {
-  let posts: { id: string; title: string; slug: string; excerpt: string | null; tags: string[]; createdAt: Date }[] = []
+  let posts: { id: string; title: string; slug: string; excerpt: string | null; tags: string[]; coverImage: string | null; createdAt: Date }[] = []
 
   try {
     posts = await prisma.post.findMany({
       where: { status: 'published' },
       orderBy: { createdAt: 'desc' },
-      select: { id: true, title: true, slug: true, excerpt: true, tags: true, createdAt: true },
+      select: { id: true, title: true, slug: true, excerpt: true, tags: true, coverImage: true, createdAt: true },
     })
   } catch {
     return <PostsError />

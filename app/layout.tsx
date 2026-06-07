@@ -72,6 +72,26 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/favicon.png" sizes="any" type="image/png" />
         <link rel="icon" href="/favicon.ico" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Person',
+              name: 'Patrick Murani',
+              url: 'https://murani.signiqe.com',
+              jobTitle: 'Software Engineer',
+              description: 'Senior Software Engineer, Graphic Designer, and Photographer based in Nairobi.',
+              image: 'https://murani.signiqe.com/Murani.jpg',
+              email: 'patrickmurani@gmail.com',
+              sameAs: [
+                'https://github.com/PatohMrun',
+                'https://www.linkedin.com/in/patrick-murani',
+                'https://twitter.com/mrunphotography',
+              ],
+            }),
+          }}
+        />
       </head>
       <body>
         <Providers>

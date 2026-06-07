@@ -20,9 +20,16 @@ export async function GET() {
 export async function POST(req: Request) {
   if (!(await isAdmin())) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
-  const { title, slug, excerpt, content, tags, status } = await req.json()
+  const { title, slug, excerpt, content, tags, status, coverImage } = await req.json()
+
+  if (!title?.trim() || !slug?.trim() || !content?.trim())
+    return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
+  if (title.length > 200) return NextResponse.json({ error: 'Title too long' }, { status: 400 })
+  if (slug.length > 200) return NextResponse.json({ error: 'Slug too long' }, { status: 400 })
+  if (content.length > 500_000) return NextResponse.json({ error: 'Content too long' }, { status: 400 })
+
   const post = await prisma.post.create({
-    data: { title, slug, excerpt, content, tags, status },
+    data: { title, slug, excerpt, content, tags, status, coverImage: coverImage || null },
   })
   revalidatePath('/blog')
   revalidatePath(`/blog/${slug}`)

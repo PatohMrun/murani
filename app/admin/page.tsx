@@ -7,7 +7,7 @@ export const revalidate = 0
 export default async function AdminPage() {
   const posts = await prisma.post.findMany({
     orderBy: { createdAt: 'desc' },
-    select: { id: true, title: true, slug: true, status: true, tags: true, createdAt: true },
+    select: { id: true, title: true, slug: true, status: true, tags: true, createdAt: true, likes: true, shares: true },
   })
 
   return (
@@ -39,6 +39,7 @@ export default async function AdminPage() {
                 <th className="text-left px-6 py-4 hidden md:table-cell">Tags</th>
                 <th className="text-left px-6 py-4 hidden sm:table-cell">Status</th>
                 <th className="text-left px-6 py-4 hidden lg:table-cell">Date</th>
+                <th className="text-left px-6 py-4 hidden xl:table-cell">Stats</th>
                 <th className="px-6 py-4" />
               </tr>
             </thead>
@@ -69,6 +70,9 @@ export default async function AdminPage() {
                   </td>
                   <td className="px-6 py-4 hidden lg:table-cell text-sm text-gray-500 dark:text-gray-400">
                     {new Date(post.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                  </td>
+                  <td className="px-6 py-4 hidden xl:table-cell">
+                    <span className="text-xs text-gray-400 dark:text-gray-600">{post.likes} likes · {post.shares} shares</span>
                   </td>
                   <td className="px-6 py-4">
                     <PostActions id={post.id} />

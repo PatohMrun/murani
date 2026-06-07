@@ -5,6 +5,9 @@ import { Metadata } from 'next'
 import { FaArrowLeft } from 'react-icons/fa6'
 import ReadingProgressBar from '@/components/ReadingProgressBar'
 import ShareButton from '@/components/ShareButton'
+import LikeButton from '@/components/LikeButton'
+import CommentsSection from '@/components/CommentsSection'
+import sanitizeHtml from 'sanitize-html'
 
 export const revalidate = 3600
 
@@ -30,21 +33,86 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params
   const post = await prisma.post.findUnique({ where: { slug } })
   if (!post) return {}
+
+  const url = `https://murani.signiqe.com/blog/${slug}`
+  const images = post.coverImage
+    ? [{ url: post.coverImage, width: 1200, height: 630, alt: post.title }]
+    : [{ url: '/Murani.jpg', width: 1200, height: 630, alt: post.title }]
+
   return {
     title: post.title,
     description: post.excerpt ?? undefined,
+    alternates: { canonical: url },
+    openGraph: {
+      type: 'article',
+      url,
+      title: post.title,
+      description: post.excerpt ?? undefined,
+      publishedTime: post.createdAt.toISOString(),
+      modifiedTime: post.updatedAt.toISOString(),
+      authors: ['Patrick Murani'],
+      tags: post.tags,
+      images,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.excerpt ?? undefined,
+      images: images.map(i => i.url),
+    },
   }
 }
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const post = await prisma.post.findUnique({ where: { slug, status: 'published' } })
+  const post = await prisma.post.findUnique({
+    where: { slug, status: 'published' },
+    select: {
+      id: true, title: true, slug: true, excerpt: true, content: true,
+      tags: true, coverImage: true, createdAt: true, updatedAt: true,
+      likes: true, shares: true,
+    },
+  })
   if (!post) notFound()
 
   const readingTime = getReadingTime(post.content)
+  const safeContent = sanitizeHtml(post.content, {
+    allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img', 'h1', 'h2', 'figure', 'figcaption', 'mark', 'u', 's']),
+    allowedAttributes: {
+      ...sanitizeHtml.defaults.allowedAttributes,
+      '*': ['class'],
+      a: ['href', 'name', 'target', 'rel'],
+      img: ['src', 'alt', 'width', 'height', 'loading'],
+    },
+    allowedSchemes: ['https', 'http', 'mailto'],
+  })
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: post.title,
+    description: post.excerpt ?? undefined,
+    image: post.coverImage ?? 'https://murani.signiqe.com/Murani.jpg',
+    author: {
+      '@type': 'Person',
+      name: 'Patrick Murani',
+      url: 'https://murani.signiqe.com',
+    },
+    publisher: {
+      '@type': 'Person',
+      name: 'Patrick Murani',
+      url: 'https://murani.signiqe.com',
+    },
+    datePublished: post.createdAt.toISOString(),
+    dateModified: post.updatedAt.toISOString(),
+    url: `https://murani.signiqe.com/blog/${post.slug}`,
+    keywords: post.tags.join(', '),
+    mainEntityOfPage: { '@type': 'WebPage', '@id': `https://murani.signiqe.com/blog/${post.slug}` },
+  }
 
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <ReadingProgressBar />
 
       <div className="min-h-screen font-inter relative overflow-x-hidden">
@@ -124,19 +192,26 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 prose-img:rounded-xl prose-img:shadow-lg
                 prose-blockquote:border-blue-500 prose-blockquote:text-gray-600 dark:prose-blockquote:text-gray-400
                 prose-li:leading-relaxed"
-              dangerouslySetInnerHTML={{ __html: post.content }}
+              dangerouslySetInnerHTML={{ __html: safeContent }}
             />
 
-            <div className="mt-16 pt-8 border-t border-gray-100 dark:border-gray-800 flex items-center justify-between">
-              <Link
-                href="/blog"
-                className="inline-flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 transition-colors group"
-              >
-                <FaArrowLeft size={11} className="group-hover:-translate-x-0.5 transition-transform" />
-                All posts
-              </Link>
-              <ShareButton />
+            <div className="mt-16 pt-8 border-t border-gray-100 dark:border-gray-800">
+              <div className="flex items-center justify-between">
+                <Link
+                  href="/blog"
+                  className="inline-flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 transition-colors group"
+                >
+                  <FaArrowLeft size={11} className="group-hover:-translate-x-0.5 transition-transform" />
+                  All posts
+                </Link>
+                <div className="flex items-center gap-2">
+                  <LikeButton postId={post.id} initialLikes={post.likes} />
+                  <ShareButton postId={post.id} initialShares={post.shares} />
+                </div>
+              </div>
             </div>
+
+            <CommentsSection postId={post.id} />
           </div>
         </div>
       </div>

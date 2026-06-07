@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import LogoutButton from '@/components/admin/LogoutButton'
+import { FaArrowUpRightFromSquare } from 'react-icons/fa6'
 
 export const metadata = { title: 'Admin Studio | Patrick Murani' }
 
@@ -19,8 +20,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 <Link href="/admin/new" className="text-sm text-blue-600 dark:text-blue-400 font-medium hover:text-blue-700 transition-colors">
                   + New Post
                 </Link>
-                <Link href="/blog" target="_blank" className="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 transition-colors">
-                  View Blog ↗
+                <Link href="/admin/comments" className="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 transition-colors">
+                  Comments
+                </Link>
+                <Link href="/blog" target="_blank" className="inline-flex items-center gap-1.5 text-sm text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 transition-colors">
+                  View Blog <FaArrowUpRightFromSquare size={11} />
                 </Link>
               </nav>
             </div>

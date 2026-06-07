@@ -7,7 +7,7 @@ import TextAlign from '@tiptap/extension-text-align'
 import Highlight from '@tiptap/extension-highlight'
 import Placeholder from '@tiptap/extension-placeholder'
 import Image from '@tiptap/extension-image'
-import { useEffect, useCallback } from 'react'
+import { useEffect, useCallback, useRef, useState } from 'react'
 import {
   FaBold, FaItalic, FaUnderline, FaStrikethrough,
   FaListUl, FaListOl, FaQuoteLeft, FaCode, FaLink,
@@ -67,7 +67,7 @@ export default function Editor({ content, onChange }: EditorProps) {
     onUpdate: ({ editor }) => onChange(editor.getHTML()),
     editorProps: {
       attributes: {
-        class: 'prose prose-gray dark:prose-invert max-w-none min-h-[400px] p-4 focus:outline-hidden',
+        class: 'prose prose-gray dark:prose-invert max-w-none min-h-full p-4 focus:outline-hidden prose-img:rounded-xl prose-img:shadow-lg prose-img:mx-auto',
       },
     },
   })
@@ -88,10 +88,26 @@ export default function Editor({ content, onChange }: EditorProps) {
     }
   }, [editor])
 
-  const addImage = useCallback(() => {
-    const url = window.prompt('Image URL')
-    if (url && editor) editor.chain().focus().setImage({ src: url }).run()
+  const fileInputRef = useRef<HTMLInputElement>(null)
+  const [uploading, setUploading] = useState(false)
+
+  const handleImageFile = useCallback(async (file: File) => {
+    if (!editor) return
+    setUploading(true)
+    try {
+      const fd = new FormData()
+      fd.append('file', file)
+      const res = await fetch('/api/upload', { method: 'POST', body: fd })
+      const data = await res.json()
+      if (res.ok) editor.chain().focus().setImage({ src: data.url }).run()
+    } finally {
+      setUploading(false)
+    }
   }, [editor])
+
+  const addImage = useCallback(() => {
+    fileInputRef.current?.click()
+  }, [])
 
   if (!editor) return null
 
@@ -160,8 +176,8 @@ export default function Editor({ content, onChange }: EditorProps) {
         <ToolbarButton onClick={addLink} active={editor.isActive('link')} title="Add Link">
           <FaLink />
         </ToolbarButton>
-        <ToolbarButton onClick={addImage} title="Add Image">
-          <FaImage />
+        <ToolbarButton onClick={addImage} title="Upload Image">
+          {uploading ? <span className="text-xs">…</span> : <FaImage />}
         </ToolbarButton>
 
         <Divider />
@@ -174,8 +190,28 @@ export default function Editor({ content, onChange }: EditorProps) {
         </ToolbarButton>
       </div>
 
-      {/* Editor */}
-      <EditorContent editor={editor} />
+      {/* Hidden file input for image uploads */}
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept="image/jpeg,image/png,image/webp,image/gif"
+        className="hidden"
+        onChange={e => {
+          const file = e.target.files?.[0]
+          if (file) handleImageFile(file)
+          e.target.value = ''
+        }}
+      />
+
+      {/* Editor — fixed height, content scrolls inside */}
+      <div className="h-[60vh] overflow-y-auto relative">
+        {uploading && (
+          <div className="absolute inset-0 bg-white/70 dark:bg-gray-900/70 flex items-center justify-center z-10 text-sm text-gray-500">
+            Uploading image…
+          </div>
+        )}
+        <EditorContent editor={editor} />
+      </div>
     </div>
   )
 }
