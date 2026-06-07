@@ -205,7 +205,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   All posts
                 </Link>
                 <div className="flex items-center gap-2">
-                  <LikeButton postId={post.id} initialLikes={post.likes} />
+                  <LikeButton postId={post.id} />
                   <ShareButton postId={post.id} initialShares={post.shares} />
                 </div>
               </div>
