@@ -51,12 +51,19 @@ const Navbar: React.FC = () => {
 
     return (
         <nav
-            className={`fixed w-full z-50 transition-all duration-300 font-inter border-b
+            className={`fixed w-full z-50 font-inter border-b transition-all duration-500 ease-in-out
                 ${scrolled
-                    ? 'bg-white/80 dark:bg-primary/80 shadow-lg border-gray-200 dark:border-gray-800 backdrop-blur-md py-3'
-                    : 'bg-transparent border-transparent py-5'
+                    ? 'border-gray-200 dark:border-gray-800 py-3'
+                    : 'border-transparent py-5'
                 }`}
         >
+            {/* Blur/bg layer — fades in on scroll */}
+            <div className={`absolute inset-0 -z-10 backdrop-blur-md transition-opacity duration-500 ease-in-out
+                ${scrolled
+                    ? 'opacity-100 bg-white/80 dark:bg-primary/80 shadow-lg'
+                    : 'opacity-0'
+                }`}
+            />
             <div className="container mx-auto px-6 flex justify-between items-center">
                 {/* Brand */}
                 <Link href="/" className="group">
