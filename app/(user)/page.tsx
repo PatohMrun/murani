@@ -2,8 +2,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import Experience from "@/components/Experience";
+import LatestPosts from "@/components/LatestPosts";
 import { motion } from "framer-motion";
-import { FaArrowRight, FaLinkedin, FaGithub, FaEnvelope } from "react-icons/fa6";
+import { FaArrowRight, FaLinkedin, FaGithub, FaEnvelope, FaAndroid } from "react-icons/fa6";
 
 export default function Home() {
   const fadeInUp = {
@@ -49,7 +50,7 @@ export default function Home() {
             </motion.h1>
 
             <motion.p variants={fadeInUp} className="text-gray-600 dark:text-gray-400 text-base sm:text-lg lg:text-xl mb-8 leading-relaxed max-w-xl mx-auto lg:mx-0">
-              A <span className="text-blue-600 dark:text-blue-400 font-semibold">Senior Software Engineer</span> with a passion for blending code, design, and usability. I turn complex problems into elegant, user-centric solutions.
+              A <span className="text-blue-600 dark:text-blue-400 font-semibold">Software Engineer</span> with a passion for blending code, design, and usability. I turn complex problems into elegant, user-centric solutions.
             </motion.p>
 
             <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
@@ -61,10 +62,10 @@ export default function Home() {
                 <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link
-                href="/contact"
+                href="/blog"
                 className="px-8 py-4 bg-white dark:bg-gray-800 text-gray-900 dark:text-white border border-gray-200 dark:border-gray-700 rounded-full font-semibold hover:border-blue-500 hover:text-blue-500 dark:hover:border-blue-500 dark:hover:text-blue-400 transition-all text-center"
               >
-                Contact Me
+                Read My Blog
               </Link>
             </motion.div>
 
@@ -180,6 +181,38 @@ export default function Home() {
               </Link>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Latest Blog Posts */}
+      <LatestPosts />
+
+      {/* APK Strip */}
+      <section className="py-10 relative">
+        <div className="container mx-auto px-4 max-w-7xl">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <Link
+              href="/apks"
+              className="group flex flex-col sm:flex-row items-center justify-between gap-4 px-8 py-6 rounded-2xl bg-linear-to-r from-blue-600/10 to-purple-600/10 dark:from-blue-900/30 dark:to-purple-900/30 border border-blue-500/20 hover:border-blue-500/40 transition-all"
+            >
+              <div className="flex items-center gap-4">
+                <div className="w-10 h-10 rounded-xl bg-linear-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white shrink-0">
+                  <FaAndroid size={20} />
+                </div>
+                <div className="text-center sm:text-left">
+                  <p className="font-bold text-gray-900 dark:text-white">Android Apps</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">Native Android apps available for download</p>
+                </div>
+              </div>
+              <span className="text-sm font-semibold text-blue-600 dark:text-blue-400 flex items-center gap-1.5 group-hover:gap-2.5 transition-all whitespace-nowrap">
+                Browse APKs <FaArrowRight size={12} />
+              </span>
+            </Link>
+          </motion.div>
         </div>
       </section>
     </div>
