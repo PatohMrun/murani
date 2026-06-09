@@ -113,7 +113,7 @@ export default function LatestPosts() {
                     </div>
 
                     {/* Card body */}
-                    <div className="flex flex-col flex-1 px-5 pb-5 -mt-2">
+                    <div className="flex flex-col flex-1 px-5 pb-5 pt-3">
                       {/* Title */}
                       <h4 className="text-base sm:text-lg font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors leading-snug mb-2 flex-1">
                         {post.title}
