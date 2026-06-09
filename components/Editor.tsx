@@ -73,8 +73,11 @@ export default function Editor({ content, onChange }: EditorProps) {
   })
 
   useEffect(() => {
-    if (editor && content !== editor.getHTML()) {
-      editor.commands.setContent(content)
+    // Only sync external content changes when the editor isn't focused.
+    // When focused, the editor owns its own state — running setContent on every
+    // parent re-render resets the cursor after each keystroke.
+    if (editor && !editor.view.hasFocus() && content !== editor.getHTML()) {
+      editor.commands.setContent(content, { emitUpdate: false })
     }
   }, [content, editor])
 
@@ -90,16 +93,24 @@ export default function Editor({ content, onChange }: EditorProps) {
 
   const fileInputRef = useRef<HTMLInputElement>(null)
   const [uploading, setUploading] = useState(false)
+  const [uploadError, setUploadError] = useState('')
 
   const handleImageFile = useCallback(async (file: File) => {
     if (!editor) return
     setUploading(true)
+    setUploadError('')
     try {
       const fd = new FormData()
       fd.append('file', file)
       const res = await fetch('/api/upload', { method: 'POST', body: fd })
       const data = await res.json()
-      if (res.ok) editor.chain().focus().setImage({ src: data.url }).run()
+      if (res.ok) {
+        editor.chain().focus().setImage({ src: data.url }).run()
+      } else {
+        setUploadError(data.error ?? 'Upload failed')
+      }
+    } catch {
+      setUploadError('Network error — could not upload image')
     } finally {
       setUploading(false)
     }
@@ -202,6 +213,13 @@ export default function Editor({ content, onChange }: EditorProps) {
           e.target.value = ''
         }}
       />
+
+      {uploadError && (
+        <div className="px-4 py-2 bg-red-50 dark:bg-red-900/20 border-b border-red-100 dark:border-red-800 text-xs text-red-600 dark:text-red-400 flex items-center justify-between">
+          <span>{uploadError}</span>
+          <button type="button" onClick={() => setUploadError('')} className="ml-4 font-bold">✕</button>
+        </div>
+      )}
 
       {/* Editor — fixed height, content scrolls inside */}
       <div className="h-[60vh] overflow-y-auto relative">

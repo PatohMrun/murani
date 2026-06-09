@@ -31,19 +31,18 @@ export async function POST(req: NextRequest) {
       contentType = 'image/gif'
       ext = 'gif'
     } else {
-      // GIFs kept as-is to preserve animation; everything else → WebP lossless + strip EXIF
       body = new Uint8Array(
-        await sharp(input)
-          .webp({ lossless: true })
-          .withMetadata({ exif: {} })
-          .toBuffer()
+        await sharp(input).webp({ lossless: true }).toBuffer()
       )
       contentType = 'image/webp'
       ext = 'webp'
     }
   } catch (err) {
-    console.error('Image processing error:', err)
-    return NextResponse.json({ error: 'Could not process image — file may be corrupt or unsupported' }, { status: 422 })
+    // sharp failed (corrupt file or native binary issue) — fall back to original
+    console.error('Image processing failed, uploading original:', err)
+    body = new Uint8Array(input)
+    contentType = file.type
+    ext = file.name.split('.').pop()?.toLowerCase() ?? 'jpg'
   }
 
   const filename = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`
