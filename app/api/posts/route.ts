@@ -7,7 +7,7 @@ export async function GET() {
   const posts = await prisma.post.findMany({
     where: { status: 'published' },
     orderBy: { createdAt: 'desc' },
-    select: { id: true, title: true, slug: true, excerpt: true, tags: true, createdAt: true },
+    select: { id: true, title: true, slug: true, excerpt: true, tags: true, coverImage: true, createdAt: true },
   })
   return NextResponse.json(posts)
 }
