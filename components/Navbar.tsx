@@ -56,11 +56,13 @@ const Navbar: React.FC = () => {
         >
             {/* Always-on top scrim — anchors nav content against hero images */}
             <div className="absolute inset-0 -z-20 bg-gradient-to-b from-black/20 to-transparent pointer-events-none" />
-            {/* Blur/bg layer — fades in on scroll */}
-            <div className={`absolute inset-0 -z-10 backdrop-blur-md transition-opacity duration-500 ease-in-out
+            {/* Blur/bg layer — fades in on scroll or when mobile menu is open */}
+            <div className={`absolute inset-0 -z-10 backdrop-blur-md transition-all duration-300 ease-in-out
                 ${scrolled
                     ? 'opacity-100 bg-white/80 dark:bg-primary/80 shadow-lg'
-                    : 'opacity-0'
+                    : isOpen
+                        ? 'opacity-100 bg-white/95 dark:bg-primary/95'
+                        : 'opacity-0'
                 }`}
             />
             <div className="container mx-auto px-6 flex justify-between items-center">
@@ -102,12 +104,11 @@ const Navbar: React.FC = () => {
                 </div>
 
                 {/* Mobile Controls */}
-                <div className={`md:hidden flex items-center gap-1 rounded-xl px-2 py-1 transition-colors duration-500
-                    ${scrolled ? 'bg-transparent' : 'bg-white/15 dark:bg-black/20 backdrop-blur-sm'}`}>
+                <div className="md:hidden flex items-center gap-4">
                     <ThemeSwitch />
                     <button
                         onClick={handleToggleMenu}
-                        className="p-2 rounded-lg text-gray-700 dark:text-gray-200 hover:bg-gray-100/60 dark:hover:bg-gray-800/60 transition-colors"
+                        className="p-2 rounded-lg text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
                     >
                         {isOpen ? <MdClose size={28} /> : <MdMenuOpen size={28} />}
                     </button>
