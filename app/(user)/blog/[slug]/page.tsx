@@ -115,7 +115,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <ReadingProgressBar />
 
-      <div className="min-h-screen font-inter relative overflow-x-hidden">
+      <div className="min-h-screen font-inter relative overflow-x-hidden bg-white dark:bg-gray-950">
 
         {/* Hero */}
         <div className={`relative z-10 ${post.coverImage ? 'min-h-[60vh] flex flex-col justify-end' : 'pt-24 pb-10'}`}>
