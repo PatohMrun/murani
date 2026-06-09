@@ -216,8 +216,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           </div>
         </div>
 
-        {/* Content card — solid background, blocks cosmos */}
-        <div className="relative z-10 bg-white dark:bg-gray-950 rounded-t-3xl shadow-[0_-8px_32px_rgba(0,0,0,0.08)] dark:shadow-[0_-8px_32px_rgba(0,0,0,0.4)]">
+        {/* Content area — solid background, blocks cosmos */}
+        <div className="relative z-10 bg-white dark:bg-gray-950">
           <div className="max-w-3xl mx-auto px-4 sm:px-8 pt-10 pb-20">
             <div
               className="prose prose-sm sm:prose-base prose-gray dark:prose-invert max-w-none font-inter
