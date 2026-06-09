@@ -116,65 +116,102 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       <ReadingProgressBar />
 
       <div className="min-h-screen font-inter relative overflow-x-hidden">
-        {/* Background blurs */}
-        <div className="absolute -top-32 -right-20 w-96 h-96 bg-blue-500/5 dark:bg-blue-500/10 rounded-full blur-[100px] pointer-events-none" />
-        <div className="absolute bottom-10 -left-20 w-96 h-96 bg-purple-500/5 dark:bg-purple-500/10 rounded-full blur-[100px] pointer-events-none" />
 
-        {/* Hero — cosmic shows through */}
-        <div className="pt-24 px-4 pb-10 relative z-10">
-          <div className="max-w-3xl mx-auto">
-            <Link
-              href="/blog"
-              className="inline-flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 transition-colors mb-10 group"
-            >
-              <FaArrowLeft size={11} className="group-hover:-translate-x-0.5 transition-transform" />
-              Back to Blog
-            </Link>
+        {/* Hero */}
+        <div className={`relative z-10 ${post.coverImage ? 'min-h-[60vh] flex flex-col justify-end' : 'pt-24 pb-10'}`}>
 
-            <div className="flex flex-wrap gap-2 mb-4">
-              {post.tags.map(tag => (
-                <span
-                  key={tag}
-                  className="px-2.5 py-0.5 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 text-xs font-medium rounded-full"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
+          {post.coverImage ? (
+            <>
+              {/* Cover image */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={post.coverImage}
+                alt={post.title}
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+              {/* Base overlay — light mode: white tint, dark mode: black tint */}
+              <div className="absolute inset-0 bg-white/40 dark:bg-black/50" />
+              {/* Bottom gradient fade into content card */}
+              <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-white dark:from-gray-950 to-transparent" />
+            </>
+          ) : (
+            <>
+              <div className="absolute -top-32 -right-20 w-96 h-96 bg-blue-500/5 dark:bg-blue-500/10 rounded-full blur-[100px] pointer-events-none" />
+              <div className="absolute bottom-10 -left-20 w-96 h-96 bg-purple-500/5 dark:bg-purple-500/10 rounded-full blur-[100px] pointer-events-none" />
+            </>
+          )}
 
-            <h1 className="text-2xl sm:text-3xl lg:text-5xl font-bold font-oswald text-gray-900 dark:text-white mb-4 leading-tight">
-              {post.title}
-            </h1>
+          <div className={`relative px-4 ${post.coverImage ? 'pb-12 pt-28' : ''}`}>
+            <div className="max-w-3xl mx-auto">
+              <Link
+                href="/blog"
+                className={`inline-flex items-center gap-2 text-sm transition-colors mb-10 group ${
+                  post.coverImage
+                    ? 'text-gray-700 dark:text-white/60 hover:text-gray-900 dark:hover:text-white'
+                    : 'text-gray-500 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400'
+                }`}
+              >
+                <FaArrowLeft size={11} className="group-hover:-translate-x-0.5 transition-transform" />
+                Back to Blog
+              </Link>
 
-            {post.excerpt && (
-              <p className="text-sm sm:text-base lg:text-lg text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
-                {post.excerpt}
-              </p>
-            )}
-
-            <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-gray-400 dark:text-gray-500">
-              <span>
-                {new Date(post.createdAt).toLocaleDateString('en-US', {
-                  month: 'long',
-                  day: 'numeric',
-                  year: 'numeric',
-                })}
-              </span>
-              <span className="w-1 h-1 rounded-full bg-gray-300 dark:bg-gray-700" />
-              <span>{readingTime} min read</span>
-              {post.updatedAt > post.createdAt && (
-                <>
-                  <span className="w-1 h-1 rounded-full bg-gray-300 dark:bg-gray-700" />
-                  <span>
-                    Updated{' '}
-                    {new Date(post.updatedAt).toLocaleDateString('en-US', {
-                      month: 'long',
-                      day: 'numeric',
-                      year: 'numeric',
-                    })}
+              <div className="flex flex-wrap gap-2 mb-4">
+                {post.tags.map(tag => (
+                  <span
+                    key={tag}
+                    className={`px-2.5 py-0.5 text-xs font-medium rounded-full ${
+                      post.coverImage
+                        ? 'bg-black/20 dark:bg-white/10 text-gray-900 dark:text-white backdrop-blur-sm'
+                        : 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400'
+                    }`}
+                  >
+                    {tag}
                   </span>
-                </>
+                ))}
+              </div>
+
+              <h1 className="text-2xl sm:text-3xl lg:text-5xl font-bold font-oswald text-gray-900 dark:text-white mb-4 leading-tight">
+                {post.title}
+              </h1>
+
+              {post.excerpt && (
+                <p className={`text-sm sm:text-base lg:text-lg mb-6 leading-relaxed ${
+                  post.coverImage
+                    ? 'text-gray-700 dark:text-white/70'
+                    : 'text-gray-600 dark:text-gray-400'
+                }`}>
+                  {post.excerpt}
+                </p>
               )}
+
+              <div className={`flex flex-wrap items-center gap-x-3 gap-y-1 text-sm ${
+                post.coverImage
+                  ? 'text-gray-600 dark:text-white/50'
+                  : 'text-gray-400 dark:text-gray-500'
+              }`}>
+                <span>
+                  {new Date(post.createdAt).toLocaleDateString('en-US', {
+                    month: 'long',
+                    day: 'numeric',
+                    year: 'numeric',
+                  })}
+                </span>
+                <span className="w-1 h-1 rounded-full bg-current opacity-40" />
+                <span>{readingTime} min read</span>
+                {post.updatedAt > post.createdAt && (
+                  <>
+                    <span className="w-1 h-1 rounded-full bg-current opacity-40" />
+                    <span>
+                      Updated{' '}
+                      {new Date(post.updatedAt).toLocaleDateString('en-US', {
+                        month: 'long',
+                        day: 'numeric',
+                        year: 'numeric',
+                      })}
+                    </span>
+                  </>
+                )}
+              </div>
             </div>
           </div>
         </div>

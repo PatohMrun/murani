@@ -1,11 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { cookies } from 'next/headers'
 import { prisma } from '@/lib/prisma'
-
-async function isAdmin() {
-  const cookieStore = await cookies()
-  return cookieStore.get('admin_token')?.value === process.env.ADMIN_SECRET
-}
+import { isAdmin } from '@/lib/auth'
 
 // CSRF: admin mutations must come from our own origin via fetch (custom header can't be set by forms/links)
 function hasAdminHeader(req: NextRequest) {

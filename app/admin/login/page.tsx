@@ -1,7 +1,9 @@
 'use client'
 import { useState } from 'react'
+import { createClient } from '@/lib/supabase/client'
 
 export default function LoginPage() {
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
@@ -11,17 +13,14 @@ export default function LoginPage() {
     setLoading(true)
     setError('')
 
-    const res = await fetch('/api/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ password }),
-    })
+    const supabase = createClient()
+    const { error: authError } = await supabase.auth.signInWithPassword({ email, password })
 
-    if (res.ok) {
-      window.location.href = '/admin'
-    } else {
-      setError('Incorrect password')
+    if (authError) {
+      setError('Incorrect email or password')
       setLoading(false)
+    } else {
+      window.location.href = '/admin'
     }
   }
 
@@ -32,7 +31,7 @@ export default function LoginPage() {
           <h1 className="text-3xl font-bold font-oswald text-gray-900 dark:text-white">
             Admin <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-600 to-purple-600">Studio</span>
           </h1>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">Enter your password to continue</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">Sign in to continue</p>
         </div>
 
         <form
@@ -40,13 +39,27 @@ export default function LoginPage() {
           className="bg-white dark:bg-gray-900 rounded-2xl p-8 shadow-xl border border-gray-100 dark:border-gray-800 space-y-4"
         >
           <div>
+            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Email</label>
+            <input
+              type="email"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              required
+              autoFocus
+              autoComplete="email"
+              className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-hidden transition-all"
+              placeholder="you@example.com"
+            />
+          </div>
+
+          <div>
             <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">Password</label>
             <input
               type="password"
               value={password}
               onChange={e => setPassword(e.target.value)}
               required
-              autoFocus
+              autoComplete="current-password"
               className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-hidden transition-all"
               placeholder="••••••••"
             />
