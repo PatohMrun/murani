@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
+import sharp from 'sharp'
 import { isAdmin } from '@/lib/auth'
 
 const BUCKET = 'blog-images'
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif']
 const MAX_SIZE = 5 * 1024 * 1024 // 5 MB
-
 
 export async function POST(req: NextRequest) {
   if (!(await isAdmin())) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
@@ -18,10 +18,35 @@ export async function POST(req: NextRequest) {
   if (file.size > MAX_SIZE)
     return NextResponse.json({ error: 'File too large (max 5 MB)' }, { status: 400 })
 
-  const ext = file.name.split('.').pop()?.toLowerCase() ?? 'jpg'
-  const filename = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`
+  const input = Buffer.from(await file.arrayBuffer())
+  const isGif = file.type === 'image/gif'
 
-  const bytes = await file.arrayBuffer()
+  let body: Uint8Array
+  let contentType: string
+  let ext: string
+
+  try {
+    if (isGif) {
+      body = new Uint8Array(input)
+      contentType = 'image/gif'
+      ext = 'gif'
+    } else {
+      // GIFs kept as-is to preserve animation; everything else → WebP lossless + strip EXIF
+      body = new Uint8Array(
+        await sharp(input)
+          .webp({ lossless: true })
+          .withMetadata({ exif: {} })
+          .toBuffer()
+      )
+      contentType = 'image/webp'
+      ext = 'webp'
+    }
+  } catch (err) {
+    console.error('Image processing error:', err)
+    return NextResponse.json({ error: 'Could not process image — file may be corrupt or unsupported' }, { status: 422 })
+  }
+
+  const filename = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`
   const supabaseUrl = process.env.SUPABASE_URL
   const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
 
@@ -29,10 +54,10 @@ export async function POST(req: NextRequest) {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${serviceKey}`,
-      'Content-Type': file.type,
+      'Content-Type': contentType,
       'x-upsert': 'false',
     },
-    body: bytes,
+    body: body as BodyInit,
   })
 
   if (!res.ok) {

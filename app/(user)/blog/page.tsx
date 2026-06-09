@@ -8,7 +8,7 @@ export const revalidate = 3600
 
 export const metadata: Metadata = {
   title: 'Blog',
-  description: 'Thoughts on software engineering, design, and building digital products.',
+  description: 'Code, cameras, and whatever catches my attention.',
 }
 
 function PostsSkeleton() {
