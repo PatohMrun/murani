@@ -4,7 +4,7 @@ import { Metadata } from 'next'
 import { FaPenNib, FaCircleExclamation } from 'react-icons/fa6'
 import BlogPostsList from '@/components/BlogPostsList'
 
-export const revalidate = 3600
+export const revalidate = 0
 
 export const metadata: Metadata = {
   title: 'Blog',

@@ -4,18 +4,30 @@ import PostActions from '@/components/admin/PostActions'
 
 export const revalidate = 0
 
-export default async function AdminPage() {
-  const posts = await prisma.post.findMany({
-    orderBy: { createdAt: 'desc' },
-    select: { id: true, title: true, slug: true, status: true, tags: true, createdAt: true, likes: true, shares: true },
-  })
+const PAGE_SIZE = 50
+
+export default async function AdminPage({ searchParams }: { searchParams: Promise<{ page?: string }> }) {
+  const { page: pageParam } = await searchParams
+  const page = Math.max(0, parseInt(pageParam ?? '0', 10) || 0)
+
+  const [posts, total] = await Promise.all([
+    prisma.post.findMany({
+      orderBy: { createdAt: 'desc' },
+      select: { id: true, title: true, slug: true, status: true, tags: true, createdAt: true, likes: true, shares: true },
+      take: PAGE_SIZE,
+      skip: page * PAGE_SIZE,
+    }),
+    prisma.post.count(),
+  ])
+
+  const totalPages = Math.ceil(total / PAGE_SIZE)
 
   return (
     <div>
       <div className="flex items-center justify-between mb-8">
         <div>
           <h1 className="text-2xl font-bold font-oswald text-gray-900 dark:text-white">Posts</h1>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5">{posts.length} total</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5">{total} total</p>
         </div>
         <Link
           href="/admin/new"
@@ -81,6 +93,32 @@ export default async function AdminPage() {
               ))}
             </tbody>
           </table>
+        </div>
+      )}
+
+      {totalPages > 1 && (
+        <div className="flex items-center justify-between mt-6 text-sm">
+          <span className="text-gray-500 dark:text-gray-400">
+            Page {page + 1} of {totalPages}
+          </span>
+          <div className="flex gap-2">
+            {page > 0 && (
+              <Link
+                href={`/admin?page=${page - 1}`}
+                className="px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+              >
+                Previous
+              </Link>
+            )}
+            {page + 1 < totalPages && (
+              <Link
+                href={`/admin?page=${page + 1}`}
+                className="px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+              >
+                Next
+              </Link>
+            )}
+          </div>
         </div>
       )}
     </div>

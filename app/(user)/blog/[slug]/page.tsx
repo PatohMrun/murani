@@ -7,7 +7,7 @@ import ReadingProgressBar from '@/components/ReadingProgressBar'
 import ShareButton from '@/components/ShareButton'
 import LikeButton from '@/components/LikeButton'
 import CommentsSection from '@/components/CommentsSection'
-import sanitizeHtml from 'sanitize-html'
+import { sanitizeContent } from '@/lib/sanitize'
 
 export const revalidate = 3600
 
@@ -76,16 +76,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   if (!post) notFound()
 
   const readingTime = getReadingTime(post.content)
-  const safeContent = sanitizeHtml(post.content, {
-    allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img', 'h1', 'h2', 'figure', 'figcaption', 'mark', 'u', 's']),
-    allowedAttributes: {
-      ...sanitizeHtml.defaults.allowedAttributes,
-      '*': ['class'],
-      a: ['href', 'name', 'target', 'rel'],
-      img: ['src', 'alt', 'width', 'height', 'loading'],
-    },
-    allowedSchemes: ['https', 'http', 'mailto'],
-  })
+  const safeContent = sanitizeContent(post.content)
 
   const jsonLd = {
     '@context': 'https://schema.org',

@@ -23,6 +23,8 @@ model Post {
   updatedAt  DateTime   @updatedAt
   comments   Comment[]
   postLikes  PostLike[]
+
+  @@index([status])
 }
 
 model PostLike {
@@ -46,7 +48,7 @@ model Comment {
   name      String
   content   String
   approved  Boolean   @default(false)
-  ip        String?
+  ipHash    String
   createdAt DateTime  @default(now())
 
   @@index([postId])

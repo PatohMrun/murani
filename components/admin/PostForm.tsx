@@ -23,6 +23,11 @@ interface PostFormProps {
   existingTags?: string[]
 }
 
+const RESERVED_SLUGS = new Set([
+  'admin', 'api', 'blog', 'apks', 'contact', 'about', 'login', 'logout',
+  'upload', 'download', 'stats', 'new', 'edit', 'delete', 'dashboard',
+])
+
 function slugify(text: string) {
   return text
     .toLowerCase()
@@ -102,14 +107,19 @@ export default function PostForm({ initialData, existingTags = [] }: PostFormPro
 
   async function handleCoverUpload(file: File) {
     setCoverUploading(true)
+    setError('')
     try {
       const compressed = await compressImage(file)
       const fd = new FormData()
       fd.append('file', compressed)
       const res = await fetch('/api/upload', { method: 'POST', body: fd })
-      const data = await res.json()
-      if (res.ok) setForm(f => ({ ...f, coverImage: data.url }))
+      let data: { url?: string; error?: string } = {}
+      try { data = await res.json() } catch { /* non-JSON response */ }
+      if (res.ok && data.url) setForm(f => ({ ...f, coverImage: data.url! }))
       else setError(data.error ?? 'Cover upload failed')
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : ''
+      setError(msg ? `Upload failed — ${msg}` : 'Cover upload failed — please try again')
     } finally {
       setCoverUploading(false)
     }
@@ -119,6 +129,12 @@ export default function PostForm({ initialData, existingTags = [] }: PostFormPro
     e.preventDefault()
     setSaving(true)
     setError('')
+
+    if (RESERVED_SLUGS.has(form.slug.toLowerCase())) {
+      setError(`"${form.slug}" is a reserved path — choose a different slug`)
+      setSaving(false)
+      return
+    }
 
     const pendingTag = tagInput.trim().toLowerCase().replace(/,/g, '')
     const finalTags = pendingTag && !form.tags.includes(pendingTag)
@@ -193,7 +209,7 @@ export default function PostForm({ initialData, existingTags = [] }: PostFormPro
           >
             <FaImage size={22} />
             <span className="text-sm">{coverUploading ? 'Uploading…' : 'Upload cover image'}</span>
-            <span className="text-xs">JPEG, PNG, WebP, GIF · max 5 MB</span>
+            <span className="text-xs">JPEG, PNG, WebP, GIF · auto-compressed · max 10 MB</span>
           </button>
         )}
       </div>

@@ -45,13 +45,13 @@ export async function POST(req: NextRequest) {
   const since = new Date(Date.now() - 60 * 60 * 1000)
 
   // Rate limit: 5 comments per hashed IP per hour
-  const recentCount = await prisma.comment.count({ where: { ip: ipHash, createdAt: { gte: since } } })
+  const recentCount = await prisma.comment.count({ where: { ipHash, createdAt: { gte: since } } })
   if (recentCount >= 5)
     return NextResponse.json({ error: 'Too many comments. Please wait a while.' }, { status: 429 })
 
   // Duplicate content: same body from same IP in last 10 minutes
   const duplicate = await prisma.comment.findFirst({
-    where: { ip: ipHash, content: content.trim(), createdAt: { gte: new Date(Date.now() - 10 * 60 * 1000) } },
+    where: { ipHash, content: content.trim(), createdAt: { gte: new Date(Date.now() - 10 * 60 * 1000) } },
   })
   if (duplicate)
     return NextResponse.json({ error: 'Duplicate comment detected.' }, { status: 429 })
@@ -73,7 +73,7 @@ export async function POST(req: NextRequest) {
       parentId: parentId || null,
       name: name.trim(),
       content: content.trim(),
-      ip: ipHash,
+      ipHash,
       approved: false,
     },
   })

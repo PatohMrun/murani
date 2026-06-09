@@ -28,9 +28,15 @@ const Contact: React.FC = () => {
         setSuccessMessage("");
         setErrorMessage("");
 
-        const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!;
-        const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!;
-        const userId = process.env.NEXT_PUBLIC_EMAILJS_USER_ID!;
+        const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+        const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+        const userId = process.env.NEXT_PUBLIC_EMAILJS_USER_ID;
+
+        if (!serviceId || !templateId || !userId) {
+            setErrorMessage('Contact form is not configured. Please reach out directly via email.');
+            setIsSubmitting(false);
+            return;
+        }
 
         const templateParams = {
             from_name: formData.from_name,
@@ -40,7 +46,7 @@ const Contact: React.FC = () => {
         };
 
         try {
-            await emailjs.send(serviceId!, templateId!, templateParams, userId);
+            await emailjs.send(serviceId, templateId, templateParams, userId);
             setSuccessMessage("Message sent successfully!");
             setFormData({ from_name: "", reply_to: "", subject: "", message: "" });
         } catch (error: unknown) {

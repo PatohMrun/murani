@@ -111,8 +111,13 @@ export default function Editor({ content, onChange }: EditorProps) {
       } else {
         setUploadError(data.error ?? 'Upload failed')
       }
-    } catch {
-      setUploadError('Network error — could not upload image')
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : ''
+      setUploadError(
+        msg && !msg.toLowerCase().includes('fetch') && !msg.toLowerCase().includes('network')
+          ? `Image processing failed — ${msg}`
+          : 'Network error — could not upload image'
+      )
     } finally {
       setUploading(false)
     }

@@ -1,6 +1,5 @@
 'use client'
 import { useState } from 'react'
-import { createClient } from '@/lib/supabase/client'
 
 export default function LoginPage() {
   const [email, setEmail] = useState('')
@@ -13,14 +12,22 @@ export default function LoginPage() {
     setLoading(true)
     setError('')
 
-    const supabase = createClient()
-    const { error: authError } = await supabase.auth.signInWithPassword({ email, password })
-
-    if (authError) {
-      setError('Incorrect email or password')
+    try {
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      })
+      const data = await res.json()
+      if (!res.ok) {
+        setError(data.error ?? 'Incorrect email or password')
+        setLoading(false)
+      } else {
+        window.location.href = '/admin'
+      }
+    } catch {
+      setError('Network error — please try again')
       setLoading(false)
-    } else {
-      window.location.href = '/admin'
     }
   }
 
@@ -74,6 +81,10 @@ export default function LoginPage() {
           >
             {loading ? 'Signing in...' : 'Sign In'}
           </button>
+
+          <p className="text-center text-sm text-gray-400">
+            <a href="/admin/reset-password" className="hover:text-blue-500 transition-colors">Forgot password?</a>
+          </p>
         </form>
       </div>
     </div>

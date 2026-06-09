@@ -38,14 +38,11 @@ export async function POST(req: NextRequest) {
       ext = 'webp'
     }
   } catch (err) {
-    // sharp failed (corrupt file or native binary issue) — fall back to original
-    console.error('Image processing failed, uploading original:', err)
-    body = new Uint8Array(input)
-    contentType = file.type
-    ext = file.name.split('.').pop()?.toLowerCase() ?? 'jpg'
+    console.error('Image processing failed:', err)
+    return NextResponse.json({ error: 'Could not process image — file may be corrupt' }, { status: 422 })
   }
 
-  const filename = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`
+  const filename = `${crypto.randomUUID()}.${ext}`
   const supabaseUrl = process.env.SUPABASE_URL
   const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
 

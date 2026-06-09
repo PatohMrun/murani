@@ -2,6 +2,12 @@ import { NextResponse } from 'next/server'
 import { revalidatePath } from 'next/cache'
 import { prisma } from '@/lib/prisma'
 import { isAdmin } from '@/lib/auth'
+import { sanitizeContent } from '@/lib/sanitize'
+
+const RESERVED_SLUGS = new Set([
+  'admin', 'api', 'blog', 'apks', 'contact', 'about', 'login', 'logout',
+  'upload', 'download', 'stats', 'new', 'edit', 'delete', 'dashboard',
+])
 
 export async function GET(_req: Request, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -29,13 +35,42 @@ export async function PUT(req: Request, { params }: { params: Promise<{ id: stri
   if (title.length > 200) return NextResponse.json({ error: 'Title too long' }, { status: 400 })
   if (slug.length > 200) return NextResponse.json({ error: 'Slug too long' }, { status: 400 })
   if (content.length > 500_000) return NextResponse.json({ error: 'Content too long' }, { status: 400 })
+  if (RESERVED_SLUGS.has(slug.toLowerCase()))
+    return NextResponse.json({ error: 'Slug is a reserved path' }, { status: 400 })
+
+  if (coverImage) {
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+    if (supabaseUrl) {
+      try {
+        const { hostname } = new URL(coverImage)
+        const allowedHost = new URL(supabaseUrl).hostname
+        if (hostname !== allowedHost) {
+          return NextResponse.json({ error: 'Invalid cover image URL' }, { status: 400 })
+        }
+      } catch {
+        return NextResponse.json({ error: 'Invalid cover image URL' }, { status: 400 })
+      }
+    }
+  }
+
+  // Fetch existing post so we can revalidate the old slug if it changes
+  const existing = await prisma.post.findUnique({ where: { id }, select: { slug: true } })
+  if (!existing) return NextResponse.json({ error: 'Not found' }, { status: 404 })
+
+  // Check slug uniqueness against other posts
+  if (slug !== existing.slug) {
+    const conflict = await prisma.post.findFirst({ where: { slug, id: { not: id } } })
+    if (conflict) return NextResponse.json({ error: 'Slug already in use' }, { status: 409 })
+  }
 
   const post = await prisma.post.update({
     where: { id },
-    data: { title, slug, excerpt, content, tags, status, coverImage: coverImage || null },
+    data: { title, slug, excerpt, content: sanitizeContent(content), tags, status, coverImage: coverImage || null },
   })
+
   revalidatePath('/blog')
-  revalidatePath(`/blog/${post.slug}`)
+  revalidatePath(`/blog/${existing.slug}`) // revalidate old slug in case it changed
+  if (slug !== existing.slug) revalidatePath(`/blog/${slug}`)
   return NextResponse.json(post)
 }
 

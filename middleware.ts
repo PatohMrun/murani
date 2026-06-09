@@ -26,7 +26,8 @@ export async function middleware(request: NextRequest) {
 
   const isAdminRoute =
     request.nextUrl.pathname.startsWith('/admin') &&
-    !request.nextUrl.pathname.startsWith('/admin/login')
+    !request.nextUrl.pathname.startsWith('/admin/login') &&
+    !request.nextUrl.pathname.startsWith('/admin/reset-password')
 
   if (isAdminRoute && !user) {
     const url = request.nextUrl.clone()
