@@ -129,10 +129,10 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 alt={post.title}
                 className="absolute inset-0 w-full h-full object-cover"
               />
-              {/* Base overlay — light mode: white tint, dark mode: black tint */}
-              <div className="absolute inset-0 bg-white/40 dark:bg-black/50" />
+              {/* Base overlay — light: subtle white tint, dark: stronger black tint for readability */}
+              <div className="absolute inset-0 bg-white/30 dark:bg-black/65" />
               {/* Bottom gradient fade into content card */}
-              <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-white dark:from-gray-950 to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-white dark:from-gray-950 to-transparent" />
             </>
           ) : (
             <>
