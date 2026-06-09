@@ -73,7 +73,7 @@ const Navbar: React.FC = () => {
                 {/* Brand */}
                 <Link href="/" className="group">
                     <h1 className={`font-bold text-xl sm:text-2xl font-oswald tracking-wide transition-all duration-300
-                        ${heroUnscrolled ? 'text-white drop-shadow-md' : 'text-gray-900 dark:text-white'}`}>
+                        text-gray-900 dark:text-white ${heroUnscrolled ? 'dark:drop-shadow-md' : ''}`}>
                         Patrick <span className='text-transparent bg-clip-text bg-linear-to-r from-blue-600 to-purple-600 group-hover:from-purple-600 group-hover:to-blue-600 transition-all duration-500'>Murani</span>
                     </h1>
                 </Link>
@@ -86,11 +86,9 @@ const Navbar: React.FC = () => {
                                 key={link.name}
                                 href={link.href}
                                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 relative group overflow-hidden
-                                    ${heroUnscrolled
-                                        ? 'text-white drop-shadow-sm hover:text-white/80'
-                                        : isActive(link.href)
-                                            ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20'
-                                            : 'text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400'
+                                    ${isActive(link.href)
+                                        ? `text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 ${heroUnscrolled ? 'dark:text-white dark:bg-transparent dark:drop-shadow-sm' : ''}`
+                                        : `text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 ${heroUnscrolled ? 'dark:text-white dark:drop-shadow-sm dark:hover:text-white/80' : ''}`
                                     }`}
                             >
                                 <span className="relative z-10">{link.name}</span>
@@ -117,7 +115,7 @@ const Navbar: React.FC = () => {
                         onClick={handleToggleMenu}
                         className={`p-2 rounded-lg transition-colors
                             ${heroUnscrolled
-                                ? 'text-white drop-shadow-md hover:bg-white/10'
+                                ? 'text-gray-700 dark:text-white dark:drop-shadow-md hover:bg-gray-100 dark:hover:bg-white/10'
                                 : 'text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800'
                             }`}
                     >
