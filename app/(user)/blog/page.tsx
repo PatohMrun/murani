@@ -97,13 +97,13 @@ export default function BlogPage() {
         <div className="mb-12">
           <p className="text-xs font-bold text-blue-500 tracking-widest uppercase mb-2">Writing</p>
           <h1 className="text-4xl lg:text-6xl font-bold font-oswald text-gray-900 dark:text-white leading-tight">
-            The{' '}
+            Latest{' '}
             <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-500 to-purple-500">
-              Blog
+              Thoughts
             </span>
           </h1>
           <p className="text-gray-500 dark:text-gray-400 mt-4 text-lg max-w-xl">
-            Thoughts on software engineering, design, and building digital products.
+            Code, cameras, and whatever catches my attention.
           </p>
         </div>
 

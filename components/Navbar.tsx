@@ -49,6 +49,10 @@ const Navbar: React.FC = () => {
         return pathname.startsWith(href);
     };
 
+    // Blog post pages have a full-bleed hero image behind the transparent nav
+    const isHeroPage = /^\/blog\/.+/.test(pathname)
+    const heroUnscrolled = isHeroPage && !scrolled
+
     return (
         <nav
             className={`fixed w-full z-50 font-inter transition-all duration-500 ease-in-out
@@ -68,7 +72,8 @@ const Navbar: React.FC = () => {
             <div className="container mx-auto px-6 flex justify-between items-center">
                 {/* Brand */}
                 <Link href="/" className="group">
-                    <h1 className='font-bold text-xl sm:text-2xl font-oswald tracking-wide text-gray-900 dark:text-white'>
+                    <h1 className={`font-bold text-xl sm:text-2xl font-oswald tracking-wide transition-all duration-300
+                        ${heroUnscrolled ? 'text-white drop-shadow-md' : 'text-gray-900 dark:text-white'}`}>
                         Patrick <span className='text-transparent bg-clip-text bg-linear-to-r from-blue-600 to-purple-600 group-hover:from-purple-600 group-hover:to-blue-600 transition-all duration-500'>Murani</span>
                     </h1>
                 </Link>
@@ -81,9 +86,11 @@ const Navbar: React.FC = () => {
                                 key={link.name}
                                 href={link.href}
                                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 relative group overflow-hidden
-                                    ${isActive(link.href)
-                                        ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20'
-                                        : 'text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400'
+                                    ${heroUnscrolled
+                                        ? 'text-white drop-shadow-sm hover:text-white/80'
+                                        : isActive(link.href)
+                                            ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20'
+                                            : 'text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400'
                                     }`}
                             >
                                 <span className="relative z-10">{link.name}</span>
@@ -108,7 +115,11 @@ const Navbar: React.FC = () => {
                     <ThemeSwitch />
                     <button
                         onClick={handleToggleMenu}
-                        className="p-2 rounded-lg text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                        className={`p-2 rounded-lg transition-colors
+                            ${heroUnscrolled
+                                ? 'text-white drop-shadow-md hover:bg-white/10'
+                                : 'text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800'
+                            }`}
                     >
                         {isOpen ? <MdClose size={28} /> : <MdMenuOpen size={28} />}
                     </button>
