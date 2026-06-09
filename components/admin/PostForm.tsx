@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import dynamic from 'next/dynamic'
 import { FaImage, FaXmark } from 'react-icons/fa6'
+import { compressImage } from '@/lib/compressImage'
 
 const Editor = dynamic(() => import('@/components/Editor'), { ssr: false })
 
@@ -102,8 +103,9 @@ export default function PostForm({ initialData, existingTags = [] }: PostFormPro
   async function handleCoverUpload(file: File) {
     setCoverUploading(true)
     try {
+      const compressed = await compressImage(file)
       const fd = new FormData()
-      fd.append('file', file)
+      fd.append('file', compressed)
       const res = await fetch('/api/upload', { method: 'POST', body: fd })
       const data = await res.json()
       if (res.ok) setForm(f => ({ ...f, coverImage: data.url }))

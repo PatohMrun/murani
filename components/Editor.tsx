@@ -8,6 +8,7 @@ import Highlight from '@tiptap/extension-highlight'
 import Placeholder from '@tiptap/extension-placeholder'
 import Image from '@tiptap/extension-image'
 import { useEffect, useCallback, useRef, useState } from 'react'
+import { compressImage } from '@/lib/compressImage'
 import {
   FaBold, FaItalic, FaUnderline, FaStrikethrough,
   FaListUl, FaListOl, FaQuoteLeft, FaCode, FaLink,
@@ -100,8 +101,9 @@ export default function Editor({ content, onChange }: EditorProps) {
     setUploading(true)
     setUploadError('')
     try {
+      const compressed = await compressImage(file)
       const fd = new FormData()
-      fd.append('file', file)
+      fd.append('file', compressed)
       const res = await fetch('/api/upload', { method: 'POST', body: fd })
       const data = await res.json()
       if (res.ok) {
