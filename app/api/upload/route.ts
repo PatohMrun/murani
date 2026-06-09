@@ -32,7 +32,7 @@ export async function POST(req: NextRequest) {
       ext = 'gif'
     } else {
       body = new Uint8Array(
-        await sharp(input).webp({ lossless: true }).toBuffer()
+        await sharp(input).webp({ quality: 85 }).toBuffer()
       )
       contentType = 'image/webp'
       ext = 'webp'
