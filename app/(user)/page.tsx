@@ -112,13 +112,13 @@ export default function Home() {
       </section>
 
       {/* Experience Section */}
-      <section className="py-20 relative" id="experience">
+      <section className="py-12 relative" id="experience">
         <div className="container mx-auto px-4 max-w-7xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-8"
           >
             <h2 className="text-xs sm:text-sm font-bold text-blue-500 tracking-widest uppercase mb-2">My Journey</h2>
             <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold font-oswald">Professional Experience</h3>

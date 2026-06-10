@@ -67,7 +67,7 @@ const Contact: React.FC = () => {
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="text-center mb-16"
+                    className="text-center mb-8"
                 >
                     <h2 className="text-xs sm:text-sm font-bold text-blue-500 tracking-widest uppercase mb-2">Get in Touch</h2>
                     <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold font-oswald text-gray-900 dark:text-white">
@@ -75,13 +75,13 @@ const Contact: React.FC = () => {
                     </h1>
                 </motion.div>
 
-                <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
+                <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
                     {/* Contact Info Side */}
                     <motion.div
                         initial={{ opacity: 0, x: -50 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.2 }}
-                        className="space-y-8"
+                        className="space-y-6"
                     >
                         <div className="bg-white/80 dark:bg-gray-800/50 backdrop-blur-md p-6 md:p-8 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-xl">
                             <h3 className="text-2xl font-bold font-oswald mb-6 text-gray-900 dark:text-white">Contact Information</h3>

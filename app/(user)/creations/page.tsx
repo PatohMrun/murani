@@ -27,7 +27,7 @@ const Creations: React.FC = () => {
     <div className="min-h-screen transition-colors duration-500 font-inter relative overflow-x-hidden pt-24 pb-12">
       <div className="relative z-10 container mx-auto px-4">
         {/* Header */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-6">
           {/* ... existing header content ... */}
           <h2 className="text-xs sm:text-sm font-bold text-blue-500 tracking-widest uppercase mb-2">Portfolio</h2>
           <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold font-oswald text-gray-900 dark:text-gray-100 mb-6">
@@ -39,7 +39,7 @@ const Creations: React.FC = () => {
         </div>
 
         {/* Tab Switcher */}
-        <div className="flex justify-center mb-12">
+        <div className="flex justify-center mb-8">
           <div className="bg-white dark:bg-gray-800 p-1 rounded-full shadow-lg border border-gray-100 dark:border-gray-700 flex relative">
             {/* Sliding Background */}
             <motion.div

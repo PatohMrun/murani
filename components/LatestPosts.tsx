@@ -45,13 +45,13 @@ export default function LatestPosts() {
   if (!loading && posts.length === 0) return null
 
   return (
-    <section className="py-20 relative" id="writing">
+    <section className="py-12 relative" id="writing">
       <div className="container mx-auto px-4 max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="text-center mb-8"
         >
           <h2 className="text-xs sm:text-sm font-bold text-blue-500 tracking-widest uppercase mb-2">Writing</h2>
           <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold font-oswald">

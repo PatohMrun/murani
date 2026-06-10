@@ -93,7 +93,7 @@ const Skills: React.FC = () => {
 
     return (
         <motion.section
-            className="min-h-screen py-20 pb-40 px-4 sm:px-8 font-inter relative overflow-x-hidden"
+            className="min-h-screen py-12 pb-16 px-4 sm:px-8 font-inter relative overflow-x-hidden"
             id="skills"
             initial="hidden"
             whileInView="visible"
@@ -105,7 +105,7 @@ const Skills: React.FC = () => {
             <div className="absolute -bottom-10 -left-20 w-96 h-96 bg-gray-500/10 dark:bg-white/5 rounded-full blur-[100px] pointer-events-none" />
 
             <div className="max-w-7xl mx-auto relative z-10">
-                <motion.div variants={cardVariants} className="text-center mb-16">
+                <motion.div variants={cardVariants} className="text-center mb-8">
                     <h2 className="text-xs sm:text-sm font-bold text-blue-500 tracking-widest uppercase mb-2">My Expertise</h2>
                     <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-oswald text-gray-900 dark:text-gray-100">
                         Technical <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-500 to-purple-500">Skills</span>
