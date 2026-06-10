@@ -179,10 +179,10 @@ export default function Home() {
               />
             </div>
 
-            <div className="flex flex-col items-center gap-4 pt-8">
+            <div className="flex flex-col items-center gap-4 pt-3">
               <button
                 onClick={() => setExperienceExpanded(e => !e)}
-                className="flex items-center gap-2 text-sm font-semibold text-blue-500 hover:text-blue-600 transition-colors"
+                className="flex items-center gap-2 px-6 py-2.5 rounded-full border border-blue-500/40 text-blue-600 dark:text-blue-400 font-semibold text-sm hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:border-blue-500 transition-all"
               >
                 {experienceExpanded ? 'Show less' : 'Show 4 more'}
                 <FaChevronDown
