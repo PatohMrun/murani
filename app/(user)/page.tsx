@@ -4,9 +4,11 @@ import Link from "next/link";
 import Experience from "@/components/Experience";
 import LatestPosts from "@/components/LatestPosts";
 import { motion } from "framer-motion";
-import { FaArrowRight, FaLinkedin, FaGithub, FaEnvelope, FaAndroid } from "react-icons/fa6";
+import { FaArrowRight, FaLinkedin, FaGithub, FaEnvelope, FaAndroid, FaChevronDown } from "react-icons/fa6";
+import { useState } from "react";
 
 export default function Home() {
+  const [experienceExpanded, setExperienceExpanded] = useState(false);
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
     visible: {
@@ -139,39 +141,56 @@ export default function Home() {
               index={1}
             />
 
-            <Experience
-              company="AWS Student Community Day Kenya"
-              position="Graphic Designer"
-              year="May 2024 – Sep 2024"
-              description="Crafted the visual identity for a major tech conference, designing marketing assets that drove engagement and brand consistency."
-              index={2}
-            />
+            {/* Collapsible entries */}
+            <div
+              className="overflow-hidden transition-all duration-500 ease-in-out"
+              style={{ maxHeight: experienceExpanded ? '2000px' : '0px', opacity: experienceExpanded ? 1 : 0 }}
+            >
+              <Experience
+                company="AWS Student Community Day Kenya"
+                position="Graphic Designer"
+                year="May 2024 – Sep 2024"
+                description="Crafted the visual identity for a major tech conference, designing marketing assets that drove engagement and brand consistency."
+                index={2}
+              />
 
-            <Experience
-              company="Google Developer Groups – UEAB"
-              position="UI/UX Lead"
-              year="Sep 2023 – Aug 2024"
-              description="Pioneered the design chapter, mentoring students in UI/UX principles and leading workshops on creative coding and prototyping."
-              index={3}
-            />
+              <Experience
+                company="Google Developer Groups – UEAB"
+                position="UI/UX Lead"
+                year="Sep 2023 – Aug 2024"
+                description="Pioneered the design chapter, mentoring students in UI/UX principles and leading workshops on creative coding and prototyping."
+                index={3}
+              />
 
-            <Experience
-              company="University of Eastern Africa, Baraton"
-              position="Full Stack Developer"
-              year="2023 – 2024"
-              description="Developed institutional platforms for research and innovation, streamlining grant applications and project showcases."
-              index={4}
-            />
+              <Experience
+                company="University of Eastern Africa, Baraton"
+                position="Full Stack Developer"
+                year="2023 – 2024"
+                description="Developed institutional platforms for research and innovation, streamlining grant applications and project showcases."
+                index={4}
+              />
 
-            <Experience
-              company="UEAB Crested Crane"
-              position="Graphic Designer & Photographer"
-              year="Sep 2022 – Apr 2024"
-              description="Visual storyteller for the university, capturing campus life and designing the annual yearbook publication."
-              index={5}
-            />
+              <Experience
+                company="UEAB Crested Crane"
+                position="Graphic Designer & Photographer"
+                year="Sep 2022 – Apr 2024"
+                description="Visual storyteller for the university, capturing campus life and designing the annual yearbook publication."
+                index={5}
+              />
+            </div>
 
-            <div className="flex justify-center pt-8">
+            <div className="flex flex-col items-center gap-4 pt-8">
+              <button
+                onClick={() => setExperienceExpanded(e => !e)}
+                className="flex items-center gap-2 text-sm font-semibold text-blue-500 hover:text-blue-600 transition-colors"
+              >
+                {experienceExpanded ? 'Show less' : 'Show 4 more'}
+                <FaChevronDown
+                  size={12}
+                  className={`transition-transform duration-300 ${experienceExpanded ? 'rotate-180' : ''}`}
+                />
+              </button>
+
               <Link
                 href="patrickmurani.pdf"
                 target="_blank"
