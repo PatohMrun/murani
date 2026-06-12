@@ -229,13 +229,16 @@ export default function Editor({ content, onChange }: EditorProps) {
       )}
 
       {/* Editor — fixed height, content scrolls inside */}
-      <div className="h-[60vh] overflow-y-auto relative">
+      <div
+        className="h-[60vh] overflow-y-auto relative"
+        onClick={() => editor.commands.focus()}
+      >
         {uploading && (
           <div className="absolute inset-0 bg-white/70 dark:bg-gray-900/70 flex items-center justify-center z-10 text-sm text-gray-500">
             Uploading image…
           </div>
         )}
-        <EditorContent editor={editor} />
+        <EditorContent editor={editor} className="h-full" />
       </div>
     </div>
   )
