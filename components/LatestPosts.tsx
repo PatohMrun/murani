@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { FaArrowRight } from 'react-icons/fa6'
+import RevealText, { FlowText } from './RevealText'
 
 interface Post {
   id: string
@@ -55,10 +56,15 @@ export default function LatestPosts() {
         >
           <h2 className="text-xs sm:text-sm font-bold text-blue-500 tracking-widest uppercase mb-2">Writing</h2>
           <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold font-oswald">
-            Latest <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-600 to-purple-600">Thoughts</span>
+            <RevealText text="Latest" />{' '}
+            <RevealText
+              text="Thoughts"
+              delay={0.2}
+              charClassName="text-transparent bg-clip-text bg-linear-to-r from-blue-600 to-purple-600"
+            />
           </h3>
           <p className="mt-3 text-gray-500 dark:text-gray-400 text-sm sm:text-base max-w-xl mx-auto">
-            Code, cameras, and whatever catches my attention.
+            <FlowText text="Code, cameras, and whatever catches my attention." delay={0.35} />
           </p>
         </motion.div>
 

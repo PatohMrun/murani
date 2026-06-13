@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import TiltCard from './TiltCard';
 
 interface ExperienceProps {
     company: string;
@@ -24,9 +24,9 @@ const Experience: React.FC<ExperienceProps> = ({ company, year, position, descri
             <div className="hidden md:block w-5/12" />
 
             {/* Content Card */}
-            <motion.div
-                whileHover={{ y: -5 }}
-                className={`w-full md:w-5/12 bg-white dark:bg-gray-900 p-6 rounded-xl shadow-lg border border-gray-100 dark:border-gray-800 hover:border-blue-500/30 dark:hover:border-blue-500/30 transition-all duration-300 relative z-10 md:text-left
+            <TiltCard className="w-full md:w-5/12 relative z-10">
+            <div
+                className={`bg-white dark:bg-gray-900 p-6 rounded-xl shadow-lg border border-gray-100 dark:border-gray-800 hover:border-blue-500/30 dark:hover:border-blue-500/30 transition-colors duration-300 md:text-left
                     ${isEven ? 'md:text-right md:items-end' : ''}
                 `}
             >
@@ -48,7 +48,8 @@ const Experience: React.FC<ExperienceProps> = ({ company, year, position, descri
                         {description}
                     </p>
                 </div>
-            </motion.div>
+            </div>
+            </TiltCard>
         </div>
     );
 }

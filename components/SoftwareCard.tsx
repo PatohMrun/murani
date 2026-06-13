@@ -3,6 +3,7 @@ import Image from "next/image";
 import { FaArrowRight } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
+import TiltCard from "./TiltCard";
 
 interface SoftwareCardProps {
     source: string;
@@ -33,9 +34,10 @@ const SoftwareCard: React.FC<SoftwareCardProps> = ({ source, title, description,
             variants={cardVariants}
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
-            className="group w-full bg-white dark:bg-gray-800/50 backdrop-blur-md rounded-2xl overflow-hidden border border-gray-100 dark:border-gray-700 shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col h-full"
-            whileHover={{ y: -5 }}
+            className="h-full w-full"
         >
+        <TiltCard className="h-full w-full">
+        <div className="group w-full bg-white dark:bg-gray-800/50 backdrop-blur-md rounded-2xl overflow-hidden border border-gray-100 dark:border-gray-700 shadow-lg hover:shadow-2xl transition-shadow duration-300 flex flex-col h-full">
             <div className="relative h-48 w-full overflow-hidden">
                 <Image
                     src={source}
@@ -61,6 +63,8 @@ const SoftwareCard: React.FC<SoftwareCardProps> = ({ source, title, description,
                     <FaArrowRight className="transform transition-transform group-hover/btn:translate-x-1" />
                 </motion.a>
             </div>
+        </div>
+        </TiltCard>
         </motion.div>
     );
 };

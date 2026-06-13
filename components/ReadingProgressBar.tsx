@@ -1,5 +1,6 @@
 'use client'
 import { useEffect, useState } from 'react'
+import BodyPortal from './BodyPortal'
 
 export default function ReadingProgressBar() {
   const [progress, setProgress] = useState(0)
@@ -16,11 +17,13 @@ export default function ReadingProgressBar() {
   }, [])
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-[60] h-0.5 bg-transparent">
-      <div
-        className="h-full bg-linear-to-r from-blue-500 to-purple-500"
-        style={{ width: `${progress}%`, transition: 'width 60ms linear' }}
-      />
-    </div>
+    <BodyPortal>
+      <div className="fixed top-0 left-0 right-0 z-[60] h-0.5 bg-transparent">
+        <div
+          className="h-full bg-linear-to-r from-blue-500 to-purple-500"
+          style={{ width: `${progress}%`, transition: 'width 60ms linear' }}
+        />
+      </div>
+    </BodyPortal>
   )
 }

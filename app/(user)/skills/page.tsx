@@ -6,6 +6,8 @@ import { AiTwotoneApi } from "react-icons/ai";
 import { PiGraphicsCardFill } from "react-icons/pi";
 import { IoMdCamera } from "react-icons/io";
 import { motion } from 'framer-motion';
+import TiltCard from '@/components/TiltCard';
+import RevealText from '@/components/RevealText';
 
 const Skills: React.FC = () => {
     const containerVariants = {
@@ -108,17 +110,21 @@ const Skills: React.FC = () => {
                 <motion.div variants={cardVariants} className="text-center mb-8">
                     <h2 className="text-xs sm:text-sm font-bold text-blue-500 tracking-widest uppercase mb-2">My Expertise</h2>
                     <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-oswald text-gray-900 dark:text-gray-100">
-                        Technical <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-500 to-purple-500">Skills</span>
+                        <RevealText text="Technical" />{' '}
+                        <RevealText
+                            text="Skills"
+                            delay={0.25}
+                            charClassName="text-transparent bg-clip-text bg-linear-to-r from-blue-500 to-purple-500"
+                        />
                     </h3>
                 </motion.div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
                     {skillsData.map((skill, index) => (
-                        <motion.div
-                            key={index}
-                            className="bg-white dark:bg-gray-800/50 backdrop-blur-xs border border-gray-100 dark:border-gray-700 p-6 rounded-2xl shadow-xs hover:shadow-xl transition-all duration-300 group"
-                            variants={cardVariants}
-                            whileHover={{ y: -5 }}
+                        <motion.div key={index} variants={cardVariants} className="h-full">
+                        <TiltCard className="h-full">
+                        <div
+                            className="h-full bg-white dark:bg-gray-800/50 backdrop-blur-xs border border-gray-100 dark:border-gray-700 p-6 rounded-2xl shadow-xs hover:shadow-xl transition-shadow duration-300 group"
                         >
                             <div className="flex items-center gap-4 mb-6">
                                 <div className={`p-3 rounded-xl bg-gray-50 dark:bg-gray-700/50 ${skill.color} group-hover:scale-110 transition-transform duration-300`}>
@@ -153,6 +159,8 @@ const Skills: React.FC = () => {
                                     />
                                 </div>
                             </div>
+                        </div>
+                        </TiltCard>
                         </motion.div>
                     ))}
                 </div>

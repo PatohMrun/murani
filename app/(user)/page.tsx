@@ -3,12 +3,20 @@ import Image from "next/image";
 import Link from "next/link";
 import Experience from "@/components/Experience";
 import LatestPosts from "@/components/LatestPosts";
-import { motion } from "framer-motion";
+import MagneticButton from "@/components/MagneticButton";
+import RevealText, { FlowText } from "@/components/RevealText";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { FaArrowRight, FaLinkedin, FaGithub, FaEnvelope, FaAndroid, FaChevronDown } from "react-icons/fa6";
 import { useState } from "react";
 
 export default function Home() {
   const [experienceExpanded, setExperienceExpanded] = useState(false);
+  const { scrollY } = useScroll();
+  // hero holds fully solid through the first ~55% of its own height, then
+  // eases away only as the section is genuinely leaving the viewport
+  const heroY = useTransform(scrollY, [0, 750], [0, -70]);
+  const heroOpacity = useTransform(scrollY, [0, 520, 880], [1, 1, 0]);
+  const imageY = useTransform(scrollY, [0, 750], [0, -45]);
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
     visible: {
@@ -40,6 +48,7 @@ export default function Home() {
             initial="hidden"
             animate="visible"
             variants={staggerContainer}
+            style={{ y: heroY, opacity: heroOpacity }}
             className="text-center lg:text-left order-2 lg:order-1"
           >
             <motion.div variants={fadeInUp} className="inline-block px-4 py-2 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 font-semibold text-sm mb-6 border border-blue-200 dark:border-blue-800">
@@ -52,23 +61,28 @@ export default function Home() {
             </motion.h1>
 
             <motion.p variants={fadeInUp} className="text-gray-600 dark:text-gray-400 text-base sm:text-lg lg:text-xl mb-8 leading-relaxed max-w-xl mx-auto lg:mx-0">
-              A <span className="text-blue-600 dark:text-blue-400 font-semibold">Software Engineer</span> with a passion for blending code, design, and usability. I turn complex problems into elegant, user-centric solutions.
+              A <span className="text-blue-600 dark:text-blue-400 font-semibold">Software Engineer</span>{' '}
+              <FlowText text="with a passion for blending code, design, and usability. I turn complex problems into elegant, user-centric solutions." delay={0.5} />
             </motion.p>
 
             <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <Link
-                href="/creations"
-                className="group px-8 py-4 bg-blue-600 text-white rounded-full font-semibold shadow-lg shadow-blue-500/30 hover:bg-blue-700 hover:shadow-blue-500/40 transition-all flex items-center justify-center gap-2"
-              >
-                View My Work
-                <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
-              </Link>
-              <Link
-                href="/blog"
-                className="px-8 py-4 bg-white dark:bg-gray-800 text-gray-900 dark:text-white border border-gray-200 dark:border-gray-700 rounded-full font-semibold hover:border-blue-500 hover:text-blue-500 dark:hover:border-blue-500 dark:hover:text-blue-400 transition-all text-center"
-              >
-                Read My Blog
-              </Link>
+              <MagneticButton>
+                <Link
+                  href="/creations"
+                  className="group px-8 py-4 bg-blue-600 text-white rounded-full font-semibold shadow-lg shadow-blue-500/30 hover:bg-blue-700 hover:shadow-blue-500/40 transition-all flex items-center justify-center gap-2"
+                >
+                  View My Work
+                  <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </MagneticButton>
+              <MagneticButton>
+                <Link
+                  href="/blog"
+                  className="px-8 py-4 bg-white dark:bg-gray-800 text-gray-900 dark:text-white border border-gray-200 dark:border-gray-700 rounded-full font-semibold hover:border-blue-500 hover:text-blue-500 dark:hover:border-blue-500 dark:hover:text-blue-400 transition-all flex items-center justify-center"
+                >
+                  Read My Blog
+                </Link>
+              </MagneticButton>
             </motion.div>
 
             <motion.div variants={fadeInUp} className="mt-12 flex gap-6 justify-center lg:justify-start text-xl sm:text-2xl text-gray-400">
@@ -83,6 +97,7 @@ export default function Home() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
+            style={{ y: imageY }}
             className="order-1 lg:order-2 flex justify-center relative"
           >
             <div className="relative w-72 h-72 lg:w-96 lg:h-96">
@@ -121,7 +136,9 @@ export default function Home() {
             className="text-center mb-8"
           >
             <h2 className="text-xs sm:text-sm font-bold text-blue-500 tracking-widest uppercase mb-2">My Journey</h2>
-            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold font-oswald">Professional Experience</h3>
+            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold font-oswald">
+              <RevealText text="Professional Experience" />
+            </h3>
           </motion.div>
 
           <div className="relative space-y-8 md:space-y-0 relative">

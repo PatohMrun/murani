@@ -3,6 +3,7 @@ import { prisma } from '@/lib/prisma'
 import { Metadata } from 'next'
 import { FaPenNib, FaCircleExclamation } from 'react-icons/fa6'
 import BlogPostsList from '@/components/BlogPostsList'
+import RevealText, { FlowText } from '@/components/RevealText'
 
 export const revalidate = 0
 
@@ -97,13 +98,15 @@ export default function BlogPage() {
         <div className="mb-12">
           <p className="text-xs font-bold text-blue-500 tracking-widest uppercase mb-2">Writing</p>
           <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold font-oswald text-gray-900 dark:text-white leading-tight">
-            Latest{' '}
-            <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-500 to-purple-500">
-              Thoughts
-            </span>
+            <RevealText text="Latest" />{' '}
+            <RevealText
+              text="Thoughts"
+              delay={0.2}
+              charClassName="text-transparent bg-clip-text bg-linear-to-r from-blue-500 to-purple-500"
+            />
           </h1>
           <p className="text-gray-500 dark:text-gray-400 mt-4 text-sm sm:text-base lg:text-lg max-w-xl">
-            Code, cameras, and whatever catches my attention.
+            <FlowText text="Code, cameras, and whatever catches my attention." delay={0.35} />
           </p>
         </div>
 

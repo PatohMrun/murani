@@ -5,6 +5,8 @@ import SoftwareProjects from "@/components/SoftwareProjects";
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaCode, FaPaintBrush, FaInstagram, FaPinterest, FaWhatsapp } from "react-icons/fa";
+import RevealText, { FlowText } from "@/components/RevealText";
+import BodyPortal from "@/components/BodyPortal";
 
 const Creations: React.FC = () => {
   const [activeTab, setActiveTab] = useState<"software" | "graphic">("software");
@@ -31,10 +33,15 @@ const Creations: React.FC = () => {
           {/* ... existing header content ... */}
           <h2 className="text-xs sm:text-sm font-bold text-blue-500 tracking-widest uppercase mb-2">Portfolio</h2>
           <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold font-oswald text-gray-900 dark:text-gray-100 mb-6">
-            My <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-500 to-purple-500">Creations</span>
+            <RevealText text="My" />{' '}
+            <RevealText
+              text="Creations"
+              delay={0.15}
+              charClassName="text-transparent bg-clip-text bg-linear-to-r from-blue-500 to-purple-500"
+            />
           </h1>
           <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-sm sm:text-base lg:text-lg">
-            Explore a collection of my digital work, ranging from complex software solutions to creative graphic designs.
+            <FlowText text="Explore a collection of my digital work, ranging from complex software solutions to creative graphic designs." delay={0.4} />
           </p>
         </div>
 
@@ -86,7 +93,8 @@ const Creations: React.FC = () => {
         </AnimatePresence>
       </div>
 
-      {/* Fixed Social Buttons (Outside accessible container) */}
+      {/* Fixed Social Buttons (portaled to body — SmoothScroll's transform would re-anchor them) */}
+      <BodyPortal>
       <AnimatePresence>
         {activeTab === "graphic" && (
           <div className="fixed bottom-4 left-4 space-y-3 z-50 flex flex-col items-center">
@@ -126,6 +134,7 @@ const Creations: React.FC = () => {
           </div>
         )}
       </AnimatePresence>
+      </BodyPortal>
     </div>
   );
 };

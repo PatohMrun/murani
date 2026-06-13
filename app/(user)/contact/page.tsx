@@ -3,6 +3,7 @@ import React from "react";
 import emailjs from "emailjs-com";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import RevealText from "@/components/RevealText";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { FaPaperPlane, FaEnvelope, FaPhone, FaLocationDot, FaWhatsapp, FaLinkedin, FaInstagram, FaGithub } from "react-icons/fa6";
 
@@ -71,7 +72,12 @@ const Contact: React.FC = () => {
                 >
                     <h2 className="text-xs sm:text-sm font-bold text-blue-500 tracking-widest uppercase mb-2">Get in Touch</h2>
                     <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold font-oswald text-gray-900 dark:text-white">
-                        Let&apos;s <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-500 to-purple-500">Connect</span>
+                        <RevealText text="Let's" />{' '}
+                        <RevealText
+                            text="Connect"
+                            delay={0.2}
+                            charClassName="text-transparent bg-clip-text bg-linear-to-r from-blue-500 to-purple-500"
+                        />
                     </h1>
                 </motion.div>
 
