@@ -53,3 +53,17 @@ body {
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+/* Compositor-only star twinkle (opacity), runs off the main thread.
+   Used by CosmosBackground on a small subset of stars. */
+@keyframes star-twinkle {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 0.85; }
+}
+.star-twinkle {
+  animation: star-twinkle var(--twinkle-dur, 4s) ease-in-out infinite;
+  animation-delay: var(--twinkle-delay, 0s);
+}
+@media (prefers-reduced-motion: reduce) {
+  .star-twinkle { animation: none; opacity: 0.5; }
+}

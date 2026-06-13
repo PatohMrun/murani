@@ -1,96 +1,75 @@
 'use client'
-import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { useEffect, useState, type CSSProperties } from 'react'
 
-const CosmosBackground = () => {
-    // Generate static stars to avoid hydration mismatch
-    const [stars, setStars] = useState<{ top: string; left: string; size: number; delay: number; duration: number }[]>([]);
+interface Star {
+  top: string
+  left: string
+  size: number
+  delay: number
+  duration: number
+  twinkle: boolean
+}
 
-    useEffect(() => {
-        const starCount = 50;
-        const newStars = Array.from({ length: starCount }).map(() => ({
-            top: `${Math.random() * 100}%`,
-            left: `${Math.random() * 100}%`,
-            size: Math.random() * 2 + 1,
-            delay: Math.random() * 5,
-            duration: Math.random() * 3 + 2,
-        }));
-        setStars(newStars);
-    }, []);
+/**
+ * Lightweight cosmos backdrop. Deliberately cheap so it never costs frames:
+ * - color "nebula" glows are static radial-gradient backgrounds (no filter
+ *   blur, no mix-blend, no animation — those were the mobile jank source)
+ * - stars are painted once; only a small subset gets a compositor-only CSS
+ *   opacity twinkle (off the main thread, auto-disabled for reduced motion)
+ */
+export default function CosmosBackground() {
+  const [stars, setStars] = useState<Star[]>([])
 
-    return (
-        <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10 bg-gray-50 dark:bg-black transition-colors duration-500">
-            {/* Deep Space Gradients - Theme Aware */}
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,var(--tw-gradient-stops))] from-gray-200/40 via-transparent to-transparent dark:from-zinc-900/80 dark:via-black dark:to-black"></div>
+  useEffect(() => {
+    const count = 40
+    setStars(
+      Array.from({ length: count }).map((_, i) => ({
+        top: `${Math.random() * 100}%`,
+        left: `${Math.random() * 100}%`,
+        size: Math.random() * 2 + 1,
+        delay: Math.random() * 5,
+        duration: Math.random() * 3 + 3,
+        twinkle: i % 3 === 0, // ~13 twinkle, rest static
+      }))
+    )
+  }, [])
 
-            {/* Subtle Nebula Layers - Theme Aware */}
-            <motion.div
-                animate={{
-                    rotate: [0, 360],
-                    scale: [1, 1.1, 1],
-                }}
-                transition={{
-                    duration: 60,
-                    repeat: Infinity,
-                    ease: "linear"
-                }}
-                className="absolute top-[-20%] left-[-10%] w-[70%] h-[70%] bg-gray-300/20 dark:bg-white/5 rounded-full blur-[120px] mix-blend-multiply dark:mix-blend-screen opacity-60 dark:opacity-30"
-            />
-            <motion.div
-                animate={{
-                    rotate: [360, 0],
-                    scale: [1, 1.2, 1],
-                }}
-                transition={{
-                    duration: 55,
-                    repeat: Infinity,
-                    ease: "linear"
-                }}
-                className="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] bg-gray-300/20 dark:bg-white/5 rounded-full blur-[120px] mix-blend-multiply dark:mix-blend-screen opacity-60 dark:opacity-30"
-            />
+  return (
+    <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none bg-gray-50 dark:bg-black transition-colors duration-500">
+      {/* deep-space base gradient */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,var(--tw-gradient-stops))] from-gray-200/40 via-transparent to-transparent dark:from-zinc-900/80 dark:via-black dark:to-black" />
 
-            {/* Twinkling Stars - Dark in Light Mode, White in Dark Mode */}
-            {stars.map((star, i) => (
-                <motion.div
-                    key={i}
-                    className="absolute bg-gray-900/30 dark:bg-white rounded-full opacity-70"
-                    style={{
-                        top: star.top,
-                        left: star.left,
-                        width: star.size,
-                        height: star.size,
-                    }}
-                    animate={{
-                        opacity: [0.2, 0.8, 0.2],
-                        scale: [1, 1.2, 1],
-                    }}
-                    transition={{
-                        duration: star.duration,
-                        repeat: Infinity,
-                        delay: star.delay,
-                        ease: "easeInOut",
-                    }}
-                />
-            ))}
+      {/* static color glows — radial-gradient paint, no blur filter / blend mode */}
+      <div
+        className="absolute -top-1/4 -left-[15%] w-[60vw] h-[60vw] rounded-full"
+        style={{ background: 'radial-gradient(circle, rgba(99,102,241,0.10), transparent 70%)' }}
+      />
+      <div
+        className="absolute top-1/3 -right-[15%] w-[55vw] h-[55vw] rounded-full"
+        style={{ background: 'radial-gradient(circle, rgba(168,85,247,0.09), transparent 70%)' }}
+      />
+      <div
+        className="absolute -bottom-1/4 left-1/4 w-[55vw] h-[55vw] rounded-full"
+        style={{ background: 'radial-gradient(circle, rgba(56,189,248,0.08), transparent 70%)' }}
+      />
 
-            {/* Shooting Star effect (Optional subtle addition) */}
-            <motion.div
-                initial={{ top: -10, left: '100%', opacity: 0 }}
-                animate={{
-                    top: ['20%', '80%'],
-                    left: ['80%', '20%'],
-                    opacity: [0, 1, 0]
-                }}
-                transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    repeatDelay: 5,
-                    ease: "easeIn"
-                }}
-                className="absolute w-1 h-1 bg-gray-500 dark:bg-white shadow-[0_0_20px_2px_rgba(100,116,139,0.5)] dark:shadow-[0_0_20px_2px_rgba(255,255,255,0.8)] rounded-full blur-[0.5px]"
-            />
-        </div>
-    );
-};
-
-export default CosmosBackground;
+      {/* stars */}
+      {stars.map((s, i) => (
+        <span
+          key={i}
+          className={`absolute rounded-full bg-gray-900/30 dark:bg-white ${s.twinkle ? 'star-twinkle' : 'opacity-60'}`}
+          style={
+            {
+              top: s.top,
+              left: s.left,
+              width: s.size,
+              height: s.size,
+              '--twinkle-dur': `${s.duration}s`,
+              '--twinkle-delay': `${s.delay}s`,
+            } as CSSProperties
+          }
+        />
+      ))}
+    </div>
+  )
+}
