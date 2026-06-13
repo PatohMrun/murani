@@ -68,19 +68,18 @@ body {
   .star-twinkle { animation: none; opacity: 0.5; }
 }
 
-/* Occasional comet: animates transform + opacity only (compositor, off the
-   main thread). The streak is visible for ~10% of each cycle, idle the rest,
-   so it reads as a rare shooting star. The `rotate` individual property aims
-   the tail along the travel vector and composes with the animated transform. */
-/* translate is the OUTERMOST transform (screen space, so it moves down-left as
-   intended); rotate is inner and constant, just aiming the bar along travel.
-   Mixing an individual `rotate` property with an animated `transform` would run
-   the translate in the rotated local frame — don't do that. */
-@keyframes comet-streak {
+/* Comet streak: one-shot, fired imperatively by CosmosBackground at random
+   intervals/directions so the appearances are unpredictable. Animates
+   transform + opacity only (compositor, off the main thread). The whole
+   duration IS the streak; idle gaps come from JS, not the keyframe.
+   translate is the OUTERMOST transform (screen space); rotate is inner and
+   constant, aiming the tail along the travel vector. Mixing an individual
+   `rotate` property with an animated `transform` would run the translate in
+   the rotated local frame — so the rotate lives inside the keyframe. */
+@keyframes comet-fly {
   0%   { transform: translate3d(0, 0, 0) rotate(var(--comet-rot, 158deg)); opacity: 0; }
-  2%   { opacity: 1; }
-  11%  { transform: translate3d(var(--comet-dx, -100vw), var(--comet-dy, 55vh), 0) rotate(var(--comet-rot, 158deg)); opacity: 0; }
-  100% { transform: translate3d(var(--comet-dx, -100vw), var(--comet-dy, 55vh), 0) rotate(var(--comet-rot, 158deg)); opacity: 0; }
+  12%  { opacity: 1; }
+  100% { transform: translate3d(var(--comet-dx, -95vw), var(--comet-dy, 55vh), 0) rotate(var(--comet-rot, 158deg)); opacity: 0; }
 }
 .comet {
   position: absolute;
@@ -88,13 +87,9 @@ body {
   height: 2px;
   border-radius: 9999px;
   transform-origin: center;
-  /* hidden by default so it never sits parked-but-visible during the
-     animation-delay; the keyframes raise opacity only while it streaks */
-  opacity: 0;
+  opacity: 0; /* idle = invisible; the keyframe raises opacity only while flying */
   /* light mode: soft blue head */
   background: linear-gradient(90deg, transparent, rgba(96, 165, 250, 0.5) 75%, rgba(59, 130, 246, 0.95));
-  animation: comet-streak var(--comet-dur, 12s) linear infinite;
-  animation-delay: var(--comet-delay, 0s);
   will-change: transform, opacity;
 }
 .dark .comet {
