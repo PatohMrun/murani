@@ -7,6 +7,7 @@ import ReadingProgressBar from '@/components/ReadingProgressBar'
 import ShareButton from '@/components/ShareButton'
 import LikeButton from '@/components/LikeButton'
 import CommentsSection from '@/components/CommentsSection'
+import LocalDateTime from '@/components/LocalDateTime'
 import { sanitizeContent } from '@/lib/sanitize'
 
 export const revalidate = 3600
@@ -181,11 +182,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   : 'text-gray-400 dark:text-gray-500'
               }`}>
                 <span>
-                  {new Date(post.createdAt).toLocaleDateString('en-US', {
-                    month: 'long',
-                    day: 'numeric',
-                    year: 'numeric',
-                  })}
+                  <LocalDateTime value={post.createdAt.toISOString()} />
                 </span>
                 <span className="w-1 h-1 rounded-full bg-current opacity-40" />
                 <span>{readingTime} min read</span>
@@ -193,12 +190,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   <>
                     <span className="w-1 h-1 rounded-full bg-current opacity-40" />
                     <span>
-                      Updated{' '}
-                      {new Date(post.updatedAt).toLocaleDateString('en-US', {
-                        month: 'long',
-                        day: 'numeric',
-                        year: 'numeric',
-                      })}
+                      Updated <LocalDateTime value={post.updatedAt.toISOString()} />
                     </span>
                   </>
                 )}
