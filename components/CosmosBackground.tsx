@@ -70,6 +70,16 @@ export default function CosmosBackground() {
           }
         />
       ))}
+
+      {/* occasional comets — CSS transform/opacity only, head leads down-left */}
+      <span
+        className="comet"
+        style={{ top: '12%', left: '80%', '--comet-dx': '-95vw', '--comet-dy': '55vh', '--comet-rot': '160deg', '--comet-dur': '12s', '--comet-delay': '4s' } as CSSProperties}
+      />
+      <span
+        className="comet"
+        style={{ top: '6%', left: '48%', '--comet-dx': '-70vw', '--comet-dy': '72vh', '--comet-rot': '146deg', '--comet-dur': '16s', '--comet-delay': '11s' } as CSSProperties}
+      />
     </div>
   )
 }

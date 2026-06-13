@@ -1,5 +1,5 @@
 'use client'
-import { useEditor, EditorContent } from '@tiptap/react'
+import { useEditor, EditorContent, useEditorState } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import Underline from '@tiptap/extension-underline'
 import Link from '@tiptap/extension-link'
@@ -25,11 +25,13 @@ interface EditorProps {
 function ToolbarButton({
   onClick,
   active,
+  disabled,
   title,
   children,
 }: {
   onClick: () => void
   active?: boolean
+  disabled?: boolean
   title: string
   children: React.ReactNode
 }) {
@@ -37,11 +39,15 @@ function ToolbarButton({
     <button
       type="button"
       onClick={onClick}
+      disabled={disabled}
       title={title}
+      aria-pressed={active}
       className={`p-2 rounded-lg text-sm transition-colors ${
-        active
-          ? 'bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400'
-          : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700'
+        disabled
+          ? 'text-gray-300 dark:text-gray-600 cursor-not-allowed'
+          : active
+            ? 'bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400'
+            : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700'
       }`}
     >
       {children}
@@ -71,6 +77,33 @@ export default function Editor({ content, onChange }: EditorProps) {
         class: 'prose prose-gray dark:prose-invert max-w-none min-h-full p-4 focus:outline-hidden prose-img:rounded-xl prose-img:shadow-lg prose-img:mx-auto',
       },
     },
+  })
+
+  // Reactive snapshot of the marks/nodes active at the current selection.
+  // useEditorState re-renders the toolbar on every selection change (not just
+  // on edits), so the buttons reflect the styles where the cursor actually is.
+  const state = useEditorState({
+    editor,
+    selector: ({ editor }) => ({
+      bold: editor.isActive('bold'),
+      italic: editor.isActive('italic'),
+      underline: editor.isActive('underline'),
+      strike: editor.isActive('strike'),
+      highlight: editor.isActive('highlight'),
+      h1: editor.isActive('heading', { level: 1 }),
+      h2: editor.isActive('heading', { level: 2 }),
+      h3: editor.isActive('heading', { level: 3 }),
+      bulletList: editor.isActive('bulletList'),
+      orderedList: editor.isActive('orderedList'),
+      blockquote: editor.isActive('blockquote'),
+      codeBlock: editor.isActive('codeBlock'),
+      alignLeft: editor.isActive({ textAlign: 'left' }),
+      alignCenter: editor.isActive({ textAlign: 'center' }),
+      alignRight: editor.isActive({ textAlign: 'right' }),
+      link: editor.isActive('link'),
+      canUndo: editor.can().undo(),
+      canRedo: editor.can().redo(),
+    }),
   })
 
   useEffect(() => {
@@ -127,35 +160,35 @@ export default function Editor({ content, onChange }: EditorProps) {
     fileInputRef.current?.click()
   }, [])
 
-  if (!editor) return null
+  if (!editor || !state) return null
 
   return (
     <div className="border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden bg-white dark:bg-gray-900">
       {/* Toolbar */}
       <div className="flex flex-wrap items-center gap-0.5 p-2 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50">
-        <ToolbarButton onClick={() => editor.chain().focus().toggleBold().run()} active={editor.isActive('bold')} title="Bold">
+        <ToolbarButton onClick={() => editor.chain().focus().toggleBold().run()} active={state.bold} title="Bold">
           <FaBold />
         </ToolbarButton>
-        <ToolbarButton onClick={() => editor.chain().focus().toggleItalic().run()} active={editor.isActive('italic')} title="Italic">
+        <ToolbarButton onClick={() => editor.chain().focus().toggleItalic().run()} active={state.italic} title="Italic">
           <FaItalic />
         </ToolbarButton>
-        <ToolbarButton onClick={() => editor.chain().focus().toggleUnderline().run()} active={editor.isActive('underline')} title="Underline">
+        <ToolbarButton onClick={() => editor.chain().focus().toggleUnderline().run()} active={state.underline} title="Underline">
           <FaUnderline />
         </ToolbarButton>
-        <ToolbarButton onClick={() => editor.chain().focus().toggleStrike().run()} active={editor.isActive('strike')} title="Strikethrough">
+        <ToolbarButton onClick={() => editor.chain().focus().toggleStrike().run()} active={state.strike} title="Strikethrough">
           <FaStrikethrough />
         </ToolbarButton>
-        <ToolbarButton onClick={() => editor.chain().focus().toggleHighlight().run()} active={editor.isActive('highlight')} title="Highlight">
+        <ToolbarButton onClick={() => editor.chain().focus().toggleHighlight().run()} active={state.highlight} title="Highlight">
           <MdHighlight />
         </ToolbarButton>
 
         <Divider />
 
-        {[1, 2, 3].map(level => (
+        {([1, 2, 3] as const).map(level => (
           <ToolbarButton
             key={level}
-            onClick={() => editor.chain().focus().toggleHeading({ level: level as 1 | 2 | 3 }).run()}
-            active={editor.isActive('heading', { level })}
+            onClick={() => editor.chain().focus().toggleHeading({ level }).run()}
+            active={level === 1 ? state.h1 : level === 2 ? state.h2 : state.h3}
             title={`Heading ${level}`}
           >
             <span className="font-bold text-xs">H{level}</span>
@@ -164,34 +197,34 @@ export default function Editor({ content, onChange }: EditorProps) {
 
         <Divider />
 
-        <ToolbarButton onClick={() => editor.chain().focus().toggleBulletList().run()} active={editor.isActive('bulletList')} title="Bullet List">
+        <ToolbarButton onClick={() => editor.chain().focus().toggleBulletList().run()} active={state.bulletList} title="Bullet List">
           <FaListUl />
         </ToolbarButton>
-        <ToolbarButton onClick={() => editor.chain().focus().toggleOrderedList().run()} active={editor.isActive('orderedList')} title="Ordered List">
+        <ToolbarButton onClick={() => editor.chain().focus().toggleOrderedList().run()} active={state.orderedList} title="Ordered List">
           <FaListOl />
         </ToolbarButton>
-        <ToolbarButton onClick={() => editor.chain().focus().toggleBlockquote().run()} active={editor.isActive('blockquote')} title="Blockquote">
+        <ToolbarButton onClick={() => editor.chain().focus().toggleBlockquote().run()} active={state.blockquote} title="Blockquote">
           <FaQuoteLeft />
         </ToolbarButton>
-        <ToolbarButton onClick={() => editor.chain().focus().toggleCodeBlock().run()} active={editor.isActive('codeBlock')} title="Code Block">
+        <ToolbarButton onClick={() => editor.chain().focus().toggleCodeBlock().run()} active={state.codeBlock} title="Code Block">
           <FaCode />
         </ToolbarButton>
 
         <Divider />
 
-        <ToolbarButton onClick={() => editor.chain().focus().setTextAlign('left').run()} active={editor.isActive({ textAlign: 'left' })} title="Align Left">
+        <ToolbarButton onClick={() => editor.chain().focus().setTextAlign('left').run()} active={state.alignLeft} title="Align Left">
           <FaAlignLeft />
         </ToolbarButton>
-        <ToolbarButton onClick={() => editor.chain().focus().setTextAlign('center').run()} active={editor.isActive({ textAlign: 'center' })} title="Align Center">
+        <ToolbarButton onClick={() => editor.chain().focus().setTextAlign('center').run()} active={state.alignCenter} title="Align Center">
           <FaAlignCenter />
         </ToolbarButton>
-        <ToolbarButton onClick={() => editor.chain().focus().setTextAlign('right').run()} active={editor.isActive({ textAlign: 'right' })} title="Align Right">
+        <ToolbarButton onClick={() => editor.chain().focus().setTextAlign('right').run()} active={state.alignRight} title="Align Right">
           <FaAlignRight />
         </ToolbarButton>
 
         <Divider />
 
-        <ToolbarButton onClick={addLink} active={editor.isActive('link')} title="Add Link">
+        <ToolbarButton onClick={addLink} active={state.link} title="Add Link">
           <FaLink />
         </ToolbarButton>
         <ToolbarButton onClick={addImage} title="Upload Image">
@@ -200,10 +233,10 @@ export default function Editor({ content, onChange }: EditorProps) {
 
         <Divider />
 
-        <ToolbarButton onClick={() => editor.chain().focus().undo().run()} title="Undo">
+        <ToolbarButton onClick={() => editor.chain().focus().undo().run()} disabled={!state.canUndo} title="Undo">
           <FaUndo />
         </ToolbarButton>
-        <ToolbarButton onClick={() => editor.chain().focus().redo().run()} title="Redo">
+        <ToolbarButton onClick={() => editor.chain().focus().redo().run()} disabled={!state.canRedo} title="Redo">
           <FaRedo />
         </ToolbarButton>
       </div>

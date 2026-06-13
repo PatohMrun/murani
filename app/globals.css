@@ -67,3 +67,37 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .star-twinkle { animation: none; opacity: 0.5; }
 }
+
+/* Occasional comet: animates transform + opacity only (compositor, off the
+   main thread). The streak is visible for ~10% of each cycle, idle the rest,
+   so it reads as a rare shooting star. The `rotate` individual property aims
+   the tail along the travel vector and composes with the animated transform. */
+/* translate is the OUTERMOST transform (screen space, so it moves down-left as
+   intended); rotate is inner and constant, just aiming the bar along travel.
+   Mixing an individual `rotate` property with an animated `transform` would run
+   the translate in the rotated local frame — don't do that. */
+@keyframes comet-streak {
+  0%   { transform: translate3d(0, 0, 0) rotate(var(--comet-rot, 158deg)); opacity: 0; }
+  2%   { opacity: 1; }
+  11%  { transform: translate3d(var(--comet-dx, -100vw), var(--comet-dy, 55vh), 0) rotate(var(--comet-rot, 158deg)); opacity: 0; }
+  100% { transform: translate3d(var(--comet-dx, -100vw), var(--comet-dy, 55vh), 0) rotate(var(--comet-rot, 158deg)); opacity: 0; }
+}
+.comet {
+  position: absolute;
+  width: 160px;
+  height: 2px;
+  border-radius: 9999px;
+  transform-origin: center;
+  /* light mode: soft blue head */
+  background: linear-gradient(90deg, transparent, rgba(96, 165, 250, 0.5) 75%, rgba(59, 130, 246, 0.95));
+  animation: comet-streak var(--comet-dur, 12s) linear infinite;
+  animation-delay: var(--comet-delay, 0s);
+  will-change: transform, opacity;
+}
+.dark .comet {
+  /* dark mode: white head with cool glow */
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6) 78%, #ffffff);
+}
+@media (prefers-reduced-motion: reduce) {
+  .comet { display: none; }
+}
