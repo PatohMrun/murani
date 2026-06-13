@@ -93,7 +93,7 @@ const Skills: React.FC = () => {
 
     return (
         <motion.section
-            className="min-h-screen py-12 pb-16 px-4 sm:px-8 font-inter relative overflow-x-hidden"
+            className="min-h-screen pt-28 pb-16 px-4 sm:px-8 font-inter relative overflow-x-hidden"
             id="skills"
             initial="hidden"
             whileInView="visible"
@@ -124,7 +124,7 @@ const Skills: React.FC = () => {
                                 <div className={`p-3 rounded-xl bg-gray-50 dark:bg-gray-700/50 ${skill.color} group-hover:scale-110 transition-transform duration-300`}>
                                     {skill.icon}
                                 </div>
-                                <h4 className="text-lg font-bold text-gray-900 dark:text-gray-100">{skill.title}</h4>
+                                <h4 className="text-base sm:text-lg font-bold text-gray-900 dark:text-gray-100">{skill.title}</h4>
                             </div>
 
                             <div className="flex flex-wrap gap-2 mb-6">

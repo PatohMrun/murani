@@ -30,7 +30,7 @@ const Footer: React.FC = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
                     {/* Brand Section */}
                     <div className="space-y-4">
-                        <h2 className="text-2xl font-bold font-oswald text-gray-900 dark:text-white">
+                        <h2 className="text-xl sm:text-2xl font-bold font-oswald text-gray-900 dark:text-white">
                             Patrick Murani
                         </h2>
                         <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
@@ -41,7 +41,7 @@ const Footer: React.FC = () => {
 
                     {/* Quick Links */}
                     <div>
-                        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Quick Links</h3>
+                        <h3 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white mb-4">Quick Links</h3>
                         <ul className="space-y-2 text-sm">
                             <li>
                                 <Link href="/" className="text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 transition-colors">
@@ -78,7 +78,7 @@ const Footer: React.FC = () => {
 
                     {/* Contact Info */}
                     <div>
-                        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Get in Touch</h3>
+                        <h3 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white mb-4">Get in Touch</h3>
                         <ul className="space-y-3 text-sm text-gray-600 dark:text-gray-400">
                             <li className="flex items-center gap-2">
                                 <FaEnvelope className="text-blue-500" />
@@ -101,7 +101,7 @@ const Footer: React.FC = () => {
 
                     {/* Socials */}
                     <div>
-                        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Connect</h3>
+                        <h3 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white mb-4">Connect</h3>
                         <div className="grid grid-cols-4 gap-3">
                             {socialLinks.map((social, index) => (
                                 <a

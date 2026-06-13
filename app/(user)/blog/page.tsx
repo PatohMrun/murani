@@ -75,7 +75,7 @@ async function PostsFeed() {
           <FaPenNib size={22} />
         </div>
         <div>
-          <p className="text-gray-700 dark:text-gray-300 font-semibold text-lg">No posts yet</p>
+          <p className="text-gray-700 dark:text-gray-300 font-semibold text-base sm:text-lg">No posts yet</p>
           <p className="text-gray-400 dark:text-gray-600 text-sm mt-1">Something is brewing — check back soon.</p>
         </div>
       </div>
@@ -96,13 +96,13 @@ export default function BlogPage() {
         {/* Header renders instantly */}
         <div className="mb-12">
           <p className="text-xs font-bold text-blue-500 tracking-widest uppercase mb-2">Writing</p>
-          <h1 className="text-4xl lg:text-6xl font-bold font-oswald text-gray-900 dark:text-white leading-tight">
+          <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold font-oswald text-gray-900 dark:text-white leading-tight">
             Latest{' '}
             <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-500 to-purple-500">
               Thoughts
             </span>
           </h1>
-          <p className="text-gray-500 dark:text-gray-400 mt-4 text-lg max-w-xl">
+          <p className="text-gray-500 dark:text-gray-400 mt-4 text-sm sm:text-base lg:text-lg max-w-xl">
             Code, cameras, and whatever catches my attention.
           </p>
         </div>

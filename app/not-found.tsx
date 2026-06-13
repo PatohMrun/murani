@@ -51,7 +51,7 @@ export default function NotFound() {
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, type: "spring", delay: 0.2 }}
-                    className="text-8xl md:text-9xl font-bold leading-none font-oswald text-transparent bg-clip-text bg-linear-to-r from-gray-200 to-gray-500 mb-2"
+                    className="text-7xl sm:text-8xl md:text-9xl font-bold leading-none font-oswald text-transparent bg-clip-text bg-linear-to-r from-gray-200 to-gray-500 mb-2"
                 >
                     404
                 </motion.h1>
@@ -69,7 +69,7 @@ export default function NotFound() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.5, duration: 0.8 }}
-                    className="text-gray-400 mb-8 max-w-md mx-auto text-lg"
+                    className="text-gray-400 mb-8 max-w-md mx-auto text-base sm:text-lg"
                 >
                     The page you&apos;re looking for seems to have drifted out of the frame. Let&apos;s get you back to the main subject.
                 </motion.p>

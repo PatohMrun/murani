@@ -84,7 +84,7 @@ const Contact: React.FC = () => {
                         className="space-y-6"
                     >
                         <div className="bg-white/80 dark:bg-gray-800/50 backdrop-blur-md p-6 md:p-8 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-xl">
-                            <h3 className="text-2xl font-bold font-oswald mb-6 text-gray-900 dark:text-white">Contact Information</h3>
+                            <h3 className="text-xl sm:text-2xl font-bold font-oswald mb-6 text-gray-900 dark:text-white">Contact Information</h3>
                             <div className="space-y-6">
                                 <div className="flex items-start gap-4">
                                     <div className="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-full text-blue-600 dark:text-blue-400 shrink-0">
@@ -92,7 +92,7 @@ const Contact: React.FC = () => {
                                     </div>
                                     <div className="min-w-0">
                                         <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 font-semibold uppercase tracking-wide">Email</p>
-                                        <a href="mailto:patrickmurani@gmail.com" className="text-sm sm:text-lg font-medium text-gray-900 dark:text-gray-200 hover:text-blue-500 transition-colors whitespace-nowrap">patrickmurani@gmail.com</a>
+                                        <a href="mailto:patrickmurani@gmail.com" className="text-sm sm:text-base lg:text-lg font-medium text-gray-900 dark:text-gray-200 hover:text-blue-500 transition-colors whitespace-nowrap">patrickmurani@gmail.com</a>
                                     </div>
                                 </div>
 
@@ -102,7 +102,7 @@ const Contact: React.FC = () => {
                                     </div>
                                     <div>
                                         <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 font-semibold uppercase tracking-wide">Phone</p>
-                                        <a href="tel:+254795556007" className="text-sm sm:text-lg font-medium text-gray-900 dark:text-gray-200 hover:text-blue-500 transition-colors whitespace-nowrap">+254 795 556 007</a>
+                                        <a href="tel:+254795556007" className="text-sm sm:text-base lg:text-lg font-medium text-gray-900 dark:text-gray-200 hover:text-blue-500 transition-colors whitespace-nowrap">+254 795 556 007</a>
                                     </div>
                                 </div>
 
@@ -112,7 +112,7 @@ const Contact: React.FC = () => {
                                     </div>
                                     <div>
                                         <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 font-semibold uppercase tracking-wide">Location</p>
-                                        <p className="text-sm sm:text-lg font-medium text-gray-900 dark:text-gray-200">Nairobi, Kenya</p>
+                                        <p className="text-sm sm:text-base lg:text-lg font-medium text-gray-900 dark:text-gray-200">Nairobi, Kenya</p>
                                     </div>
                                 </div>
                             </div>
@@ -148,7 +148,7 @@ const Contact: React.FC = () => {
                     >
                         <div className="absolute top-0 right-0 w-32 h-32 bg-gray-500/10 dark:bg-white/5 rounded-bl-full pointer-events-none" />
 
-                        <h3 className="text-2xl font-bold font-oswald mb-8 text-gray-900 dark:text-white">Send a Message</h3>
+                        <h3 className="text-xl sm:text-2xl font-bold font-oswald mb-8 text-gray-900 dark:text-white">Send a Message</h3>
 
                         <form onSubmit={handleSubmit} className="space-y-6">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

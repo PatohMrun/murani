@@ -19,7 +19,7 @@ export default function BlogPostError({
       <div className="w-14 h-14 rounded-2xl bg-red-50 dark:bg-red-900/20 flex items-center justify-center text-red-400 mb-4">
         <FaCircleExclamation size={22} />
       </div>
-      <p className="text-gray-700 dark:text-gray-300 font-semibold text-lg">Couldn&apos;t load this post</p>
+      <p className="text-gray-700 dark:text-gray-300 font-semibold text-base sm:text-lg">Couldn&apos;t load this post</p>
       <p className="text-gray-400 dark:text-gray-600 text-sm mt-1 mb-6">
         The database may be temporarily unavailable.
       </p>

@@ -33,7 +33,7 @@ const Creations: React.FC = () => {
           <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold font-oswald text-gray-900 dark:text-gray-100 mb-6">
             My <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-500 to-purple-500">Creations</span>
           </h1>
-          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-lg">
+          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-sm sm:text-base lg:text-lg">
             Explore a collection of my digital work, ranging from complex software solutions to creative graphic designs.
           </p>
         </div>

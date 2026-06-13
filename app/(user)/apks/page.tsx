@@ -72,7 +72,7 @@ export default function APKsPage() {
                 {/* Header Section */}
                 <div className="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-gray-200 dark:border-gray-800 pb-4">
                     <div>
-                        <h1 className="text-3xl font-bold font-oswald text-gray-900 dark:text-white">
+                        <h1 className="text-2xl sm:text-3xl font-bold font-oswald text-gray-900 dark:text-white">
                             Android <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Releases</span>
                         </h1>
                         <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
@@ -104,7 +104,7 @@ export default function APKsPage() {
                                         </div>
                                         <div>
                                             <div className="flex items-center gap-2">
-                                                <h2 className="text-lg font-bold font-oswald">{app.name}</h2>
+                                                <h2 className="text-base sm:text-lg font-bold font-oswald">{app.name}</h2>
                                                 <span className="px-2 py-0.5 rounded bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 text-xs font-semibold">
                                                     v{app.latestRelease.version}
                                                 </span>

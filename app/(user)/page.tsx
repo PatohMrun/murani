@@ -71,7 +71,7 @@ export default function Home() {
               </Link>
             </motion.div>
 
-            <motion.div variants={fadeInUp} className="mt-12 flex gap-6 justify-center lg:justify-start text-2xl text-gray-400">
+            <motion.div variants={fadeInUp} className="mt-12 flex gap-6 justify-center lg:justify-start text-xl sm:text-2xl text-gray-400">
               <a href="https://github.com/PatohMrun" target="_blank" rel="noopener noreferrer" className="hover:text-gray-900 dark:hover:text-white transition-colors"><FaGithub /></a>
               <a href="https://www.linkedin.com/in/patrick-murani" target="_blank" rel="noopener noreferrer" className="hover:text-blue-600 transition-colors"><FaLinkedin /></a>
               <a href="mailto:patrickmurani@gmail.com" className="hover:text-red-500 transition-colors"><FaEnvelope /></a>

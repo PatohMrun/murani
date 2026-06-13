@@ -204,7 +204,7 @@ export default function CommentsSection({ postId }: { postId: string }) {
 
   return (
     <section className="mt-16 pt-10 border-t border-gray-100 dark:border-gray-800">
-      <h2 className="flex items-center gap-2 text-xl font-bold font-oswald text-gray-900 dark:text-white mb-8">
+      <h2 className="flex items-center gap-2 text-lg sm:text-xl font-bold font-oswald text-gray-900 dark:text-white mb-8">
         <FaRegComment size={18} className="text-blue-400" />
         {total > 0 ? `${total} Comment${total !== 1 ? 's' : ''}` : 'Comments'}
       </h2>

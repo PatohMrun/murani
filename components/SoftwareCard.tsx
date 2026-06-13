@@ -47,7 +47,7 @@ const SoftwareCard: React.FC<SoftwareCardProps> = ({ source, title, description,
             </div>
 
             <div className="p-6 flex flex-col grow">
-                <h3 className="text-xl font-bold font-oswald text-gray-900 dark:text-white mb-2 line-clamp-1">{title}</h3>
+                <h3 className="text-lg sm:text-xl font-bold font-oswald text-gray-900 dark:text-white mb-2 line-clamp-1">{title}</h3>
                 <p className="text-gray-600 dark:text-gray-300 text-sm mb-6 line-clamp-3 grow">{description}</p>
 
                 <motion.a
