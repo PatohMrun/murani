@@ -73,7 +73,7 @@ export async function POST(req: NextRequest) {
       from,
       to,
       replyTo,
-      subject: `[Portfolio] ${subject}`,
+      subject: `New message from ${fromName}: ${subject}`,
       html: `<div style="font-family:system-ui,-apple-system,sans-serif;line-height:1.6;color:#111">
         <h2 style="margin:0 0 16px">New message from your portfolio</h2>
         <p style="margin:4px 0"><strong>Name:</strong> ${safe.name}</p>
