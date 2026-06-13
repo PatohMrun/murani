@@ -4,7 +4,7 @@ import Link from "next/link";
 import Experience from "@/components/Experience";
 import LatestPosts from "@/components/LatestPosts";
 import MagneticButton from "@/components/MagneticButton";
-import RevealText, { FlowText } from "@/components/RevealText";
+import RevealText from "@/components/RevealText";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { FaArrowRight, FaLinkedin, FaGithub, FaEnvelope, FaAndroid, FaChevronDown } from "react-icons/fa6";
 import { useState } from "react";
@@ -61,8 +61,7 @@ export default function Home() {
             </motion.h1>
 
             <motion.p variants={fadeInUp} className="text-gray-600 dark:text-gray-400 text-base sm:text-lg lg:text-xl mb-8 leading-relaxed max-w-xl mx-auto lg:mx-0">
-              A <span className="text-blue-600 dark:text-blue-400 font-semibold">Software Engineer</span>{' '}
-              <FlowText text="with a passion for blending code, design, and usability. I turn complex problems into elegant, user-centric solutions." delay={0.5} />
+              A <span className="text-blue-600 dark:text-blue-400 font-semibold">Software Engineer</span> with a passion for blending code, design, and usability. I turn complex problems into elegant, user-centric solutions.
             </motion.p>
 
             <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
