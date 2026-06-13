@@ -19,7 +19,7 @@ export default function RevealText({ text, className = '', charClassName = '', d
         <motion.span
           key={i}
           aria-hidden
-          className={`inline-block will-change-transform ${charClassName}`}
+          className={`inline-block ${charClassName}`}
           initial={{ opacity: 0, y: 32, rotateX: -85, filter: 'blur(10px)' }}
           whileInView={{ opacity: 1, y: 0, rotateX: 0, filter: 'blur(0px)' }}
           // fire only once the heading sits ~120px inside the viewport so the
@@ -50,7 +50,7 @@ export function FlowText({ text, className = '', delay = 0 }: FlowTextProps) {
         <motion.span
           key={i}
           aria-hidden
-          className="inline-block will-change-transform"
+          className="inline-block"
           initial={{ opacity: 0, y: 16, filter: 'blur(6px)' }}
           whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
           viewport={{ once: true, margin: '0px 0px -100px 0px' }}

@@ -52,7 +52,7 @@ export default function TiltCard({ children, className = '', maxTilt = 9, glare 
         onPointerMove={onMove}
         onPointerLeave={onLeave}
         style={{ rotateX: srx, rotateY: sry, transformStyle: 'preserve-3d' }}
-        className="relative h-full w-full will-change-transform"
+        className="relative h-full w-full"
       >
         {children}
         {glare && (

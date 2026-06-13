@@ -93,7 +93,7 @@ const Creations: React.FC = () => {
         </AnimatePresence>
       </div>
 
-      {/* Fixed Social Buttons (portaled to body — SmoothScroll's transform would re-anchor them) */}
+      {/* Fixed Social Buttons (portaled to body to stay viewport-anchored) */}
       <BodyPortal>
       <AnimatePresence>
         {activeTab === "graphic" && (

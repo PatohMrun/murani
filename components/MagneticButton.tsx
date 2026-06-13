@@ -36,7 +36,7 @@ export default function MagneticButton({ children, className = '', strength = 0.
       onPointerMove={onMove}
       onPointerLeave={onLeave}
       style={{ x: sx, y: sy }}
-      className={`inline-block will-change-transform ${className}`}
+      className={`inline-block ${className}`}
     >
       {children}
     </motion.div>
