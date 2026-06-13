@@ -7,9 +7,25 @@ import RevealText, { FlowText } from '@/components/RevealText'
 
 export const revalidate = 0
 
+const blogDescription = 'Code, cameras, and whatever catches my attention — essays and notes by Patrick Murani.'
+
 export const metadata: Metadata = {
   title: 'Blog',
-  description: 'Code, cameras, and whatever catches my attention.',
+  description: blogDescription,
+  openGraph: {
+    title: 'Blog | Patrick Murani',
+    description: blogDescription,
+    type: 'website',
+    url: 'https://murani.signiqe.com/blog',
+    siteName: 'Patrick Murani Portfolio',
+    images: [{ url: '/Murani.jpg', width: 1200, height: 630, alt: 'Patrick Murani — Blog' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Blog | Patrick Murani',
+    description: blogDescription,
+    images: ['/Murani.jpg'],
+  },
 }
 
 function PostsSkeleton() {
