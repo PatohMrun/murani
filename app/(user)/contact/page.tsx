@@ -1,6 +1,5 @@
 'use client'
 import React from "react";
-import emailjs from "emailjs-com";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import RevealText from "@/components/RevealText";
@@ -13,6 +12,7 @@ const Contact: React.FC = () => {
         reply_to: "",
         subject: "",
         message: "",
+        company: "", // honeypot — kept empty by real users
     });
 
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -29,33 +29,21 @@ const Contact: React.FC = () => {
         setSuccessMessage("");
         setErrorMessage("");
 
-        const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
-        const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
-        const userId = process.env.NEXT_PUBLIC_EMAILJS_USER_ID;
-
-        if (!serviceId || !templateId || !userId) {
-            setErrorMessage('Contact form is not configured. Please reach out directly via email.');
-            setIsSubmitting(false);
-            return;
-        }
-
-        const templateParams = {
-            from_name: formData.from_name,
-            reply_to: formData.reply_to,
-            subject: formData.subject,
-            message: formData.message,
-        };
-
         try {
-            await emailjs.send(serviceId, templateId, templateParams, userId);
-            setSuccessMessage("Message sent successfully!");
-            setFormData({ from_name: "", reply_to: "", subject: "", message: "" });
-        } catch (error: unknown) {
-            const errorMessage = error instanceof Error
-                ? `Failed to send message: ${error.message}`
-                : "Failed to send message. Please try again later.";
-            setErrorMessage(errorMessage);
-            console.error('Email send error:', error);
+            const res = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData),
+            });
+            const data = await res.json().catch(() => ({}));
+            if (res.ok) {
+                setSuccessMessage("Message sent successfully! I'll get back to you soon.");
+                setFormData({ from_name: "", reply_to: "", subject: "", message: "", company: "" });
+            } else {
+                setErrorMessage(data.error ?? "Failed to send message. Please try again later.");
+            }
+        } catch {
+            setErrorMessage("Network error — please check your connection and try again.");
         } finally {
             setIsSubmitting(false);
         }
@@ -157,6 +145,17 @@ const Contact: React.FC = () => {
                         <h3 className="text-xl sm:text-2xl font-bold font-oswald mb-8 text-gray-900 dark:text-white">Send a Message</h3>
 
                         <form onSubmit={handleSubmit} className="space-y-6">
+                            {/* Honeypot: hidden from users, attracts bots. Kept out of tab order & a11y tree. */}
+                            <input
+                                type="text"
+                                name="company"
+                                value={formData.company}
+                                onChange={handleChange}
+                                tabIndex={-1}
+                                autoComplete="off"
+                                aria-hidden="true"
+                                className="absolute left-[-9999px] w-px h-px opacity-0 pointer-events-none"
+                            />
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div className="space-y-2">
                                     <label className="text-sm font-semibold text-gray-600 dark:text-gray-400 ml-1">Name</label>
